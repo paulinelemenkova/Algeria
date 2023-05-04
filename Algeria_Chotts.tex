@@ -37,10 +37,10 @@
 
 %=================================================================
 % Full title of the paper (Capitalized)
-\Title{Ephemeral Salt Lakes Melrhir Chott and Merouane Chott, Algeria: Changes in Patterns Over a 10-year Period}
+\Title{Using GRASS GIS for Detecting Changes in Patterns of the Ephemeral Salt Lakes Melrhir Chott and Merouane Chott, Algeria}
 
 % MDPI internal command: Title for citation in the left column
-\TitleCitation{Ephemeral Salt Lakes Melrhir Chott and Merouane Chott, Algeria: Changes in Patterns Over a 10-year Period}
+\TitleCitation{Using GRASS GIS for Detecting Changes in Patterns of the Ephemeral Salt Lakes Melrhir Chott and Merouane Chott, Algeria}
 
 % Author Orchid ID: enter ID or remove command
 \newcommand{\orcidauthorA}{0000-0002-5759-1089} % Polina Add \orcidA{} behind the author's name
@@ -71,26 +71,28 @@ $^{1}$ \quad Laboratory of Image Synthesis and Analysis (LISA), École polytechn
 
 % Abstract (Do not insert blank lines, i.e. \\) 
 \abstract{
-Automated classification of satellite images is a challenging task that enables to use remote sensing data for environmental modelling of the Earth's landscapes. Satellite images are a key data source in computational ecology and environmental studies. Landsat 8-9 OLI/TIRS images recorded since 2013 as a continuation of the Landsat data collection form a valuable pool of big Earth geospatial data to evaluate land cover types and landscapes of the Earth. However, such datasets should be processed and classified to enable the use of the satellite images in the environmental applications. The use of traditional GIS software is a time‐consuming and cumbersome work which can lead to misclassification of pixels during identification of land cover types. To address these limitations, we suggest using GRASS GIS scripts to automate classification of the remote sensing data by employing algorithms of image processing and geospatial analysis for discrimination of land cover types and detecting changes in the north-east Algeria. In this document, we implement a GRASS GIS-based framework of land cover types discrimination to identify changes in the endorheic basins of the ephemeral salt lakes Chott Melrhir and Chott Merouane, Algeria, employing embedded algorithms of image processing.
+Automated classification of satellite images is a challenging task that enables to use remote sensing data for environmental modelling of the Earth's landscapes. In this document, we implement a GRASS GIS-based framework of land cover types discrimination to identify changes in the endorheic basins of the ephemeral salt lakes Chott Melrhir and Chott Merouane, Algeria, employing embedded algorithms of image processing. This study presents a dataset of the 10  Landsat 8-9 OLI/TIRS satellite images obtained from the USGS for a 10-year period of 2013-2023. The images were analysed for the changes of level in ephemerical lakes which experience temporal fluctuations in water level being dry for the most of the time and fed with water during rains. Two approaches are tested on the images for unsupervised classification for evaluating the algorithm of GRASS GIS: the 'i.cluster  module was used for generating image classes; the 'i.maxlik' was used for classification by the Maximal Likelihood approach. The document includes a technical description of the scripts used for image processing in the Appendix with comments on functionality in Methodology section. The results include the identified variations in the ephemeral salt lakes in the Algerian part of Sahara on 10-year period (2013-2023) using the series of the Landsat OLI/TIRS multispectral images by GRASS GIS. The main strength of the GRASS GIS framework is high speed, accuracy and effectiveness of the image processing for environmental monitoring. The presented GitHub repository containing GRASS GIS scripts used in this study provides a reference to satellite image interpretation which can be used in similar studies on environmental monitoring of the arid and semi-arid areas of Africa.
 }
 
 % Keywords
 \keyword{Sahara Desert; Africa; salt lake; cartography; image analysis; satellite image; remote sensing; geography; GRASS GIS; mapping} 
 
 % The fields PACS, MSC, and JEL may be left empty or commented out if not applicable
-\PACS{J0101}
-\MSC{}
-\JEL{}
+\PACS{91.10.Da; 91.10.Jf; 91.10.Sp; 91.10.Xa; 96.25.Vt; 91.10.Fc; 95.40.+s; 95.75.Qr; 95.75.Rs; 42.68.Wt}
+\MSC{86A30; 86-08; 86A99; 86A04}
+\JEL{ Y91; Q20; Q24; Q23; Q3; Q01; R11; O44; O13; Q5; Q51; Q55; N57; C6; C61}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{document}
 
 \section{Introduction}
-%\textcolor{red}{\lipsum[2-4]}
 
-Detecting changes in water level of the ephemeral salt lakes using remote sensing data is an important task in hydrological analysis of arid regions, as it is often the basis of higher level applications, such as environmental monitoring, water resource management, climate change studies, analysis of groundwater distribution, etc. Located in the northern Africa's Maghreb region in Sahara desert, salt lakes, or "chotts", are subject to temporal fluctuations in water level throughout the calendar year. Chotts remain dry for the most of the time but are fed by water from wadi during winter or occasional rains. Monitoring such changes in water supply using variability of contours of the ephemeral stream beds is possible using satellite image classification which is based on different spectral reflectance of the objects visible on the land surface \cite{Medjani}. Changes in lake contours are used as indicators for monitoring land cover changes and hydrological modelling.
+\subsection{Background and Motivation}
+Detecting changes in water level of the ephemeral salt lakes using remote sensing data is an important task in hydrological analysis of arid regions, as it is often the basis of higher level applications, such as environmental monitoring, water resource management, climate change studies, analysis of groundwater distribution, etc. Located in the northern Africa's Maghreb region in Sahara desert, salt lakes, or "chotts", are subject to temporal fluctuations in water level throughout the calendar year. Chotts remain dry for the most of the time but are fed by water from wadi during winter or occasional rains. Monitoring such changes in water supply using variability of contours of the ephemeral stream beds is possible using satellite image classification which is based on different spectral reflectance of the objects visible on the land surface \cite{Medjani}. Changes in lake contours are used as indicators for monitoring land cover changes and hydrological modelling. 
 
-In this paper, we identify the variations in the ephemeral salt lakes in the Algerian part of Sahara on 10-year period (2013-2023) using the series of the Landsat OLI/TIRS multispectral images by GRASS GIS. 
+Satellite images are a key data source in computational ecology and environmental studies. Landsat 8-9 OLI/TIRS images recorded since 2013 as a continuation of the Landsat data collection form a valuable pool of big Earth geospatial data to evaluate land cover types and landscapes of the Earth. However, such datasets should be processed and classified to enable the use of the satellite images in the environmental applications. The use of traditional GIS software is a time‐consuming and cumbersome work which can lead to misclassification of pixels during identification of land cover types. To address these limitations, we suggest using GRASS GIS scripts to automate classification of the remote sensing data by employing algorithms of image processing and geospatial analysis for discrimination of land cover types and detecting changes in the north-east Algeria. 
+
+\subsection{Study Area}
 
 \begin{figure}[H]
 \begin{adjustwidth}{-\extralength}{0cm}
@@ -198,6 +200,8 @@ Figure \ref{fig:03} shows the dynamics visible on the Landsat satellite scenes f
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Conclusions}
+
+The principle of using GRASS GIS modules ' i.maxlik ' and 'i.cluster' for creating clusters and image classification, the usage of the scripts by ' i.composite' for color composites from the Landsat bands and the example cases of the used workflow are presented in the scripts. The implemented methods of image analysis are presented together with the examples of GRASS GIS usage in image processing showing identified levels of lakes accurately discriminated from the other land cover types and sand areas of the Sahara desert (Grand Erg Oriental). Maintained geometric shape and topology of classes, automated recognition of pixel’ colours are presented by the GRASS GIS. 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \authorcontributions{Supervision, conceptualization, methodology, software, resources, funding acquisition, and project administration, O.D.; writing---original draft preparation, methodology, software, data curation, visualization, formal analysis, validation, writing---review and editing, and investigation, P.L. All authors have read and agreed to the published version of the manuscript.}
