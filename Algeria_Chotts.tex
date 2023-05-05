@@ -34,6 +34,7 @@
 \usepackage{gensymb} % for \textdegree
 \usepackage{tabularx}
 \usepackage{lipsum} 
+\usepackage{makecell}
 
 %=================================================================
 % Full title of the paper (Capitalized)
@@ -133,9 +134,29 @@ The study area is located in northern Algeria, Figure \ref{fig01} with enlarged 
 %----------- subsection ----------->
 \subsection{Data}
 
-The GRASS GIS-based image classification workflow is based on a Landsat 8-9 dataset containing nine satellite images covering the region of Chott Melrhir and Chott Merouane, Algeria. The data were obtained from the USGS EarthExplorer repository always on January from 2014 to 2022. The Landsat OLI/TIRS data include spectral bands in visible and NIR ranges. The images were downloaded and the TIFF files with the necessary bands were stored in GRASS GIS location (project storage folder). The images are stored in TIFF format which presents a matrix of the 2D arrays of pixels assigned to values in a gray scale with data on spectral reflectance associated to the pixels, which was used for image classification.
+The GRASS GIS-based image classification workflow is based on a Landsat 8-9 dataset containing nine satellite images covering the region of Chott Melrhir and Chott Merouane, Algeria. The data were obtained from the USGS EarthExplorer repository always on January from 2014 to 2022. The Landsat OLI/TIRS data include spectral bands in visible and NIR ranges. The images were downloaded and the TIFF files with the necessary bands were stored in GRASS GIS location (project storage folder). The images are stored in TIFF format which presents a matrix of the 2D arrays of pixels assigned to values in a grey scale with data on spectral reflectance associated to the pixels, which was used for image classification. The images were processed, preliminary analysed and stored in a working directory for GRASS GIS processing. The metadata on the Landsat images were collected by the EarthExplorer file with the .xml extension and summarised in Table \ref{tab1}. 
 
-The metadata on the Landsat images were collected by the EarthExplorer file with xml extension and summarised in Table \ref{tab:01}. Figure \ref{fig03} shows the data used in this study: nine (9) Landsat satellite scenes for the 8 consecutive years 2014-2022 in January on the following dates: \textbf{a}) 2014/01/01, (\textbf{b}) 2015/01/04, (\textbf{c}) 2016/01/07, (\textbf{d}) 2017/01/25, (\textbf{e}) 2018/01/28, (\textbf{f}) 2019/01/15, (\textbf{g}) 2020/01/02, (\textbf{h}) 2021/01/04, (\textbf{i}) 2022/01/15. Visible inspection of these images enables to see the dynamics of the salinity on the ephemeral salt lakes where bright cyan regions signify salted regions. 
+\begin{table}[H]
+\scriptsize
+\caption{Satellite images used for computing the VIs: Landsat-8 OLI/TIRS collected from the USGS \textsuperscript{1}.\label{tab1}}
+		\begin{tabularx}{\linewidth}{ p{1.6cm} | p{1.3cm} | p{6.6cm} | p{2.2cm} }
+			\toprule
+			\textbf{Date} & \textbf{Spacecraft} & \textbf{Landsat Product ID} & \textbf{Scene ID} \\
+			\midrule
+			2014/01/01 & Lands. 8 & \makecell{XXX} & XXX \\
+			2015/01/04 & Lands. 8 & \makecell{XXX} & XXX \\
+			2016/01/07 & Lands. 9 & \makecell{XXX} & XXX \\
+			2017/01/25 & Lands. 8 & \makecell{XXX} & XXX \\
+			2018/01/28 & Lands. 8 & \makecell{XXX} & XXX \\
+			2019/01/15 & Lands. 9 & \makecell{XXX} & XXX \\	
+			2020/01/02 & Lands. 8 & \makecell{XXX} & XXX \\
+			2021/01/04 & Lands. 8 & \makecell{XXX} & XXX \\
+			2022/01/15 & Lands. 9 & \makecell{XXX} & XXX \\		
+			\bottomrule
+		\end{tabularx}
+\end{table}
+
+Figure \ref{fig03} shows the data used in this study: nine (9) Landsat satellite scenes for the 8 consecutive years 2014-2022 in January on the following dates: \textbf{a}) 2014/01/01, (\textbf{b}) 2015/01/04, (\textbf{c}) 2016/01/07, (\textbf{d}) 2017/01/25, (\textbf{e}) 2018/01/28, (\textbf{f}) 2019/01/15, (\textbf{g}) 2020/01/02, (\textbf{h}) 2021/01/04, (\textbf{i}) 2022/01/15. Visible inspection of these images enables to see the dynamics of the salinity on the ephemeral salt lakes where bright cyan regions signify salted regions. 
 
 \begin{figure}[H]
 \makebox[0.90\linewidth][r]{%
@@ -238,7 +259,7 @@ While different software for satellite image processing exist, scripting methods
 
 The principle of using GRASS GIS modules ' i.maxlik ' and 'i.cluster' for creating clusters and image classification, the usage of the scripts by ' i.composite' for color composites from the Landsat bands and the example cases of the used workflow are presented in the scripts. The implemented methods of image analysis are presented together with the examples of GRASS GIS usage in image processing showing identified levels of lakes accurately discriminated from the other land cover types and sand areas of the Sahara desert (Grand Erg Oriental). Maintained geometric shape and topology of classes, automated recognition of pixel’ colours are presented by the GRASS GIS. 
 
-The tasks included converting the raster satellite images into the maps of land cover types using maximum-likelihood discriminant analysis classifier by the GRASS GIS. The core of the algorithms lies in the recognition of the spectral reflectance properties of the pixels on the images against the others, identifying the land cover classes of northern Algeria (sand, chotts, saline areas, bare rocks etc.) and discriminating them from each other using clustering in 'i.cluster' module. The algorithms of the GRASS GIS demonstrated the efficiently processing of the satellite images and recognition of the fluctuated salt lakes (dry or filled by water) during the period of 8 years. 
+The tasks included converting the raster satellite images into the maps of land cover types using maximum-likelihood discriminant analysis classifier by the GRASS GIS. The input dataset included 9 images of the Landsat OLI/TIRS satellite images in a raster TIFF format. The core of the algorithms lies in the recognition of the spectral reflectance properties of the pixels on the images against the others, identifying the land cover classes of northern Algeria (sand, chotts, saline areas, bare rocks etc.) and discriminating them from each other using clustering in 'i.cluster' module. The algorithms of the GRASS GIS demonstrated the efficiently processing of the satellite images and recognition of the fluctuated salt lakes (dry or filled by water) during the period of 8 years. 
 
 Remote sensing data contain information regarding the landscapes of the Earth detected in the satellite images. Accurate classification of the time series of the satellite images can drive environmental modelling of African Sahara through the analysis of changes in ephemeral salt lakes, obtained from the classified images Landsat OLI/TIRS. The detection of land cover types is possible using the algorithms of GRASS GIS scripts as advanced solution for geospatial data processing by defining and characterising objects that belong to the same category of the land cover classes using information retrieved from the satellite images based on spectral reflectance of the objects. 
 
