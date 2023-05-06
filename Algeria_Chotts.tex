@@ -261,7 +261,7 @@ Figure \ref{fig04} shows the outline of the general structure of the libraries w
 
 \begin{figure}[H] 
 	\centering
-		\includegraphics[width=14cm]{Rplot}
+		\includegraphics[width=14cm]{Fig_04}
 	\caption{The outline of the general structure of the GRASS GIS framework. Hierarchical structure of the modules of the GRASS GIS software used for image processing with detailed structure of the key modules of the GRASS GIS software  and sequential workflow of the data processing} \label{fig04}
 \end{figure} 
 
@@ -281,14 +281,14 @@ r.info -r L8_2014_07
 g.list rast
 \end{lstlisting}
 
-The next step included creating the groups and subgroups of the Landsat imagery data using GRASS GIS module 'i.group', and generating signature file as shown in Listing \ref{lst02}:
+The next step included creating the groups and subgroups of the Landsat imagery data using GRASS GIS module 'i.group', and generating signature file. The aim of this step was to create the raster map layers in a Landsat imagery group by assigning them to the subgroups with 30-m resolution with only necessary bands (visible spectra), Listing \ref{lst02}:
 
 \begin{lstlisting}[language=bash,caption=GRASS GIS code for grouping and subgrouping Landsat bands,style=mystyle,label={lst02}]
 # store VIZ, NIR, MIR into group and a subgroup with 30 m resolution without TIR
 i.group group=L8_2014 subgroup=res_30m \ input=L8_2014_01,L8_2014_02,L8_2014_03,L8_2014_04,L8_2014_05,L8_2014_06,L8_2014_07
 \end{lstlisting}
 
-Since current study included images for several years, to re-use the signature file for the classification of different imagery groups for these years, the semantic labels were set up for each group of bands before generating the signature files using 'r.support' module of the GRASS GIS as shown in Listing \ref{lst03}: 
+Created group and a subgroup enables to run classification on a combination of the raster map layers in a group for each year. Since in this project, Landsat OLI/TIRS images for several years (2014 to 2022) were inspected and processed, grouping and subgrouping the data supported organisation and management of data and raster map layers in a project 'Algeria'. Since current study included several images for different years, to re-use the signature file for the classification of different imagery groups for these years, the semantic labels were set up for each group of bands before generating the signature files using 'r.support' module of the GRASS GIS as shown in Listing \ref{lst03}: 
 
 \begin{lstlisting}[language=bash,caption=GRASS GIS code for creating semantic labels for the Landsat OLI/TIRS,style=mystyle,label={lst03}]
 # Defining semantic labels for all Landsat OLI/TIRS bands
@@ -301,16 +301,60 @@ r.support map=L8_2014_06 semantic_label=OLI_6
 r.support map=L8_2014_07 semantic_label=OLI_7
 \end{lstlisting}
 
-The signature file generated in the snippet of code above allows to classify the current imagery group only. This means, that the data includes only the visible Landsat bands with 30 m resolution without panchromatic and Thermal Infrared bands, which are not necessary in this case. The bands used for generating signatures are stored in the group $'L8\_2014'$ as shown in Listing \ref{lst04}.
+The following steps of the classification using modules 'i.cluster' and 'i.maxlik' used the imagery group for each year (2014 to 2022) and subgroups of the Landsat bands with defined year and resolution. The signature file generated in the snippet of code above allows to classify the current imagery group only. This means, that the data includes only the visible Landsat bands with 30 m resolution without panchromatic and Thermal Infrared bands, which are not necessary in this case. The bands used for generating signatures are stored in the group $'L8\_2014'$ as shown in Listing \ref{lst04}.
 
-\begin{lstlisting}[language=bash,caption=GRASS GIS code for creating signature file by k-means clustering,style=mystyle,label={lst04}]
+\begin{lstlisting}[language=bash,caption=GRASS GIS code for creating signature file by k-means clustering algorithm,style=mystyle,label={lst04}]
 # generating signature file and report for 10 classes
 i.cluster group=L8_2014 subgroup=res_30m \
 signaturefile=cluster_L8_2014 classes=10 reportfile=rep_clust_L8_2014.txt
 \end{lstlisting}
 
+The next step included the classification of the images by the 'i.maxlik' module which uses the maximum likelihood discriminant analysis classifier as a core algorithm approach. The technical implementation was performed using Listing \ref{lst05}. 
+
+\begin{lstlisting}[language=bash,caption=GRASS GIS code for image classification by maximal likelihood algorithm clustering,style=mystyle,label={lst05}]
+i.maxlik group=L8_2014 subgroup=res_30m \
+  signaturefile=cluster_L8_2014 \
+  output=L8_2014_cluster_classes reject=L8_2014_cluster_reject
+\end{lstlisting}
+
+Mapping the results of the classification was done using the 'd.rast' module as shown in the following GRASS GIS code in Listing \ref{lst06}:
+  
+\begin{lstlisting}[language=bash,caption=GRASS GIS code for image classification by maximal likelihood algorithm clustering,style=mystyle,label={lst06}]
+d.mon wx0
+d.rast.leg L8_2014_cluster_classes
+d.rast.leg L8_2014_cluster_reject
+\end{lstlisting}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Results}
+
+\begin{figure}[H]
+\hspace{-32pt}\makebox[1.00\linewidth][r]{%
+	\begin{subfigure}[b]{.55\textwidth}
+		\centering
+			\includegraphics[width=7.3cm]{Fig_05a}
+		\caption{\centering }
+	\end{subfigure}%
+	\begin{subfigure}[b]{.55\textwidth}
+		\centering
+			\includegraphics[width=7.3cm]{Fig_05b}
+		\caption{\centering}
+	\end{subfigure}%
+}\\
+\vfill \vspace{1mm}
+\hspace{-32pt}\makebox[1.00\linewidth][r]{%
+	\begin{subfigure}[b]{.55\textwidth}
+		\centering
+			\includegraphics[width=7.3cm]{Fig_05a}
+		\caption{\centering}
+	\end{subfigure}
+	\begin{subfigure}[b]{.55\textwidth}
+		\centering
+			\includegraphics[width=7.3cm]{Fig_05b}
+		\caption{\centering}
+	\end{subfigure}%
+}\caption{Classification the Landsat 8-9 OLI/TIRS of the Algeria: (\textbf{a}) 2014 map with pixels classified into 10 classes, (\textbf{b}) 2014 rejected classes (\textbf{c}) 2015, (\textbf{d}) 2015.}\label{fig05}
+\end{figure}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Discussion}
