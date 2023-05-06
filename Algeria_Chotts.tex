@@ -283,15 +283,31 @@ g.list rast
 
 The next step included creating the groups and subgroups of the Landsat imagery data using GRASS GIS module 'i.group', and generating signature file as shown in Listing \ref{lst02}:
 
-\begin{lstlisting}[language=bash,caption=GRASS GIS code for grouping and subgrouping Landsat bands and creating signature file,style=mystyle,label={lst02}]
+\begin{lstlisting}[language=bash,caption=GRASS GIS code for grouping and subgrouping Landsat bands,style=mystyle,label={lst02}]
 # store VIZ, NIR, MIR into group and a subgroup with 30 m resolution without TIR
 i.group group=L8_2014 subgroup=res_30m \ input=L8_2014_01,L8_2014_02,L8_2014_03,L8_2014_04,L8_2014_05,L8_2014_06,L8_2014_07
-# generating signature file and report for 10 classes
-i.cluster group=L8_2014 subgroup=res_30m \
-  signaturefile=cluster_L8_2014 classes=10 reportfile=rep_clust_L8_2014.txt
 \end{lstlisting}
 
-The signature file generated in the snippet of code above allows to classify the current imagery group only. This means, that the data includes only the visible Landsat bands with 30 m resolution without panchromatic and Thermal Infrared bands, which are not necessary in this case. The bands used for generating signatures are stored in the group $'L8\_2014'$ as shown in the case above.
+Since current study included images for several years, to re-use the signature file for the classification of different imagery groups for these years, the semantic labels were set up for each group of bands before generating the signature files using 'r.support' module of the GRASS GIS as shown in Listing \ref{lst03}: 
+
+\begin{lstlisting}[language=bash,caption=GRASS GIS code for creating semantic labels for the Landsat OLI/TIRS,style=mystyle,label={lst03}]
+# Defining semantic labels for all Landsat OLI/TIRS bands
+r.support map=L8_2014_01 semantic_label=OLI_1
+r.support map=L8_2014_02 semantic_label=OLI_2
+r.support map=L8_2014_03 semantic_label=OLI_3
+r.support map=L8_2014_04 semantic_label=OLI_4
+r.support map=L8_2014_05 semantic_label=OLI_5
+r.support map=L8_2014_06 semantic_label=OLI_6
+r.support map=L8_2014_07 semantic_label=OLI_7
+\end{lstlisting}
+
+The signature file generated in the snippet of code above allows to classify the current imagery group only. This means, that the data includes only the visible Landsat bands with 30 m resolution without panchromatic and Thermal Infrared bands, which are not necessary in this case. The bands used for generating signatures are stored in the group $'L8\_2014'$ as shown in Listing \ref{lst04}.
+
+\begin{lstlisting}[language=bash,caption=GRASS GIS code for creating signature file by k-means clustering,style=mystyle,label={lst04}]
+# generating signature file and report for 10 classes
+i.cluster group=L8_2014 subgroup=res_30m \
+signaturefile=cluster_L8_2014 classes=10 reportfile=rep_clust_L8_2014.txt
+\end{lstlisting}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Results}
