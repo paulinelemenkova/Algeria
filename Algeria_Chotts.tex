@@ -71,10 +71,10 @@
 
 %=================================================================
 % Full title of the paper (Capitalized)
-\Title{A GRASS GIS Framework for Detecting Changes in Patterns of the Ephemeral Salt Lakes Melrhir Chott and Merouane Chott, Algeria}
+\Title{A GRASS GIS Scripting Framework for Monitoring Changes in the Ephemeral Salt Lakes Melrhir and Merouane Chotts, Algeria}
 
 % MDPI internal command: Title for citation in the left column
-\TitleCitation{A GRASS GIS Framework for Detecting Changes in Patterns of the Ephemeral Salt Lakes Melrhir Chott and Merouane Chott, Algeria}
+\TitleCitation{A GRASS GIS Scripting Framework for Monitoring Changes in the Ephemeral Salt Lakes Melrhir and Merouane Chotts, Algeria}
 
 % Author Orchid ID: enter ID or remove command
 \newcommand{\orcidauthorA}{0000-0002-5759-1089} % Polina Add \orcidA{} behind the author's name
@@ -105,7 +105,7 @@ $^{1}$ \quad Laboratory of Image Synthesis and Analysis (LISA), École polytechn
 
 % Abstract (Do not insert blank lines, i.e. \\) 
 \abstract{
-Automated classification of satellite images is a challenging task that enables to use remote sensing data for environmental modelling of the Earth's landscapes. In this document, we implement a GRASS GIS-based framework of land cover types discrimination to identify changes in the endorheic basins of the ephemeral salt lakes Chott Melrhir and Chott Merouane, Algeria, employing embedded algorithms of image processing. This study presents a dataset of the 10  Landsat 8-9 OLI/TIRS satellite images obtained from the USGS for a 10-year period of 2014-2022. The images were analysed for the changes of level in ephemerical lakes which experience temporal fluctuations in water level being dry for the most of the time and fed with water during rains. Two approaches are tested on the images for unsupervised classification for evaluating the algorithm of GRASS GIS: the 'i.cluster  module was used for generating image classes; the 'i.maxlik' was used for classification by the Maximal Likelihood approach. The document includes a technical description of the scripts used for image processing in the Appendix with comments on functionality in Methodology section. The results include the identified variations in the ephemeral salt lakes in the Algerian part of Sahara on 10-year period (2014-2022) using the series of the Landsat OLI/TIRS multispectral images by GRASS GIS. The main strength of the GRASS GIS framework is high speed, accuracy and effectiveness of the image processing for environmental monitoring. The presented GitHub repository containing GRASS GIS scripts used in this study provides a reference to satellite image interpretation which can be used in similar studies on environmental monitoring of the arid and semi-arid areas of Africa.
+Automated classification of satellite images is a challenging task that enables to use remote sensing data for environmental modelling of the Earth's landscapes. In this document, we implement a GRASS GIS-based framework of land cover types discrimination to identify changes in the endorheic basins of the ephemeral salt lakes Chott Melrhir and Chott Merouane, Algeria, employing embedded algorithms of image processing. This study presents a dataset of the nine Landsat 8-9 OLI/TIRS satellite images obtained from the USGS for a 8-year period of 2014-2022. The images were analysed for the changes of level in ephemerical lakes which experience temporal fluctuations in water level being dry for the most of the time and fed with water during rains. The unsupervised classification of the images was based on the implementation of the GRASS GIS algorithms by several modules: 'i.cluster' for generating image classes; 'i.maxlik' for classification by the maximal likelihood discriminant analysis, and auxiliary modules such as 'i.group', 'r.support', 'r.import', etc. The document includes a technical description of the scripts used for image processing with detailed comments on functionality of the GRASS GIS moduels. The results include the identified variations in the ephemeral salt lakes in the Algerian part of Sahara on 10-year period (2014-2022) using a time series of the Landsat OLI/TIRS multispectral images classified by the GRASS GIS. The main strength of the GRASS GIS framework is high speed, accuracy and effectiveness of the programming codes for image processing in environmental monitoring. The presented GitHub repository containing scripts used for satellite image analysis provides a reference to remote sensing data interpretation for environmental monitoring of the arid and semi-arid areas of Africa.
 }
 
 % Keywords
@@ -172,13 +172,13 @@ The GRASS GIS-based image classification workflow is based on a Landsat 8-9 data
 \begin{table}[H]
 \scriptsize
 \caption{Satellite images used for computing the VIs: Landsat-8 OLI/TIRS collected from the USGS \textsuperscript{1}.\label{tab1}}
-		\begin{tabularx}{\linewidth}{ p{1.6cm} | p{1.3cm} | p{6.6cm} | p{2.2cm} }
+		\begin{tabularx}{\linewidth}{ p{1.6cm} | p{1.3cm} | p{6.8cm} | p{2.2cm} }
 			\toprule
 			\textbf{Date} & \textbf{Spacecraft} & \textbf{Landsat Product ID} & \textbf{Scene ID} \\
 			\midrule
-			2014/01/01 & Lands. 8 & \makecell{XXX} & XXX \\
-			2015/01/04 & Lands. 8 & \makecell{XXX} & XXX \\
-			2016/01/07 & Lands. 9 & \makecell{XXX} & XXX \\
+			2014/01/01 & 8 & \makecell{LC08\_L2SP\_193036\_20140101\_20200912\_02\_T1} & LC81930362014001LGN01 \\
+			2015/01/04 & 8 & \makecell{LC08\_L2SP\_193036\_20150104\_20200910\_02\_T1} & LC81930362015004LGN01 \\
+			2016/01/07 & 8 & \makecell{LC08\_L2SP\_193036\_20160107\_20200907\_02\_T1} & LC81930362016007LGN02 \\
 			2017/01/25 & Lands. 8 & \makecell{XXX} & XXX \\
 			2018/01/28 & Lands. 8 & \makecell{XXX} & XXX \\
 			2019/01/15 & Lands. 9 & \makecell{XXX} & XXX \\	
@@ -262,7 +262,7 @@ Figure \ref{fig04} shows the outline of the general structure of the libraries w
 \begin{figure}[H] 
 	\centering
 		\includegraphics[width=14cm]{Fig_04}
-	\caption{The outline of the general structure of the GRASS GIS framework. Hierarchical structure of the modules of the GRASS GIS software used for image processing with detailed structure of the key modules of the GRASS GIS software  and sequential workflow of the data processing} \label{fig04}
+	\caption{The outline of the general structure of the GRASS GIS framework. Hierarchical structure of the process used for image processing with functionality of the key modules of the GRASS GIS and sequential workflow of the data processing. Flowchart made in R library 'mermaid'. Source: author.} \label{fig04}
 \end{figure} 
 
 %----------- subsection ----------->
@@ -301,7 +301,9 @@ r.support map=L8_2014_06 semantic_label=OLI_6
 r.support map=L8_2014_07 semantic_label=OLI_7
 \end{lstlisting}
 
-The following steps of the classification using modules 'i.cluster' and 'i.maxlik' used the imagery group for each year (2014 to 2022) and subgroups of the Landsat bands with defined year and resolution. The signature file generated in the snippet of code above allows to classify the current imagery group only. This means, that the data includes only the visible Landsat bands with 30 m resolution without panchromatic and Thermal Infrared bands, which are not necessary in this case. The bands used for generating signatures are stored in the group $'L8\_2014'$ as shown in Listing \ref{lst04}.
+The following steps of the classification using modules 'i.cluster' and 'i.maxlik' used the imagery group for each year (2014 to 2022) and subgroups of the Landsat bands with defined year and resolution. The signature file generated in the snippet of code above allows to classify the current imagery group only. This means, that the data includes only the visible Landsat bands with 30 m resolution without panchromatic and Thermal Infrared bands, which are not necessary in this case. The methodological approach of the i.cluster technique is based on reading the bands of the Landsat satellite data and assigning pixels into clusters according to the difference in spectral reflectances of the pixels. 
+
+Since pixel clusters are categories associated with land cover types on the Earth's shape, the clusters automatically defined by the GRASS GIS are used for further steps in classification. Clustering approach of the GRASS GIS uses a k-means algorithm. During the process of k-means clustering by 'i.cluster', the means of the groups where pixels are assigned are constantly change, as soon as new pixels are assigned and the means are recalculated iteratively to reach the maximal distances between the groups. The bands used for generating signatures of clusters are stored in the group $'L8\_2014'$, Listing \ref{lst04}.
 
 \begin{lstlisting}[language=bash,caption=GRASS GIS code for creating signature file by k-means clustering algorithm,style=mystyle,label={lst04}]
 # generating signature file and report for 10 classes
@@ -309,7 +311,7 @@ i.cluster group=L8_2014 subgroup=res_30m \
 signaturefile=cluster_L8_2014 classes=10 reportfile=rep_clust_L8_2014.txt
 \end{lstlisting}
 
-The next step included the classification of the images by the 'i.maxlik' module which uses the maximum likelihood discriminant analysis classifier as a core algorithm approach. The technical implementation was performed using Listing \ref{lst05}. 
+The next step included the classification of the images by the 'i.maxlik' module which uses the maximum likelihood discriminant analysis classifier as a core algorithm approach to classify the cells according to their spectral reflectances in satellite imagery. the main approach of this algorithm is that it uses the cluster means and covariance matrices generated during the previous steps in  signature file by the 'i.cluster' module to determine the categories of spectral classes according to the probability of belonging of each cell in the image based on the distance to the cluster's centroids. The technical implementation was performed using Listing \ref{lst05}. 
 
 \begin{lstlisting}[language=bash,caption=GRASS GIS code for image classification by maximal likelihood algorithm clustering,style=mystyle,label={lst05}]
 i.maxlik group=L8_2014 subgroup=res_30m \
@@ -325,6 +327,11 @@ d.rast.leg L8_2014_cluster_classes
 d.rast.leg L8_2014_cluster_reject
 \end{lstlisting}
 
+The identification of segments (objects) from imagery data was perform by the 'i.segment' module of GRASS GIS using Listing \ref{lst07} as follows:
+ \begin{lstlisting}[language=bash,caption=GRASS GIS code for image classification by maximal likelihood algorithm clustering,style=mystyle,label={lst07}]
+i.segment group=L8_2014 output=L8_2014_seg_14 threshold=0.4 memory=1000
+\end{lstlisting}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Results}
 
@@ -333,27 +340,111 @@ d.rast.leg L8_2014_cluster_reject
 	\begin{subfigure}[b]{.55\textwidth}
 		\centering
 			\includegraphics[width=7.3cm]{Fig_05a}
-		\caption{\centering }
+		\caption{\centering{2014}}
 	\end{subfigure}%
 	\begin{subfigure}[b]{.55\textwidth}
 		\centering
 			\includegraphics[width=7.3cm]{Fig_05b}
-		\caption{\centering}
+		\caption{\centering{2014}}
 	\end{subfigure}%
 }\\
 \vfill \vspace{1mm}
 \hspace{-32pt}\makebox[1.00\linewidth][r]{%
 	\begin{subfigure}[b]{.55\textwidth}
 		\centering
-			\includegraphics[width=7.3cm]{Fig_05a}
-		\caption{\centering}
+			\includegraphics[width=7.3cm]{Fig_05c}
+		\caption{\centering{2015}}
 	\end{subfigure}
 	\begin{subfigure}[b]{.55\textwidth}
 		\centering
-			\includegraphics[width=7.3cm]{Fig_05b}
-		\caption{\centering}
+			\includegraphics[width=7.3cm]{Fig_05d}
+		\caption{\centering{2015}}
 	\end{subfigure}%
-}\caption{Classification the Landsat 8-9 OLI/TIRS of the Algeria: (\textbf{a}) 2014 map with pixels classified into 10 classes, (\textbf{b}) 2014 rejected classes (\textbf{c}) 2015, (\textbf{d}) 2015.}\label{fig05}
+}\caption{Classification the Landsat 8-9 OLI/TIRS of the Algeria with pixels classified into 10 classes and rejection probability values with pixel classification confidence levels: (\textbf{a}) 2014 map, (\textbf{b}) 2014 rejected classes (\textbf{c}) 2015 map, (\textbf{d}) 2015 rejected classes.}\label{fig05}
+\end{figure}
+
+\begin{figure}[H]
+\hspace{-32pt}\makebox[1.00\linewidth][r]{%
+	\begin{subfigure}[b]{.55\textwidth}
+		\centering
+			\includegraphics[width=7.3cm]{Fig_06a}
+		\caption{\centering{2016}}
+	\end{subfigure}%
+	\begin{subfigure}[b]{.55\textwidth}
+		\centering
+			\includegraphics[width=7.3cm]{Fig_06b}
+		\caption{\centering{2016}}
+	\end{subfigure}%
+}\\
+\vfill \vspace{1mm}
+\hspace{-32pt}\makebox[1.00\linewidth][r]{%
+	\begin{subfigure}[b]{.55\textwidth}
+		\centering
+			\includegraphics[width=7.3cm]{Fig_06c}
+		\caption{\centering{2017}}
+	\end{subfigure}
+	\begin{subfigure}[b]{.55\textwidth}
+		\centering
+			\includegraphics[width=7.3cm]{Fig_06d}
+		\caption{\centering{2017}}
+	\end{subfigure}%
+}\caption{Classification the Landsat 8-9 OLI/TIRS of the Algeria with pixels classified into 10 classes and rejection probability values with pixel classification confidence levels: (\textbf{a}) 2016 map, (\textbf{b}) 2016 rejected classes (\textbf{c}) 2017 map, (\textbf{d}) 2017 rejected classes.}\label{fig06}
+\end{figure}
+
+\begin{figure}[H]
+\hspace{-32pt}\makebox[1.00\linewidth][r]{%
+	\begin{subfigure}[b]{.55\textwidth}
+		\centering
+			\includegraphics[width=7.3cm]{Fig_06a}
+		\caption{\centering{2018}}
+	\end{subfigure}%
+	\begin{subfigure}[b]{.55\textwidth}
+		\centering
+			\includegraphics[width=7.3cm]{Fig_06b}
+		\caption{\centering{2018}}
+	\end{subfigure}%
+}\\
+\vfill \vspace{1mm}
+\hspace{-32pt}\makebox[1.00\linewidth][r]{%
+	\begin{subfigure}[b]{.55\textwidth}
+		\centering
+			\includegraphics[width=7.3cm]{Fig_06c}
+		\caption{\centering{2019}}
+	\end{subfigure}
+	\begin{subfigure}[b]{.55\textwidth}
+		\centering
+			\includegraphics[width=7.3cm]{Fig_06d}
+		\caption{\centering{2019}}
+	\end{subfigure}%
+}\caption{Classification the Landsat 8-9 OLI/TIRS of the Algeria with pixels classified into 10 classes and rejection probability values with pixel classification confidence levels: (\textbf{a}) 2018 map, (\textbf{b}) 2018 rejected classes (\textbf{c}) 2019 map, (\textbf{d}) 2019 rejected classes.}\label{fig06}
+\end{figure}
+
+\begin{figure}[H]
+\hspace{-32pt}\makebox[1.00\linewidth][r]{%
+	\begin{subfigure}[b]{.55\textwidth}
+		\centering
+			\includegraphics[width=7.3cm]{Fig_06a}
+		\caption{\centering{2020}}
+	\end{subfigure}%
+	\begin{subfigure}[b]{.55\textwidth}
+		\centering
+			\includegraphics[width=7.3cm]{Fig_06b}
+		\caption{\centering{2020}}
+	\end{subfigure}%
+}\\
+\vfill \vspace{1mm}
+\hspace{-32pt}\makebox[1.00\linewidth][r]{%
+	\begin{subfigure}[b]{.55\textwidth}
+		\centering
+			\includegraphics[width=7.3cm]{Fig_06c}
+		\caption{\centering{2021}}
+	\end{subfigure}
+	\begin{subfigure}[b]{.55\textwidth}
+		\centering
+			\includegraphics[width=7.3cm]{Fig_06d}
+		\caption{\centering{2021}}
+	\end{subfigure}%
+}\caption{Classification the Landsat 8-9 OLI/TIRS of the Algeria with pixels classified into 10 classes and rejection probability values with pixel classification confidence levels: (\textbf{a}) 2020 map, (\textbf{b}) 2020 rejected classes (\textbf{c}) 2021 map, (\textbf{d}) 2021 rejected classes.}\label{fig06}
 \end{figure}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -386,7 +477,7 @@ The use of GRASS GIS for satellite image processing demonstrated excellence and 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \authorcontributions{Supervision, conceptualization, methodology, software, resources, funding acquisition, project administration, writing---original draft preparation, methodology, software, data curation, visualization, formal analysis, validation, writing---review and editing, and investigation, P.L. }
 
-\funding{The publication was funded by the Editorial Office of XXXX, Multidisciplinary Digital Publishing Institute (MDPI), by providing 100\% discount for the APC of this manuscript. This project was supported by the Federal Public Planning Service Science Policy or Belgian Science Policy Office, Federal Science Policy - BELSPO (B2/202/P2/SEISMOSTORM).}
+\funding{The publication was funded by the Editorial Office of the Applied Systems Innovation, Multidisciplinary Digital Publishing Institute (MDPI), by providing 100\% discount for the APC of this manuscript.}
 
 \institutionalreview{Not applicable.}
 
