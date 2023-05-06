@@ -36,6 +36,39 @@
 \usepackage{lipsum} 
 \usepackage{makecell}
 
+\usepackage{listings}
+\usepackage{xcolor}
+
+\definecolor{deepblue}{rgb}{0,0,0.5}
+\definecolor{deepred}{rgb}{0.6,0,0}
+\definecolor{deepmagenta}{RGB}{195,12,214}
+\definecolor{deepgreen}{RGB}{29,122,30}
+\definecolor{mintgreen}{RGB}{192,249,192}
+\definecolor{codepurple}{RGB}{204, 0, 153}
+\definecolor{LightCyan}{rgb}{0.88,1,1}
+\definecolor{GainsboroPurple}{RGB}{247,176,247}
+\definecolor{LightSlateGrey}{RGB}{124,118,118}
+%    
+\lstdefinestyle{mystyle}{
+    commentstyle=\color{LightSlateGrey},
+    keywordstyle=\color{deepgreen}\bfseries,
+    emphstyle=\color{deepred},
+    numberstyle=\tiny\color{deepmagenta},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\scriptsize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+\lstset{style=mystyle}
+
 %=================================================================
 % Full title of the paper (Capitalized)
 \Title{A GRASS GIS Framework for Detecting Changes in Patterns of the Ephemeral Salt Lakes Melrhir Chott and Merouane Chott, Algeria}
@@ -125,7 +158,7 @@ The study area is located in northern Algeria, Figure \ref{fig01} with enlarged 
 		\caption{}
 	\end{subfigure}%
 }
-\caption{(\textbf{a}): Enlarged fragment of the Melrhir Chott and Merouane Chott on the Google Maps (2023); (\textbf{b}): Melrhir Chott and Merouane Chott on the Google Earth aerial scene (2023)}\label{fig02}
+\caption{(\textbf{a}): Melrhir Chott and Merouane Chott (also known as Felrhir Chott) enlarged on the Google Maps (2023); (\textbf{b}): Melrhir Chott and Merouane Chott on the Google Earth aerial scene (2023)}\label{fig02}
 \end{figure}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -220,7 +253,7 @@ Figure \ref{fig03} shows the data used in this study: nine (9) Landsat satellite
 
 The GRASS GIS modules, 'i.cluster' and 'i.maxlik' enable to perform a key procedure converting raster images into classified objects \cite{Neteleretal2008}. The approach of unsupervised classification by the GRASS GIS is based on discriminating the pixels on the image based on their spectral signatures. Upon classification, the areas identified as different land cover classes are represented as geometrical primitives, contoured areas that represent the extent and topological structures of the distinct land cover classes \cite{NetelerMitasova2008}. In the same way, classification enables to treat pixels as different  objects according to the spectral signatures for land cover types grouping them into polygonal segments based on the defined parameters using a clustering algorithm. 
 
-\subsection{General process flowchart}
+\subsection{Process flowchart}
 
 The general workflow consists of the following steps performed in the GRASS GIS: 1) image preprocessing by the 'i.landsat.toar' module which computes and corrects the images for the top-of-atmosphere radiance or reflectance and temperature for Landsat 8-9 OLI/TIRS; 2) Creating the group and subgroup of Landsat bands to select map layers for classification, using imagery data by the 'i.group' module;  3) the unsupervised image classification performed by 'i.cluster' module which creates the cluster means and covariance matrices as cluster spectral signatures; 4) image classification by the maximum-likelihood discriminant analysis classifier using the 'i.maxlik' module; 5) plotting, analysis and interpreting the obtained maps of the land cover types in norther Algeria. 
 
@@ -233,7 +266,32 @@ Figure \ref{fig04} shows the outline of the general structure of the libraries w
 \end{figure} 
 
 %----------- subsection ----------->
-\subsection{Subsection}
+\subsection{General Workflow}
+
+First, a work project 'Algeria' was defined using spatial location derived from the coordinate reference system (CRS) pf the Landsat images: WGS84 datum and ellipsoid (EPSG:4326) UTM Projection Zone 32. The Landsat bands were imported into the project using 'r.import' module using the bilinear resampling method for reprojection, applying the extent of current region and keeping the resolution of output raster map (30 m for Landsat bands in visible spectrum). The information on raster metadata was checked using the 'r.info' module, and the computational region was defined to match the scene using the 'g.region' module. The GRASS GIS code is shown in Listing \ref{lst01}:
+
+\begin{lstlisting}[language=bash,caption=GRASS GIS code for importing the data (here: a case of the bands of Landsat image on 2014),style=mystyle,label={lst01}]
+r.import input=/Users/polinalemenkova/grassdata/Algeria/LC08_L2SP_193036_20140101_20200912_02_T1_SR_B1.TIF output=L8_2014_01 resample=bilinear extent=region resolution=region
+r.import input=/Users/polinalemenkova/grassdata/Algeria/LC08_L2SP_193036_20140101_20200912_02_T1_SR_B2.TIF output=L8_2014_02 resample=bilinear extent=region resolution=region
+r.import input=/Users/polinalemenkova/grassdata/Algeria/LC08_L2SP_193036_20140101_20200912_02_T1_SR_B3.TIF output=L8_2014_03 resample=bilinear extent=region resolution=region
+# repeated likewise for all the VIS bands until 7.
+# check raster metadata:
+r.info -r L8_2014_07
+# list the imported files
+g.list rast
+\end{lstlisting}
+
+The next step included creating the groups and subgroups of the Landsat imagery data using GRASS GIS module 'i.group', and generating signature file as shown in Listing \ref{lst02}:
+
+\begin{lstlisting}[language=bash,caption=GRASS GIS code for grouping and subgrouping Landsat bands and creating signature file,style=mystyle,label={lst02}]
+# store VIZ, NIR, MIR into group and a subgroup with 30 m resolution without TIR
+i.group group=L8_2014 subgroup=res_30m \ input=L8_2014_01,L8_2014_02,L8_2014_03,L8_2014_04,L8_2014_05,L8_2014_06,L8_2014_07
+# generating signature file and report for 10 classes
+i.cluster group=L8_2014 subgroup=res_30m \
+  signaturefile=cluster_L8_2014 classes=10 reportfile=rep_clust_L8_2014.txt
+\end{lstlisting}
+
+The signature file generated in the snippet of code above allows to classify the current imagery group only. This means, that the data includes only the visible Landsat bands with 30 m resolution without panchromatic and Thermal Infrared bands, which are not necessary in this case. The bands used for generating signatures are stored in the group $'L8\_2014'$ as shown in the case above.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Results}
