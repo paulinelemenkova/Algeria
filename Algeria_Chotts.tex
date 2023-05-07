@@ -141,7 +141,7 @@ The study area is located in northern Algeria, Figure \ref{fig01} with enlarged 
 %\centering
 	\hspace{60pt}\includegraphics[width=16.0 cm]{Fig_01.jpg}
 \end{adjustwidth}
-\caption{Topographic map of Algeria. Software: GMT v. 6.1.1. Data sources: GEBCO and DCW. Rotated red square indicates study area with Chotts Melrhir and Merouane. Map source: authors.
+\caption{Topographic map of Algeria. Software: GMT v. 6.1.1. Data sources: GEBCO and DCW. Rotated red square indicates study area with Chotts Melrhir and Merouane. Map source: author.
 \label{fig01}}
 \end{figure}
 
@@ -182,9 +182,9 @@ The GRASS GIS-based image classification workflow is based on a Landsat 8-9 data
 			2017/01/25 & 8 & \makecell{LC08\_L2SP\_193036\_20170125\_20201013\_02\_T1} & LC81930362017025LGN02 \\
 			2018/01/28 & 8 & \makecell{LC08\_L2SP\_193036\_20180128\_20200902\_02\_T1} & LC81930362018028LGN00 \\
 			2019/01/15 & 8 & \makecell{LC08\_L2SP\_193036\_20190115\_20200830\_02\_T1} & LC81930362019015LGN00 \\	
-			2020/01/02 & Lands. 8 & \makecell{XXX} & XXX \\
-			2021/01/04 & Lands. 8 & \makecell{XXX} & XXX \\
-			2022/01/15 & Lands. 9 & \makecell{XXX} & XXX \\		
+			2020/01/02 & 8 & \makecell{LC08\_L2SP\_193036\_20200102\_20200824\_02\_T1} & LC81930362020002LGN00 \\
+			2021/01/04 & 8 & \makecell{LC08\_L2SP\_193036\_20210104\_20210309\_02\_T1} & LC81930362021004LGN00 \\
+			2022/01/15 & 9 & \makecell{LC09\_L2SP\_193036\_20220115\_20220118\_02\_T1} & LC91930362022015LGN00 \\		
 			\bottomrule
 		\end{tabularx}
 \end{table}
@@ -251,18 +251,26 @@ Figure \ref{fig03} shows the data used in this study: nine (9) Landsat satellite
 %----------- subsection ----------->
 \subsection{Methods}
 
-The GRASS GIS modules, 'i.cluster' and 'i.maxlik' enable to perform a key procedure converting raster images into classified objects \cite{Neteleretal2008}. The approach of unsupervised classification by the GRASS GIS is based on discriminating the pixels on the image based on their spectral signatures. Upon classification, the areas identified as different land cover classes are represented as geometrical primitives, contoured areas that represent the extent and topological structures of the distinct land cover classes \cite{NetelerMitasova2008}. In the same way, classification enables to treat pixels as different  objects according to the spectral signatures for land cover types grouping them into polygonal segments based on the defined parameters using a clustering algorithm. 
+The remote sensing data were processing by scripting methods, Figure \ref{fig04}. The GRASS GIS modules, 'i.cluster' and 'i.maxlik' enable to perform a key procedure converting raster images into classified objects \cite{Neteleretal2008}. The approach of unsupervised classification by the GRASS GIS is based on discriminating the pixels on the image based on their spectral signatures. Upon classification, the areas identified as different land cover classes are represented as geometrical primitives, contoured areas that represent the extent and topological structures of the distinct land cover classes \cite{NetelerMitasova2008}. In the same way, classification enables to treat pixels as different  objects according to the spectral signatures for land cover types grouping them into polygonal segments based on the defined parameters using a clustering algorithm. 
+
+\begin{figure}[H]
+\begin{adjustwidth}{-\extralength}{0cm}
+%\centering
+	\hspace{60pt}\includegraphics[width=16.0 cm]{Fig_04.jpeg}
+\end{adjustwidth}
+\caption{Data and workflow processes used for study project. Diagram flowchart made in R mermaid library, source: author.\label{fig04}}
+\end{figure}
 
 \subsection{Process flowchart}
 
 The general workflow consists of the following steps performed in the GRASS GIS: 1) image preprocessing by the 'i.landsat.toar' module which computes and corrects the images for the top-of-atmosphere radiance or reflectance and temperature for Landsat 8-9 OLI/TIRS; 2) Creating the group and subgroup of Landsat bands to select map layers for classification, using imagery data by the 'i.group' module;  3) the unsupervised image classification performed by 'i.cluster' module which creates the cluster means and covariance matrices as cluster spectral signatures; 4) image classification by the maximum-likelihood discriminant analysis classifier using the 'i.maxlik' module; 5) plotting, analysis and interpreting the obtained maps of the land cover types in norther Algeria. 
 
-Figure \ref{fig04} shows the outline of the general structure of the libraries within the GRASS GIS framework for image processing. The workflow of the GRASS GIS includes several modules that handle remote sensing data: g.region, i.group, i.cluster, i.maxlik, d.rast.leg and d.mon wx0. The GRASS GIS has several modules that actually process the data with the content and connections of these processes listed in Figure \ref{fig04}. 
+Figure \ref{fig05} shows the outline of the general structure of the libraries within the GRASS GIS framework for image processing. The workflow of the GRASS GIS includes several modules that handle remote sensing data: g.region, i.group, i.cluster, i.maxlik, d.rast.leg and d.mon wx0. The GRASS GIS has several modules that actually process the data with the content and connections of these processes listed in Figure \ref{fig05}. 
 
 \begin{figure}[H] 
 	\centering
-		\includegraphics[width=14cm]{Fig_04}
-	\caption{The outline of the general structure of the GRASS GIS framework. Hierarchical structure of the process used for image processing with functionality of the key modules of the GRASS GIS and sequential workflow of the data processing. Flowchart made in R library 'mermaid'. Source: author.} \label{fig04}
+		\includegraphics[width=14cm]{Fig_05}
+	\caption{The outline of the general structure of the GRASS GIS framework. Hierarchical structure of the process used for image processing with functionality of the key modules of the GRASS GIS and sequential workflow of the data processing. Flowchart made in R library 'mermaid'. Source: author.} \label{fig05}
 \end{figure} 
 
 %----------- subsection ----------->
@@ -339,41 +347,13 @@ i.segment group=L8_2014 output=L8_2014_seg_14 threshold=0.4 memory=1000
 \hspace{-32pt}\makebox[1.00\linewidth][r]{%
 	\begin{subfigure}[b]{.55\textwidth}
 		\centering
-			\includegraphics[width=7.3cm]{Fig_05a}
-		\caption{\centering{2014}}
-	\end{subfigure}%
-	\begin{subfigure}[b]{.55\textwidth}
-		\centering
-			\includegraphics[width=7.3cm]{Fig_05b}
-		\caption{\centering{2014}}
-	\end{subfigure}%
-}\\
-\vfill \vspace{1mm}
-\hspace{-32pt}\makebox[1.00\linewidth][r]{%
-	\begin{subfigure}[b]{.55\textwidth}
-		\centering
-			\includegraphics[width=7.3cm]{Fig_05c}
-		\caption{\centering{2015}}
-	\end{subfigure}
-	\begin{subfigure}[b]{.55\textwidth}
-		\centering
-			\includegraphics[width=7.3cm]{Fig_05d}
-		\caption{\centering{2015}}
-	\end{subfigure}%
-}\caption{Classification the Landsat 8-9 OLI/TIRS of the Algeria with pixels classified into 10 classes and rejection probability values with pixel classification confidence levels: (\textbf{a}) 2014 map, (\textbf{b}) 2014 rejected classes (\textbf{c}) 2015 map, (\textbf{d}) 2015 rejected classes.}\label{fig05}
-\end{figure}
-
-\begin{figure}[H]
-\hspace{-32pt}\makebox[1.00\linewidth][r]{%
-	\begin{subfigure}[b]{.55\textwidth}
-		\centering
 			\includegraphics[width=7.3cm]{Fig_06a}
-		\caption{\centering{2016}}
+		\caption{\centering{2014}}
 	\end{subfigure}%
 	\begin{subfigure}[b]{.55\textwidth}
 		\centering
 			\includegraphics[width=7.3cm]{Fig_06b}
-		\caption{\centering{2016}}
+		\caption{\centering{2014}}
 	\end{subfigure}%
 }\\
 \vfill \vspace{1mm}
@@ -381,14 +361,14 @@ i.segment group=L8_2014 output=L8_2014_seg_14 threshold=0.4 memory=1000
 	\begin{subfigure}[b]{.55\textwidth}
 		\centering
 			\includegraphics[width=7.3cm]{Fig_06c}
-		\caption{\centering{2017}}
+		\caption{\centering{2015}}
 	\end{subfigure}
 	\begin{subfigure}[b]{.55\textwidth}
 		\centering
 			\includegraphics[width=7.3cm]{Fig_06d}
-		\caption{\centering{2017}}
+		\caption{\centering{2015}}
 	\end{subfigure}%
-}\caption{Classification the Landsat 8-9 OLI/TIRS of the Algeria with pixels classified into 10 classes and rejection probability values with pixel classification confidence levels: (\textbf{a}) 2016 map, (\textbf{b}) 2016 rejected classes (\textbf{c}) 2017 map, (\textbf{d}) 2017 rejected classes.}\label{fig06}
+}\caption{Classification the Landsat 8-9 OLI/TIRS of the Algeria with pixels classified into 10 classes and rejection probability values with pixel classification confidence levels: (\textbf{a}) 2014 map, (\textbf{b}) 2014 rejected classes (\textbf{c}) 2015 map, (\textbf{d}) 2015 rejected classes.}\label{fig06}
 \end{figure}
 
 \begin{figure}[H]
@@ -396,12 +376,12 @@ i.segment group=L8_2014 output=L8_2014_seg_14 threshold=0.4 memory=1000
 	\begin{subfigure}[b]{.55\textwidth}
 		\centering
 			\includegraphics[width=7.3cm]{Fig_07a}
-		\caption{\centering{2018}}
+		\caption{\centering{2016}}
 	\end{subfigure}%
 	\begin{subfigure}[b]{.55\textwidth}
 		\centering
 			\includegraphics[width=7.3cm]{Fig_07b}
-		\caption{\centering{2018}}
+		\caption{\centering{2016}}
 	\end{subfigure}%
 }\\
 \vfill \vspace{1mm}
@@ -409,14 +389,14 @@ i.segment group=L8_2014 output=L8_2014_seg_14 threshold=0.4 memory=1000
 	\begin{subfigure}[b]{.55\textwidth}
 		\centering
 			\includegraphics[width=7.3cm]{Fig_07c}
-		\caption{\centering{2019}}
+		\caption{\centering{2017}}
 	\end{subfigure}
 	\begin{subfigure}[b]{.55\textwidth}
 		\centering
 			\includegraphics[width=7.3cm]{Fig_07d}
-		\caption{\centering{2019}}
+		\caption{\centering{2017}}
 	\end{subfigure}%
-}\caption{Classification the Landsat 8-9 OLI/TIRS of the Algeria with pixels classified into 10 classes and rejection probability values with pixel classification confidence levels: (\textbf{a}) 2018 map, (\textbf{b}) 2018 rejected classes (\textbf{c}) 2019 map, (\textbf{d}) 2019 rejected classes.}\label{fig07}
+}\caption{Classification the Landsat 8-9 OLI/TIRS of the Algeria with pixels classified into 10 classes and rejection probability values with pixel classification confidence levels: (\textbf{a}) 2016 map, (\textbf{b}) 2016 rejected classes (\textbf{c}) 2017 map, (\textbf{d}) 2017 rejected classes.}\label{fig07}
 \end{figure}
 
 \begin{figure}[H]
@@ -424,12 +404,12 @@ i.segment group=L8_2014 output=L8_2014_seg_14 threshold=0.4 memory=1000
 	\begin{subfigure}[b]{.55\textwidth}
 		\centering
 			\includegraphics[width=7.3cm]{Fig_08a}
-		\caption{\centering{2020}}
+		\caption{\centering{2018}}
 	\end{subfigure}%
 	\begin{subfigure}[b]{.55\textwidth}
 		\centering
 			\includegraphics[width=7.3cm]{Fig_08b}
-		\caption{\centering{2020}}
+		\caption{\centering{2018}}
 	\end{subfigure}%
 }\\
 \vfill \vspace{1mm}
@@ -437,14 +417,14 @@ i.segment group=L8_2014 output=L8_2014_seg_14 threshold=0.4 memory=1000
 	\begin{subfigure}[b]{.55\textwidth}
 		\centering
 			\includegraphics[width=7.3cm]{Fig_08c}
-		\caption{\centering{2021}}
+		\caption{\centering{2019}}
 	\end{subfigure}
 	\begin{subfigure}[b]{.55\textwidth}
 		\centering
 			\includegraphics[width=7.3cm]{Fig_08d}
-		\caption{\centering{2021}}
+		\caption{\centering{2019}}
 	\end{subfigure}%
-}\caption{Classification the Landsat 8-9 OLI/TIRS of the Algeria with pixels classified into 10 classes and rejection probability values with pixel classification confidence levels: (\textbf{a}) 2020 map, (\textbf{b}) 2020 rejected classes (\textbf{c}) 2021 map, (\textbf{d}) 2021 rejected classes.}\label{fig08}
+}\caption{Classification the Landsat 8-9 OLI/TIRS of the Algeria with pixels classified into 10 classes and rejection probability values with pixel classification confidence levels: (\textbf{a}) 2018 map, (\textbf{b}) 2018 rejected classes (\textbf{c}) 2019 map, (\textbf{d}) 2019 rejected classes.}\label{fig08}
 \end{figure}
 
 \begin{figure}[H]
@@ -452,14 +432,42 @@ i.segment group=L8_2014 output=L8_2014_seg_14 threshold=0.4 memory=1000
 	\begin{subfigure}[b]{.55\textwidth}
 		\centering
 			\includegraphics[width=7.3cm]{Fig_09a}
-		\caption{\centering{2022}}
+		\caption{\centering{2020}}
 	\end{subfigure}%
 	\begin{subfigure}[b]{.55\textwidth}
 		\centering
 			\includegraphics[width=7.3cm]{Fig_09b}
+		\caption{\centering{2020}}
+	\end{subfigure}%
+}\\
+\vfill \vspace{1mm}
+\hspace{-32pt}\makebox[1.00\linewidth][r]{%
+	\begin{subfigure}[b]{.55\textwidth}
+		\centering
+			\includegraphics[width=7.3cm]{Fig_09c}
+		\caption{\centering{2021}}
+	\end{subfigure}
+	\begin{subfigure}[b]{.55\textwidth}
+		\centering
+			\includegraphics[width=7.3cm]{Fig_09d}
+		\caption{\centering{2021}}
+	\end{subfigure}%
+}\caption{Classification the Landsat 8-9 OLI/TIRS of the Algeria with pixels classified into 10 classes and rejection probability values with pixel classification confidence levels: (\textbf{a}) 2020 map, (\textbf{b}) 2020 rejected classes (\textbf{c}) 2021 map, (\textbf{d}) 2021 rejected classes.}\label{fig09}
+\end{figure}
+
+\begin{figure}[H]
+\hspace{-32pt}\makebox[1.00\linewidth][r]{%
+	\begin{subfigure}[b]{.55\textwidth}
+		\centering
+			\includegraphics[width=7.3cm]{Fig_10a}
 		\caption{\centering{2022}}
 	\end{subfigure}%
-}\caption{Classification the Landsat 8-9 OLI/TIRS of the Algeria with pixels classified into 10 classes and rejection probability values with pixel classification confidence levels: (\textbf{a}) 2022 map, (\textbf{b}) 2022 rejected classes.}\label{fig09}
+	\begin{subfigure}[b]{.55\textwidth}
+		\centering
+			\includegraphics[width=7.3cm]{Fig_10b}
+		\caption{\centering{2022}}
+	\end{subfigure}%
+}\caption{Classification the Landsat 8-9 OLI/TIRS of the Algeria with pixels classified into 10 classes and rejection probability values with pixel classification confidence levels: (\textbf{a}) 2022 map, (\textbf{b}) 2022 rejected classes.}\label{fig10}
 \end{figure}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -500,9 +508,9 @@ The use of GRASS GIS for satellite image processing demonstrated excellence and 
 
 \dataavailability{Not applicable} 
 
-\acknowledgments{The authors thank the anonymous reviewers of Land for reading, suggestions and comments that improved an earlier version of this manuscript.}
+\acknowledgments{The author thanks the anonymous reviewers of Land for reading, suggestions and comments that improved an earlier version of this manuscript.}
 
-\conflictsofinterest{The authors declare no conflict of interest.} 
+\conflictsofinterest{The author declares no conflict of interest.} 
 
 \abbreviations{Abbreviations}{
 The following abbreviations are used in this manuscript:\\
