@@ -158,6 +158,8 @@ The environmental analysis of the Algerian chotts have resulted a variety of the
 \label{fig01}}
 \end{figure}
 
+The geologic structures in sedimentary basins of the Sahara include large and deep reservoirs controured by chotts which are filled by water during the rainy periods \cite{HAMICHE2015261}. Apart from the Merouane Chott \cite{HACINI2006284}, there are several other chotts illustrating such phenomena of the hydrogeology in Algerian Sahara: Chott Ech Chergui \cite{Maizi,habibi2013analyse,Demnati}, Chott El Beida \cite{KHAZNADAR2009369}, Chott El-Gharbi \cite{CHERCHALI2023105537}.
+
 \begin{figure}[H]
 \makebox[1.0\linewidth][r]{%
 	\begin{subfigure}[b]{.5\textwidth}
@@ -173,6 +175,8 @@ The environmental analysis of the Algerian chotts have resulted a variety of the
 }
 \caption{(\textbf{a}): Melrhir Chott and Merouane Chott (also known as Felrhir Chott) enlarged on the Google Maps (2023); (\textbf{b}): Melrhir Chott and Merouane Chott on the Google Earth aerial scene (2023)}\label{fig02}
 \end{figure}
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Materials and Methods}
@@ -375,10 +379,13 @@ d.rast.leg L8_2014_cluster_classes
 d.rast.leg L8_2014_cluster_reject
 \end{lstlisting}
 
-The identification of segments (objects) from imagery data was perform by the 'i.segment' module of GRASS GIS using Listing \ref{lst07} as follows:
- \begin{lstlisting}[language=bash,caption=GRASS GIS code for image classification by maximal likelihood algorithm clustering,style=mystyle,label={lst07}]
+To make classification by the 'i.maxlik' more accurate, a thresholding procedure was applied by k-means clustering using the 'i.cluster' modules aimed to separate the target image classes using the distance from the centroids. The identification of segments (objects) from imagery data was perform by the 'i.segment' module of GRASS GIS using Listing \ref{lst07}:
+
+\begin{lstlisting}[language=bash,caption=GRASS GIS code for image segmentation by 'i.segment' algorithm clustering,style=mystyle,label={lst07}]
 i.segment group=L8_2014 output=L8_2014_seg_14 threshold=0.4 memory=1000
 \end{lstlisting}
+
+Most general methods of landscape monitoring operate by specific approaches of identification where the surface features of arid environments are assessed based on geomorphologic analysis as modelling \cite{Callot}. The methods of risk assessment of metals in water  was implemented in Ramsar Site of the Chott Merouane \cite{Benhaddya}. In case of a satellite images, the shape and extent of land cover types for the evaluation of desertification can be quite accurately applied \cite{oussedik2003realisation}. More complex cases arise with partially eroded soil which can be also detected on the images where the mask for the erosion areas and surrounding background should be defined \cite{Toumietal}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \pagebreak
@@ -414,7 +421,7 @@ The qualitative evaluation of the water level coverage in the Melrhir and Meroua
 }\caption{Classification the Landsat 8-9 OLI/TIRS of the Algeria with pixels classified into 10 classes and rejection probability values with pixel classification confidence levels: (\textbf{a}) 2014 map, (\textbf{b}) 2014 rejected classes (\textbf{c}) 2015 map, (\textbf{d}) 2015 rejected classes.}\label{fig06}
 \end{figure}
 
-The classification was succeeded for images representing nine Landsat scenes. The percentage of the pixels images with rejection probability values and pixel classification confidence levels is computed based on the reject threshold results. The statistical data on classification results for processed scenes obtained from the GRASS GIS 'i.maxlik' is summarised in monochrome images, right to the classification maps, Figures \ref{fig06} to \ref{fig10}. Detecting land cover classes on the images strongly depends on the contrast of pixels digital numbers (DN) against the one of neighbour. In case of clear cloud-free images and distinct landscape contours, the detecting can be performed smoothly. However, in case of image containing cloud coverage and noise on the images can seriously affect the inspected scene and worsen recognition and identification of the land cover classes. Therefore, the images were selected with minimal cloudiness and other noise. The second issue concerns specific characteristics of Landsat 8-9 OLI/TIRS scenes with multi-spectral spatial resolution of 30 m where the identification of the land objects is limited to those of 30-m extent, while more detailed landscape patterns are ignored for technical reasons of resolution and image sharpness.
+The classification was succeeded for images representing nine Landsat scenes. The percentage of the pixels images with rejection probability values and pixel classification confidence levels is computed based on the reject threshold results. The statistical data on classification results for processed scenes obtained from the GRASS GIS 'i.maxlik' is summarised in monochrome images, right to the classification maps, Figures \ref{fig06} to \ref{fig10}. Detecting land cover classes on the images strongly depends on the contrast of pixels digital numbers (DN) against the one of neighbour. In case of clear cloud-free images and distinct landscape contours, the detecting can be performed smoothly. However, in case of image containing cloud coverage and noise on the images can seriously affect the inspected scene and worsen recognition and identification of the land cover classes. Therefore, the images were selected with minimal cloudiness and other noise. The second issue concerns specific characteristics of Landsat 8-9 OLI/TIRS scenes with multi-spectral spatial resolution of 30 m where the identification of the land objects is limited to those of 30-m extent, while more detailed landscape patterns are ignored due to resolution and image sharpness.
 
 \begin{figure}[H]
 \hspace{-32pt}\makebox[1.00\linewidth][r]{%
@@ -443,6 +450,8 @@ The classification was succeeded for images representing nine Landsat scenes. Th
 	\end{subfigure}%
 }\caption{Classification the Landsat 8-9 OLI/TIRS of the Algeria with pixels classified into 10 classes and rejection probability values with pixel classification confidence levels: (\textbf{a}) 2016 map, (\textbf{b}) 2016 rejected classes (\textbf{c}) 2017 map, (\textbf{d}) 2017 rejected classes.}\label{fig07}
 \end{figure}
+
+During the dry periods in summer time, the salt in the Algerian chotts is concentrated by evaporation, the pH increases as well as the level of carbonate calcium increases. During wet periods or rains, a calcium carbonate precipitates, and the pH decreases while the residual alkalinity becomes negative \cite{Bourrie}. Such fluctuations affect the content of the evaporites (anhydrite) and soft sulfate minerals such as gypsum halites. The solutions evolve to halite and potassium and magnesium salts that are visible on the satellite images covering chotts for several years for comparison. Besides salt minerals, the structure of the chotts is complicated by the occasional presence of sparse vegetation downstream the depression where the palm grove gives way to the salty soils, the sebkha. 
 
 \begin{figure}[H]
 \hspace{-32pt}\makebox[1.00\linewidth][r]{%
