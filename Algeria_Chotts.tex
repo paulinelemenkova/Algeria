@@ -381,7 +381,10 @@ i.segment group=L8_2014 output=L8_2014_seg_14 threshold=0.4 memory=1000
 \end{lstlisting}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\pagebreak
 \section{Results}
+
+The qualitative evaluation of the water level coverage in the Melrhir and Merouane Chotts on the satellite images for each Landsat scene is based on the number of land cover classes as landscape segments automatically detected and visualised in Figure \ref{fig06} for years 2014 and 2015, Figure \ref{fig07} for years 2016 and 2017, Figure \ref{fig08} for years 2018 and 2019, Figure \ref{fig09} for years 2020 and 2021, and Figure \ref{fig10} for year 2022. 
 
 \begin{figure}[H]
 \hspace{-32pt}\makebox[1.00\linewidth][r]{%
@@ -410,6 +413,8 @@ i.segment group=L8_2014 output=L8_2014_seg_14 threshold=0.4 memory=1000
 	\end{subfigure}%
 }\caption{Classification the Landsat 8-9 OLI/TIRS of the Algeria with pixels classified into 10 classes and rejection probability values with pixel classification confidence levels: (\textbf{a}) 2014 map, (\textbf{b}) 2014 rejected classes (\textbf{c}) 2015 map, (\textbf{d}) 2015 rejected classes.}\label{fig06}
 \end{figure}
+
+The classification was succeeded for images representing nine Landsat scenes. The percentage of the pixels images with rejection probability values and pixel classification confidence levels is computed based on the reject threshold results. The statistical data on classification results for processed scenes obtained from the GRASS GIS 'i.maxlik' is summarised in monochrome images, right to the classification maps, Figures \ref{fig06} to \ref{fig10}. Detecting land cover classes on the images strongly depends on the contrast of pixels digital numbers (DN) against the one of neighbour. In case of clear cloud-free images and distinct landscape contours, the detecting can be performed smoothly. However, in case of image containing cloud coverage and noise on the images can seriously affect the inspected scene and worsen recognition and identification of the land cover classes. Therefore, the images were selected with minimal cloudiness and other noise. The second issue concerns specific characteristics of Landsat 8-9 OLI/TIRS scenes with multi-spectral spatial resolution of 30 m where the identification of the land objects is limited to those of 30-m extent, while more detailed landscape patterns are ignored for technical reasons of resolution and image sharpness.
 
 \begin{figure}[H]
 \hspace{-32pt}\makebox[1.00\linewidth][r]{%
