@@ -16,7 +16,7 @@
 \articlenumber{0}
 \pubyear{2023}
 \copyrightyear{2023}
-%\externaleditor{Academic Editor: Firstname Lastname}
+\externaleditor{Academic Editor: }
 \datereceived{10 May 2023} 
 \daterevised{}
 \dateaccepted{} 
@@ -323,7 +323,7 @@ The general workflow of the GRASS GIS algorithm for image processing is outlined
 			\item \emph{Analysis --} Validation of errors was performed by the computed rejection probability values with pixel classification confidence levels for each map. This was necessary for the analysis of the classification in the Chotts Melrhir and Merouane Lakes where neighbouring pixels cross each other in similar classes.
 			 \item \emph{'d.mon wx0' and 'd.rast.leg' -- Visualization} The maps were visualised as several images of the land cover types based on the performed automated classification, separated by the one year gaps between each map. The sequence of maps representing the segments of land cover classes was converted into the graphical format. The maps were visualised with legends using plotting by the 'd.mon' and 'd.legend' GRASS GIS modules.	
 		\end{enumerate}
-	        \item \emph{Algeria -- Land cover classes} The 10 land cover classes were generated using features of objects on the images based on their spectral reflectance: 1) Bare areas (desert sands); 2) Salt hardpans; 3) Water bodies (Melrhir and Merouane Chotts); 4) Non-consolidated soils 5) Consolidated soils; 6) Sparse grassland; 7) Sparse shrubland; 8) Sparse trees 9) Sparse vegetation; 9) Grassland; 10) broadleaved shrubland. 
+	        \item \emph{Algeria -- Land cover classes} The 10 land cover classes were generated using features of objects on the images based on their spectral reflectance: 1) Bare areas (desert sands); 2) Salt hardpans; 3) Water bodies (Melrhir and Merouane Chotts); 4) Non-consolidated soils 5) Consolidated soils; 6) Sparse grassland; 7) Sparse shrubland; 8) Sparse trees 9) Sparse vegetation; 9) Grassland; 10) Broadleaved shrubland. 
 	         \item \emph{FAO Classes -- Identifying} The features on the images and associate land cover classes were identified, annotated and compared for changes in years 2014-2022. These included visible changes in the time period for each year, and fluctuations in salt levels. The number of classes is chosen based on the Food and Agriculture Organization (FAO) Land Cover Legend Registry (LCLR), modified and adopted in such way that it well represent the land classes on the 30-m resolution, fits easily into memory during computer processing, and is large enough to illustrate the landscape structure in the northeastern Algeria, and the vegetation parameters are chosen to ensure that a patterns are included in the maps. 
 \end{enumerate}
 
@@ -396,6 +396,8 @@ i.segment group=L8_2014 output=L8_2014_seg_14 threshold=0.4 memory=1000
 \end{lstlisting}
 
 This workflow of the GRASS GIS software, briefly outlined above was used for classification satellite images. The sequence of the utilised modules aimed to classify pixels signed them into clusters based on their features, discriminate spectral properties of the land cover objects using signature file and generate classification maps to assign land cover classes. The landscapes categories are recognised according to contrast in DNs, assigned to land cover classes and mapped using colour palettes. These solutions have advances and high level of automation which enabled to process a time series of the nine images. 
+
+Once the images were classified in GRASS GIS, the land cover classes were assigned to classify the variety of landscapes in the target region of north-eastern Algeria. The land cover classes indicate dominant feature classes of the landscapes identified on the images that have specific characteristics and vegetation pattern unique for that given spot on the image. These include the following types derived for the FAO and adopted by generalisation for the given study area: 1) Bare areas (desert sands); 2) Salt hardpans; 3) Water bodies (Melrhir and Merouane Chotts); 4) Non-consolidated soils 5) Consolidated soils; 6) Sparse grassland; 7) Sparse shrubland; 8) Sparse trees 9) Sparse vegetation; 9) Grassland; 10) Broadleaved shrubland. The land cover classes were used as representative areas in the classified maps to compare and distinguish the changes over eight years. They also allowed to assess the shrinkage of lakes and extent of salt areas, and analyse the visualised landscapes. 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \pagebreak
