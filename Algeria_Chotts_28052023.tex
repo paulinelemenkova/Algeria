@@ -1,0 +1,635 @@
+%  LaTeX support: latex@mdpi.com 
+%  For support, please attach all files needed for compiling as well as the log file, and specify your operating system, LaTeX version, and LaTeX editor.
+
+%=================================================================
+\documentclass[asi,article,submit,pdftex,moreauthors]{Definitions/mdpi} 
+
+%=================================================================
+
+% MDPI internal commands
+\firstpage{1} 
+\makeatletter 
+\setcounter{page}{\@firstpage} 
+\makeatother
+\pubvolume{1}
+\issuenum{1}
+\articlenumber{0}
+\pubyear{2023}
+\copyrightyear{2023}
+\externaleditor{Academic Editor: }
+\datereceived{10 May 2023} 
+\daterevised{28 May 2023}
+\dateaccepted{} 
+\datepublished{} 
+\hreflink{https://doi.org/} % If needed use \linebreak
+%\doinum{}
+
+%=================================================================
+% Add packages and commands here. The following packages are loaded in our class file: fontenc, inputenc, calc, indentfirst, fancyhdr, graphicx, epstopdf, lastpage, ifthen, lineno, float, amsmath, setspace, enumitem, mathpazo, booktabs, titlesec, etoolbox, tabto, xcolor, soul, multirow, microtype, tikz, totcount, changepage, attrib, upgreek, cleveref, amsthm, hyphenat, natbib, hyperref, footmisc, url, geometry, newfloat, caption
+
+\graphicspath{{figures/}} % path to folder with figures
+\usepackage{subcaption}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{gensymb} % for \textdegree
+\usepackage{tabularx}
+\usepackage{lipsum} 
+\usepackage{makecell}
+\usepackage{enumitem}
+
+\usepackage{listings}
+\usepackage{xcolor}
+
+\definecolor{deepblue}{rgb}{0,0,0.5}
+\definecolor{deepred}{rgb}{0.6,0,0}
+\definecolor{deepmagenta}{RGB}{195,12,214}
+\definecolor{deepgreen}{RGB}{29,122,30}
+\definecolor{mintgreen}{RGB}{192,249,192}
+\definecolor{codepurple}{RGB}{204, 0, 153}
+\definecolor{LightCyan}{rgb}{0.88,1,1}
+\definecolor{GainsboroPurple}{RGB}{247,176,247}
+\definecolor{LightSlateGrey}{RGB}{124,118,118}
+%    
+\lstdefinestyle{mystyle}{
+    commentstyle=\color{LightSlateGrey},
+    keywordstyle=\color{deepgreen}\bfseries,
+    emphstyle=\color{deepred},
+    numberstyle=\tiny\color{deepmagenta},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\scriptsize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+\lstset{style=mystyle}
+
+%=================================================================
+% Full title of the paper (Capitalized)
+\Title{A GRASS GIS Scripting Framework for Monitoring Changes in the Ephemeral Salt Lakes Melrhir and Merouane Chotts, Algeria}
+
+% MDPI internal command: Title for citation in the left column
+\TitleCitation{A GRASS GIS Scripting Framework for Monitoring Changes in the Ephemeral Salt Lakes Melrhir and Merouane Chotts, Algeria}
+
+% Author Orchid ID: enter ID or remove command
+\newcommand{\orcidauthorA}{0000-0002-5759-1089} % Polina Add \orcidA{} behind the author's name
+\newcommand{\orcidauthorB}{0000-0002-6461-1551} % Olivier Add \orcidB{} behind the author's name
+
+% Authors, for the paper (add full first names)
+\Author{Polina Lemenkova $^{1}$*\orcidA{}}
+
+%\longauthorlist{yes}
+
+% MDPI internal command: Authors, for metadata in PDF
+\AuthorNames{Polina Lemenkova}
+
+% MDPI internal command: Authors, for citation in the left column
+\AuthorCitation{Lemenkova, P.}
+% If this is a Chicago style journal: Lastname, Firstname, Firstname Lastname, and Firstname Lastname.
+
+% Affiliations / Addresses (Add [1] after \address if there is only one affiliation.)
+\address{%
+$^{1}$ \quad Laboratory of Image Synthesis and Analysis (LISA), École polytechnique de Bruxelles (Brussels Faculty of Engineering), Université Libre de Bruxelles (ULB). Building L, Campus du Solbosch, ULB -- LISA CP165/57, Avenue Franklin D. Roosevelt 50, Brussels 1050, Belgium.
+}
+
+% Contact information of the corresponding author
+\corres{Correspondence: polina.lemenkova@ulb.be; Tel.: +32 471 86 04 59 (P.L.)}
+
+% Current address and/or shared authorship
+%\firstnote{Current address: Affiliation 3.} 
+
+% Abstract (Do not insert blank lines, i.e. \\) 
+\abstract{
+Automated classification of satellite images is a challenging task that enables to use remote sensing data for environmental modelling of the Earth's landscapes. In this document, we implement a GRASS GIS-based framework of land cover types discrimination to identify changes in the endorheic basins of the ephemeral salt lakes Chott Melrhir and Chott Merouane, Algeria, employing embedded algorithms of image processing. This study presents a dataset of the nine Landsat 8-9 OLI/TIRS satellite images obtained from the USGS for a 8-year period of 2014-2022. The images were analysed for the changes of level in ephemerical lakes which experience temporal fluctuations in water level being dry for the most of the time and fed with water during rains. The unsupervised classification of the images was based on the implementation of the GRASS GIS algorithms by several modules: 'i.cluster' for generating image classes; 'i.maxlik' for classification by the maximal likelihood discriminant analysis, and auxiliary modules such as 'i.group', 'r.support', 'r.import', etc. The document includes a technical description of the scripts used for image processing with detailed comments on functionality of the GRASS GIS moduels. The results include the identified variations in the ephemeral salt lakes in the Algerian part of Sahara on 10-year period (2014-2022) using a time series of the Landsat OLI/TIRS multispectral images classified by the GRASS GIS. The main strength of the GRASS GIS framework is high speed, accuracy and effectiveness of the programming codes for image processing in environmental monitoring. The presented GitHub repository containing scripts used for satellite image analysis provides a reference to remote sensing data interpretation for environmental monitoring of the arid and semi-arid areas of Africa.
+}
+
+% Keywords
+\keyword{Sahara Desert; Africa; salt lake; cartography; image analysis; satellite image; remote sensing; geography; GRASS GIS; mapping} 
+
+% The fields PACS, MSC, and JEL may be left empty or commented out if not applicable
+\PACS{91.10.Da; 91.10.Jf; 91.10.Sp; 91.10.Xa; 96.25.Vt; 91.10.Fc; 95.40.+s; 95.75.Qr; 95.75.Rs; 42.68.Wt}
+\MSC{86A30; 86-08; 86A99; 86A04}
+\JEL{ Y91; Q20; Q24; Q23; Q3; Q01; R11; O44; O13; Q5; Q51; Q55; N57; C6; C61}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+
+\section{Introduction}
+
+\subsection{Background}
+Detecting changes in water level of the ephemeral salt lakes using remote sensing data is an important task in hydrological analysis of arid regions, as it is often the basis of higher level applications, such as environmental monitoring, water resource management, climate change studies, analysis of groundwater distribution, etc. Located in the northern Africa's Maghreb region in Sahara desert, salt lakes, or "chotts", are subject to temporal fluctuations in water level throughout the calendar year. Chotts remain dry for the most of the time but are fed by water from wadi during winter or occasional rains. Monitoring such changes in water supply using variability of contours of the ephemeral stream beds is possible using satellite image classification which is based on different spectral reflectance of the objects visible on the land surface \cite{Medjani}. Changes in lake contours are used as indicators for monitoring land cover changes and hydrological modelling. 
+
+Satellite images are a key data source in computational ecology and environmental monitoring. Various colours and brightness of the land cover classes visible on the images are determined by the spectral reflectance of the pixels and can be used for mapping the landscapes of the Earth \cite{Takorabt,Laghouag,Lemenkova202021,Lemenkova202205,Amri}. Using remote sensing data enables to detect heterogeneity in the Earth's landscapes \cite{Abbas}, analyse geological processes  \cite{ARAIBIA2022104455,LAMRI2016143}. Furthermore, remote sensing data are used to record geologic processes \cite{Deroin2019,data7060074}, or support environmental analysis. Further, spectral reflectance of the land cover types identified on the satellite image may be used to detect soil salinity \cite{abdennour2019detection}. Finally, remote sensing data are applicable in geomorphological studies and can be used to reflect terrain types \cite{Rebillard,Lemenkova202127,Lemenkova202105}, and climate studies such as mapping evapotranspiration and droughts \cite{ijgi11090473}, and characteristics of soil layer \cite{MULDER20111}.  
+
+This makes satellite images as a data source in many applications of Earth science such as mapping distribution of dust in arid regions \cite{Parajuli}, assessing and mapping erosion \cite{Mihi}, aquifer characterisation \cite{AOUDIA2020103920}, evaluating groundwater potential \cite{Derdour}, geological investigations of rock physics, tectonics and hydrogeological simulations \cite{NEDJRAOUI2021104348}. The analysis of the satellite images can also be used for assessing of the geophysical setting in the desert areas such as African Sahara by integrated geological and geospatial data modelling and analysis \cite{ZERROUK2017146}. An important consideration for the use of satellite images for cartographic data analysis is that they have to be classified into maps of land cover types for interpretation and analysis of landscapes. However, manual classification using traditional GIS is a time-consuming process involving many iterations which might lead to errors and results in low accuracy. The problem is therefore focused on finding the effective algorithms to classification of satellite images.
+
+Landsat 8-9 OLI/TIRS images recorded since 2013 as a continuation of the Landsat data collection form a valuable pool of big Earth geospatial data to evaluate land cover types and landscapes of the Earth. However, such datasets should be processed and classified to enable the use of the satellite images in the environmental applications. The use of traditional GIS software is a time‐consuming and cumbersome work which can lead to misclassification of pixels during identification of land cover types. To address these limitations, we suggest using GRASS GIS scripts to automate classification of the remote sensing data by employing algorithms of image processing and geospatial analysis for discrimination of land cover types and detecting changes in the north-east Algeria. Besides the existing applications in the geomorphometry \cite{HOFIERKA2009387}, it can also be used for satellite image processing for environmental applications \cite{Lemenkova202125}.
+
+\subsection{Motivation}
+
+The need to automate classification of the satellite images in order to build a structured workflow for remote sensing data processing intensifies the need to develop tools that allow the automated image processing with reduced workload. Recently, an existing types of classification methods (clustering, maximal likelihood, K-means) have revealed the importance of the optimisation of the algorithms of image processing. Scripting techniques of the GRASS GIS ensure improvement of the accuracy and accelerates the speed of classification. Salt pan brines in desert regions of Sahara are known to be rich sources of lithium \cite{ZATOUT2020104566}. Therefore, most of the existing studies investigating Algerian Chotts are limited to geochemical analysis \cite{Hacini,Hacinietal2006,MOULLA201264} or geological evaluation of the saline brine environment as potential for lithium resources exploration \cite{KESLER201255,FLEXER20181188}. 
+
+There are various mapping techniques demonstrated in cartographic works on Algerian chotts and environmental monitoring \cite{ABDENNOUR2020100087,OUERDACHI2012426,HADOUR2020100671}. Other examples include geological studies using traditional methods of GIS for visualisation \cite{RAHAL2021104983,LAOUINI201959,HADDANE2017228}. Nevertheless, adding remote sensing data for investigation of environmental changes of the water level in the saline lakes presents a more advanced and complex approach, due to the task of image interpretation. These include the algorithms of image clustering and classification according to the spectral reflectance of the pixels on the imagery. Besides, the fluctuations in the lake level detected by the time series analysis through the satellite images should include extensive data processing to derive information on land cover types. The existing approaches rarely consider these methods, which makes classification of the remote sensing data for detecting changes in saline lakes an actual process of environmental monitoring of African Sahara. 
+
+Most general methods of landscape monitoring in saline Saharan environement operate by specific approaches of identification where the surface features of arid environments are assessed based on geomorphologic analysis as modelling \cite{Callot}. The methods of risk assessment of metals in water  was implemented in Ramsar Site of the Chott Merouane \cite{Benhaddya}. In case of a satellite images, the shape and extent of land cover types for the evaluation of desertification can be quite accurately applied \cite{oussedik2003realisation}. More complex cases arise with partially eroded soil which can be also detected on the images where the mask for the erosion areas and surrounding background should be defined \cite{Toumietal}. With this regard, this paper contributes to this problem by presenting a GRASS GIS scripting framework for automatic classification of the satellite images with aim to identify changes in the lake level over years.
+
+To this aim, in this paper we present a GRASS GIS-based scripting framework that allows to automate classification of the Landsat 8-9 OLI/TIRS satellite images covering north-east region of Algeria. The main idea behind it is to use the collection of nine scenes obtained from the archives of United States Geological Survey (USGS) in raster format for land cover types classification to detect changes in ephemeral salt lakes Chott Melrhir and Chott Merouane over time. This will provide insights into the characteristics of water level in shrinking salt lakes and land cover types on the surface are of the Earth reflected in satellite images. We addressed the problem of image classification by presenting n advanced scripting algorithm based on GRASS GIS syntax. To provide for a new foundation for the automatic classification of the time series of satellite images, we apply several modules of the GRASS GIS and a k-means of clustering that evaluate the difference in spectral reflectance of the pixels and assigns them into clusters of classified maps as bitmap graphics. 
+
+The GRASS GIS software was used due to its high computational functionality, cartographic functionality, logic and flexibility of syntax. The approach of the GRASS GIS to a classification of the images included clustering by the 'i.cluster' module, thresholding the cluster centroids to assign pixels, and detecting the 10 land cover types to automatically recognise changes in the landscapes. A dataset of the nine Landsat 8-9 OLI/TIRS images containing TIFF raster files was processed for classification, detecting variations in the lakes and identifying shrinkage in the lake level due to salinisation over the nine-year with one- year intervals automatically by the GRASS GIS. The main strength of this GRASS GIS-based framework consists in high speed, accuracy and effectiveness of image processing and classification. First, it is able to classify the land cover types using clustering data partition and maximum-likelihood discriminant analysis classifier. Second, the algorithm can identify classes over one year intervals on the images using repeated time series. Third, the workflow has a higher accuracy and speed of data processing, compared to the existing software due to scripting.
+
+\subsection{Study Area}
+
+The study area is located in northern Algeria (Figure \ref{fig01}) with a special focus on the ephemeral salt lakes Chott Melrhir and Chott Merouane, Maghreb \cite{RAMDANI2009544,1991246,KARA2004361}. The formation of the chotts is caused by complex geologic setting and tectonic development of northern Algeria. Northern Algeria is located in the North African Alpine chain that is formed by large three mountain domains: the Tell, the pre-Atlas, and the Atlas, which present the deformed margin of the stable African craton. The crust undergone a complex deformation during the Alpine orogeny \cite{ASFIRANE199561}. South and east of the South Atlas Front, the Saharan topography presents longitudinal asymmetry and decreases in altitude eastwards. In Eastern Algeria, the Atlas foreland corresponds to the distribution of chotts and sebkhas, which is an active subsiding area with topographic depressions where chotts are located. 
+
+\begin{figure}[H]
+\begin{adjustwidth}{-\extralength}{0cm}
+%\centering
+	\hspace{100pt}\includegraphics[width=16.0 cm]{Fig_01.jpg}
+\end{adjustwidth}
+\caption{Topographic map of Algeria. Software: GMT v. 6.1.1. Data sources: GEBCO and DCW. Rotated red square indicates study area with Chotts Melrhir and Merouane. Map source: author.
+\label{fig01}}
+\end{figure}
+
+Chotts are located within a large asymmetrical syncline of Northern Sahara Sedimentary Basin which was formed due to complex tectonic movements \cite{askri1995geology,Flotte}. Algerian chotts, like playas, present the endorrheic lakes located at the bottom of a large hydrographic basin and depressions \cite{Joly}. These salt lakes present an immense area (nearly 3 M hectares) of shallow topographic depressions in northern Algeria located in the arid region of the Sahara with a specific hydrological regime and high level of salinity \cite{chabour2018africa}. The topographic depression occupied by the Melrhir and Merouane Chotts (Figure \ref{fig02}) is located southwards of the Maghrebian Atlas in the Northern Sahara Sedimentary Basin. Their formation was largely influenced by vertical movements in the Atlas system during Mesozoic and Cenozoic periods, and Triassic-Lower Jurassic faults \cite{DELAMOTTE20099}. The aquifer is composed of Quaternary sediments such as sand, sandstone, clayey sand and gypsum with northwards groundwater flow orientation \cite{BOUSELSAL2022100747,BALLAIS1991209} which controls the geochemical content of groundwaters \cite{daoud1995caracterisation}.
+
+The Algerian chotts occupy a large area mainly located in the east of the country. Their geographic situation and extent is largely influenced by a complex combination of the topographic and climatic factors: the extent of the depression which favours the accumulation of water, sediments and dust \cite{Klose,Goudie2022}, and a higher level of precipitation and moisture in the eastern region of Sahara which presents the wettest region in the country \cite{Nedjraoui,Benkhaled}. At the same time, regional environmental setting of the eastern Algeria and northern Sahara experiences the contrasting influence of the Mediterranean climate in the north and the arid Sahara in the south \cite{Ficheur,Mebarki}. 
+
+The largest chotts of Algeria located within the Sahara desert include the Merouane and Melrhir Chotts (Figure \ref{fig02}) \cite{HACINI2006284}. Other existing large chotts in Algeria include, for instance, Chott Ech Chergui -- the second largest chott in North Africa \cite{Maizi,habibi2013analyse,Demnati,Larnaude}, Chott El Beida (Chott El Beïdha -- Hammam Essoukhna), Chott Oum El Raneb \cite{KHAZNADAR2009369}, Chott El-Gharbi \cite{CHERCHALI2023105537} and Chott El Hodna \cite{AISSAOUI1989413}, besides multiple minor chotts of smaller size. The specific hydrologic setting of chotts consists in the contrasting regime: chotts remain dry for much of the year but collect drainage water in the winter period from the occasional rains, spring thaw waters or groundwaters \cite{Larfa,achour2014vulnerabilite}. The level of a chott surface depends on the position of the water table. Generally, sediment deflation occurs during the decline of the water table, and sediment accumulation -- during water rise, respectively. Such highly specific hydrogeological and hydrochemical setting of the Algerian chotts resulted from complex geological development of Algeria \cite{CABY1987335,BOUBEKRI2015471,DARLING2018277,BENYOUCEF2023105547} and in turn lead to the formation of the saline minerals and lithium in the lake sediments \cite{HACINI20081583,MEFTAH20222105,DIAZCUEVAS2021101445}. 
+
+\begin{figure}[H]
+\makebox[1.0\linewidth][r]{%
+	\begin{subfigure}[b]{.5\textwidth}
+		\centering
+			\includegraphics[width=7cm]{Fig_02a.jpg}
+		\caption{}
+	\end{subfigure}%
+	\begin{subfigure}[b]{.5\textwidth}
+		\centering
+			\includegraphics[width=7cm]{Fig_02b.jpg}
+		\caption{}
+	\end{subfigure}%
+}
+\caption{(\textbf{a}): Melrhir Chott and Merouane Chott (also known as Felrhir Chott) enlarged on the Google Maps (2023); (\textbf{b}): Melrhir Chott and Merouane Chott on the Google Earth aerial scene (2023)}\label{fig02}
+\end{figure}
+
+The Merouane and Melrhir Chotts Algeria are located within the North-Western Sahara Aquifer System (NWSAS) which is one of the largest transboundary aquifer systems in the world shared between Algeria, Tunisia, and Libya. With the size of over $1 M km^2$, the NWSAS largely contributes to the water supply of the chotts through the groundwaters \cite{HAKIMI2021100791}. Another source of water supply of the Melrhir and Merouane Chotts comes from occasional rainfalls and the third type if received from the spring thaw waters from the Atlas mountains. Thus, the water level in Melrhir and Merouane Chotts is supported by the three major types of water: occasional rainfalls, spring thaw and groundwaters \cite{Ballais,fabre2005geologie,aubert1983observations}. 
+
+The crystallized salt layer is being formed on the lake's surface during the period when the lakes remain dry as a result of such fluctuations in the hydrology of the lake  \cite{Remli}. The Algerian chotts receive water intermittently during periods of occasional rains. As a result, the lake level is subject to frequenc shrinkage and a high evaporation rate, as salt layer accumulates in the surface of the sediment on the ground level of the lakes. The distribution of the salt differs within the salt pan with gypsum- and halite-rich deposits occupying the centre of the depressions and carbonate outliers found at an medium level, and calcareous lacustrine deposits lying on the aeolian sands \cite{GASSE19871}. 
+
+Specific soil properties and salinity gradients in Algerian chotts largely affect the distribution of the flora and vegetation types around the saline lakes \cite{Neffar}. For instance, the contents of gypsum influences the variation of vegetation cover of halophyte plants. Other geochemical parameters of soil in chotts such as pH, Na and Cl control the distribution of plants in moderate of low saline soils of chotts \cite{CHENCHOUNI2017660}. The biogeochemical cycles of carbon, nitrogen, sulphur and other elements within arid lands of chotts results in a specific types and distribution of the species populations and microbal communities \cite{BOUTAIBA2011909,QUADRI2016119}. The existing papers on the Algerian chotts present studies providing further details on geochemical setting and soil salinity \cite{Abdennour}, hydrogeological evaluation of geothermal resources \cite{BENMARCE2021104285,MELOUAH2021102211,Abdelaziz}, analysis of the mineralogy of desert alluvial soils in wadi of northern Sahara \cite{Djili}, brine geochemistry and mineralogy of the Algerian playa \cite{HamdiAissa,Valles}, hydrological and environmental modelling in chotts \cite{Samie}. 
+
+Soil of northern Sahara loss organic carbon, which affects their agricultural and vegetation potential and results in highly specific types of flora adopted to a highly depleted dry soil of the semi-arid climate \cite{BOUBEHZIZ2020104539}. While the most areas of chotts are devoid of vegetation due to high salt concentrations in soil, there are selected occasional vegetation types distributed over the moist areas and edges of the wetlands. Occasional plants are mainly composed of halophytic, succulent and perennial species distributed in the edges of the chotts. Thus, \cite{KHAZNADAR2009369} mentions \emph{Chenopodiaceae} family adapted to droughts and salty soils.
+
+The geologic structures in sedimentary basins of the Sahara include large and deep reservoirs controured by chotts which are filled by water during the rainy periods \cite{HAMICHE2015261}. The salt pans of Chott Merouane and Melrhir in Algeria present examples of sensitive wetlands in an arid climate. Social benefits and the effects from such unique landscapes include there types of benefits: 1) salt mining in the pan; 2) palm inter cropping and palm monoculture; 3) grazing areas in a palm oasis on the border of the lake \cite{Demnati2012}. Despite the ecological importance, geochemical special setting, unique landscapes of the saline lakes, and the specific biodiversity, the studies on the Algerian Chotts remain scarce and relatively few. In view of this, current study presents a contribution to the investigation of the Algerian Chotts through satellite image processing. 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Materials and Methods}
+
+%----------- subsection ----------->
+\subsection{Data}
+
+The GRASS GIS-based image classification workflow is based on a Landsat 8-9 dataset containing nine satellite images (Figure \ref{fig03}) covering the region of Chott Melrhir and Chott Merouane, Algeria. The major metadata are listed in Table \ref{tab1}. The data were obtained from the USGS EarthExplorer repository always on January from 2014 to 2022. The Landsat OLI/TIRS data include spectral bands in visible and NIR ranges. The images were downloaded and the TIFF files with the necessary bands were stored in GRASS GIS location (project storage folder). The images are stored in TIFF format which presents a matrix of the 2D arrays of pixels assigned to values in a grey scale with data on spectral reflectance associated to pixels, used for image classification. 
+
+\begin{table}[H]
+\scriptsize
+\caption{Satellite images used for computing the VIs: Landsat-8 OLI/TIRS collected from the USGS \textsuperscript{1}.\label{tab1}}
+		\begin{tabularx}{\linewidth}{ p{1.6cm} | p{1.3cm} | p{6.8cm} | p{2.2cm} }
+			\toprule
+			\textbf{Date} & \textbf{Spacecraft} & \textbf{Landsat Product ID} & \textbf{Scene ID} \\
+			\midrule
+			2014/01/01 & 8 & \makecell{LC08\_L2SP\_193036\_20140101\_20200912\_02\_T1} & LC81930362014001LGN01 \\
+			2015/01/04 & 8 & \makecell{LC08\_L2SP\_193036\_20150104\_20200910\_02\_T1} & LC81930362015004LGN01 \\
+			2016/01/07 & 8 & \makecell{LC08\_L2SP\_193036\_20160107\_20200907\_02\_T1} & LC81930362016007LGN02 \\
+			2017/01/25 & 8 & \makecell{LC08\_L2SP\_193036\_20170125\_20201013\_02\_T1} & LC81930362017025LGN02 \\
+			2018/01/28 & 8 & \makecell{LC08\_L2SP\_193036\_20180128\_20200902\_02\_T1} & LC81930362018028LGN00 \\
+			2019/01/15 & 8 & \makecell{LC08\_L2SP\_193036\_20190115\_20200830\_02\_T1} & LC81930362019015LGN00 \\	
+			2020/01/02 & 8 & \makecell{LC08\_L2SP\_193036\_20200102\_20200824\_02\_T1} & LC81930362020002LGN00 \\
+			2021/01/04 & 8 & \makecell{LC08\_L2SP\_193036\_20210104\_20210309\_02\_T1} & LC81930362021004LGN00 \\
+			2022/01/15 & 9 & \makecell{LC09\_L2SP\_193036\_20220115\_20220118\_02\_T1} & LC91930362022015LGN00 \\		
+			\bottomrule
+		\end{tabularx}
+\end{table}
+
+\begin{figure}[H]
+\makebox[0.90\linewidth][r]{%
+	\begin{subfigure}[b]{.40\textwidth}
+		\centering
+			\includegraphics[width=0.87\textwidth]{Fig_03a.jpg}
+		\caption{2014}
+	\end{subfigure}%
+	\begin{subfigure}[b]{.40\textwidth}
+		\centering
+		\includegraphics[width=0.87\textwidth]{Fig_03b.jpg}
+		\caption{2015}
+	\end{subfigure}%
+	\begin{subfigure}[b]{.40\textwidth}
+		\centering
+		\includegraphics[width=0.87\textwidth]{Fig_03c.jpg}
+		\caption{2016}
+	\end{subfigure}%
+}\\
+\vfill \vspace{1mm}
+\makebox[0.90\linewidth][r]{%
+	\begin{subfigure}[b]{.40\textwidth}
+		\centering
+			\includegraphics[width=0.87\textwidth]{Fig_03d.jpg}
+		\caption{2017}
+	\end{subfigure}%
+	\begin{subfigure}[b]{.40\textwidth}
+		\centering
+		\includegraphics[width=0.87\textwidth]{Fig_03e.jpg}
+		\caption{2018}
+	\end{subfigure}%
+	\begin{subfigure}[b]{.40\textwidth}
+		\centering
+		\includegraphics[width=0.87\textwidth]{Fig_03f.jpg}
+		\caption{2019}
+	\end{subfigure}%
+}\\
+\vfill \vspace{1mm}
+\makebox[0.90\linewidth][r]{%
+	\begin{subfigure}[b]{.40\textwidth}
+		\centering
+			\includegraphics[width=0.87\textwidth]{Fig_03g.jpg}
+		\caption{2020}
+	\end{subfigure}%
+	\begin{subfigure}[b]{.40\textwidth}
+		\centering
+		\includegraphics[width=0.87\textwidth]{Fig_03h.jpg}
+		\caption{2021}
+	\end{subfigure}%
+	\begin{subfigure}[b]{.40\textwidth}
+		\centering
+		\includegraphics[width=0.87\textwidth]{Fig_03i.jpg}
+		\caption{2022}
+	\end{subfigure}%
+}
+\caption{Landsat 8-9 OLI/TIRS images in natural RGB colours: lake changes for 8 years (2014-2022).}\label{fig03}
+\end{figure}
+
+
+The series of the Landsat images demonstrated high quality of the scenes as input data source: distinct colours, contrasting and clearly recognised areas corresponding to various land cover classes, no defects, faults or technical noise on the imagery, distinguishable landscape patterns and continuity, identical coverage of the scene over years and availability of multi-spectral bands. The images were processed, preliminary analysed and stored in a working directory for GRASS GIS processing. Additional mapping was performed using the Generic Mapping Tools (GMT) scripting toolset \cite{Wessel} following the existing technical cartographic workflow \cite{Lemenkova202206,Lemenkova202203}. The metadata on the Landsat images were collected by the EarthExplorer file with the .xml extension and summarised in Table \ref{tab1}. 
+
+The data of the nine (9) Landsat satellite scenes used in this study include eight consecutive years from 2014 to 2022 with scenes taken always in January on the following exact dates: \textbf{a}) 2014/01/01, (\textbf{b}) 2015/01/04, (\textbf{c}) 2016/01/07, (\textbf{d}) 2017/01/25, (\textbf{e}) 2018/01/28, (\textbf{f}) 2019/01/15, (\textbf{g}) 2020/01/02, (\textbf{h}) 2021/01/04, (\textbf{i}) 2022/01/15. Visible inspection of the images enables to see the dynamics of the salinity on the ephemeral salt lakes where bright cyan regions signify salted regions. 
+
+%----------- subsection ----------->
+\subsection{Methods}
+
+The remote sensing data were processing by scripting methods, Figure \ref{fig04}.  
+
+\begin{figure}[H]
+\begin{adjustwidth}{-\extralength}{0cm}
+%\centering
+	\hspace{100pt}\includegraphics[width=12.0 cm]{Fig_04.jpeg}
+\end{adjustwidth}
+\caption{Data and workflow processes used for study project. Diagram flowchart made in R mermaid library, source: author.\label{fig04}}
+\end{figure}
+
+The GRASS GIS modules, 'i.cluster' and 'i.maxlik' enable to perform a key procedure converting raster images into classified objects \cite{Neteleretal2008}. The approach of unsupervised classification by the GRASS GIS is based on discriminating the pixels on the image based on their spectral signatures. Upon classification, the areas identified as different land cover classes are represented as geometrical primitives, contoured areas that represent the extent and topological structures of the distinct land cover classes \cite{NetelerMitasova2008}. In the same way, classification enables to treat pixels as different  objects according to the spectral signatures for land cover types grouping them into polygonal segments based on the defined parameters using a clustering algorithm.
+
+\subsection{Process flowchart}
+
+The general workflow consists of the following steps performed in the GRASS GIS: 1) image preprocessing by the 'i.landsat.toar' module which computes and corrects the images for the top-of-atmosphere radiance or reflectance and temperature for Landsat 8-9 OLI/TIRS; 2) Creating the group and subgroup of Landsat bands to select map layers for classification, using imagery data by the 'i.group' module;  3) the unsupervised image classification performed by 'i.cluster' module which creates the cluster means and covariance matrices as cluster spectral signatures; 4) image classification by the maximum-likelihood discriminant analysis classifier using the 'i.maxlik' module; 5) plotting, analysis and interpreting the obtained maps of the land cover types in norther Algeria. 
+
+Figure \ref{fig05} shows the outline of the general structure of the libraries within the GRASS GIS framework for image processing. The workflow of the GRASS GIS includes several modules that handle remote sensing data: g.region, i.group, i.cluster, i.maxlik, d.rast.leg and d.mon wx0. The GRASS GIS has several modules that actually process the data with the content and connections of these processes listed in Figure \ref{fig05}. 
+
+\begin{figure}[H] 
+	\centering
+		\includegraphics[width=14cm]{Fig_05}
+	\caption{The outline of the general structure of the GRASS GIS framework. Hierarchical structure of the process used for image processing with functionality of the key modules of the GRASS GIS and sequential workflow of the data processing. Flowchart made in R library 'mermaid'. Source: author.} \label{fig05}
+\end{figure} 
+
+%----------- subsection ----------->
+\subsection{GRASS GIS framework workflow and process organisation}
+
+The general workflow of the GRASS GIS algorithm for image processing is outlined stepwise as followed: 
+ 
+\begin{enumerate}
+\itemsep0em
+	\item \emph{USGS -- Data } The images were collected from the USGS and organised in the workspace of the GRASS GIS. The dataset included 9 files with each ca. 200 MB, organised for viewing and analysis of the images. 
+	\begin{enumerate}
+		\item \emph{EarthExplorer -- } The Earthexplorer repository was used to obtained and download the imagery, as a powerful resource for satellite remote sensing data management system, and as a storage place for a large dataset of the Landsat 8-9 OLI/TIRS images.
+		\item \emph{Image capture -- } Raster images were downloaded using a path to the Landsat files located in the EarthExplorer repository. The images were fetched using the access to the USGS open access files, and stored in a working folder of the GRASS GIS.		
+	\end{enumerate}
+	\item \emph{GMT -- Mapping } The map of the study area in the Algeria showing exact location of the Landsat images was plotted using the GEBCO/SRTM raster grids and the DCW for annotations using the cartographic methods.	
+	\item \emph{DCW -- Adding annotations} The Digital Chart of the World (DCW) Gazetteer was used to trace, mark and add annotations on the map of Algeria as parts cartographic workflow using data from the DCW Gazetteer database. The DCW data and annotation features derived based on 1:1.000.000 data were applied to Algeria with generalised annotations added on the maps by coordinates.	
+	\item \emph{GRASS GIS -- Image processing} The images were processed in the GRASS GIS using a a sequence of modules: 'g.region', 'i.group', 'i.cluster', 'r.support', 'i.maxlik', 'd.mon', 'd.legend'.	
+		\begin{enumerate}
+			\item \emph{'i.group' -- Detection of the groups} The group and subgroups were selected by identifying visible bands in the Landsat collection and identifying Landsat sensor (8 or 9). This improved the time of computing and optimised the use of memory during image processing.  
+			\item \emph{'r.support' -- Semantic labelling --} Semantic labels were assigned using 'r.support' module for repeatability of regularly used images in time series. The labels were assigned using Landsat sensor OLI for each band correspondingly using function 'map' (e.g., map=rastername). Annotating the labels was done using 'r.support' GRASS GIS module.
+			\item \emph{'i.cluster' -- Grouping} Each cluster on the image was generated by an algorithm k-means configured as a loop of code processing the image by the GRASS GIS. This resulted in 10 defined clusters visualised as groups of pixels on the images. This procedure was performed automatically by k-means clustering using GRASS GIS 'i.cluster' module. The following parameters were tested: input imagery group, input imagery subgroup (30 m visible Landsat bands) and signature file containing threshold levels for assignment of the pixels based on the intensity of brightness according to spectral reflectance (level of colour in pixels considered or ignored).
+			\item \emph{'i.maxlik' -- Classification} The classification of the Landsat 8-89 OLI/TIRS images is applied to each scene with extracted bands in visible spectrum (bands 1 to 7 with resolution 30 m). The classes on the images were adjusted using the cycles of algorithm executed iteratively until only the 10 classes of the land cover types.
+			\item \emph{Analysis --} Validation of errors was performed by the computed rejection probability values with pixel classification confidence levels for each map. This was necessary for the analysis of the classification in the Chotts Melrhir and Merouane Lakes where neighbouring pixels cross each other in similar classes.
+			 \item \emph{'d.mon wx0' and 'd.rast.leg' -- Visualization} The maps were visualised as several images of the land cover types based on the performed automated classification, separated by the one year gaps between each map. The sequence of maps representing the segments of land cover classes was converted into the graphical format. The maps were visualised with legends using plotting by the 'd.mon' and 'd.legend' GRASS GIS modules.	
+		\end{enumerate}
+	        \item \emph{Algeria -- Land cover classes} The 10 land cover classes were generated using features of objects on the images based on their spectral reflectance: 1) Bare areas (desert sands); 2) Salt hardpans; 3) Water bodies (Melrhir and Merouane Chotts); 4) Non-consolidated soils 5) Consolidated soils; 6) Sparse grassland; 7) Sparse shrubland; 8) Sparse trees 9) Sparse vegetation; 9) Grassland; 10) Broadleaved shrubland. 
+	         \item \emph{FAO Classes -- Identifying} The features on the images and associate land cover classes were identified, annotated and compared for changes in years 2014-2022. These included visible changes in the time period for each year, and fluctuations in salt levels. The number of classes is chosen based on the Food and Agriculture Organization (FAO) Land Cover Legend Registry (LCLR), modified and adopted in such way that it well represent the land classes on the 30-m resolution, fits easily into memory during computer processing, and is large enough to illustrate the landscape structure in the northeastern Algeria, and the vegetation parameters are chosen to ensure that a patterns are included in the maps. 
+\end{enumerate}
+
+%----------- subsection ----------->
+\subsection{Scripting in GRASS GIS}
+
+First, a work project 'Algeria' was defined using spatial location derived from the coordinate reference system (CRS) pf the Landsat images: WGS84 datum and ellipsoid (EPSG:4326) UTM Projection Zone 32. The Landsat bands were imported into the project using 'r.import' module using the bilinear resampling method for reprojection, applying the extent of current region and keeping the resolution of output raster map (30 m for Landsat bands in visible spectrum). The information on raster metadata was checked using the 'r.info' module, and the computational region was defined to match the scene using the 'g.region' module. The GRASS GIS code is shown in Listing \ref{lst01}:
+
+\begin{lstlisting}[language=bash,caption=GRASS GIS code for importing the data (here: a case of the bands of Landsat image on 2014),style=mystyle,label={lst01}]
+r.import input=/Users/polinalemenkova/grassdata/Algeria/LC08_L2SP_193036_20140101_20200912_02_T1_SR_B1.TIF output=L8_2014_01 resample=bilinear extent=region resolution=region
+r.import input=/Users/polinalemenkova/grassdata/Algeria/LC08_L2SP_193036_20140101_20200912_02_T1_SR_B2.TIF output=L8_2014_02 resample=bilinear extent=region resolution=region
+r.import input=/Users/polinalemenkova/grassdata/Algeria/LC08_L2SP_193036_20140101_20200912_02_T1_SR_B3.TIF output=L8_2014_03 resample=bilinear extent=region resolution=region
+# repeated likewise for all the VIS bands until 7.
+# check raster metadata:
+r.info -r L8_2014_07
+# list the imported files
+g.list rast
+\end{lstlisting}
+
+The next step included creating the groups and subgroups of the Landsat imagery data using GRASS GIS module 'i.group', and generating signature file. The aim of this step was to create the raster map layers in a Landsat imagery group by assigning them to the subgroups with 30-m resolution with only necessary bands (visible spectra), Listing \ref{lst02}:
+
+\begin{lstlisting}[language=bash,caption=GRASS GIS code for grouping and subgrouping Landsat bands,style=mystyle,label={lst02}]
+# store VIZ, NIR, MIR into group and a subgroup with 30 m resolution without TIR
+i.group group=L8_2014 subgroup=res_30m \ input=L8_2014_01,L8_2014_02,L8_2014_03,L8_2014_04,L8_2014_05,L8_2014_06,L8_2014_07
+\end{lstlisting}
+
+Created group and a subgroup enables to run classification on a combination of the raster map layers in a group for each year. Since in this project, Landsat OLI/TIRS images for several years (2014 to 2022) were inspected and processed, grouping and subgrouping the data supported organisation and management of data and raster map layers in a project 'Algeria'. Since current study included several images for different years, to re-use the signature file for the classification of different imagery groups for these years, the semantic labels were set up for each group of bands before generating the signature files using 'r.support' module of the GRASS GIS as shown in Listing \ref{lst03}: 
+
+\begin{lstlisting}[language=bash,caption=GRASS GIS code for creating semantic labels for the Landsat OLI/TIRS,style=mystyle,label={lst03}]
+# Defining semantic labels for all Landsat OLI/TIRS bands
+r.support map=L8_2014_01 semantic_label=OLI_1
+r.support map=L8_2014_02 semantic_label=OLI_2
+r.support map=L8_2014_03 semantic_label=OLI_3
+r.support map=L8_2014_04 semantic_label=OLI_4
+r.support map=L8_2014_05 semantic_label=OLI_5
+r.support map=L8_2014_06 semantic_label=OLI_6
+r.support map=L8_2014_07 semantic_label=OLI_7
+\end{lstlisting}
+
+The following steps of the classification using modules 'i.cluster' and 'i.maxlik' used the imagery group for each year (2014 to 2022) and subgroups of the Landsat bands with defined year and resolution. The signature file generated in the snippet of code above allows to classify the current imagery group only. This means, that the data includes only the visible Landsat bands with 30 m resolution without panchromatic and Thermal Infrared bands, which are not necessary in this case. The methodological approach of the i.cluster technique is based on reading the bands of the Landsat satellite data and assigning pixels into clusters according to the difference in spectral reflectances of the pixels. 
+
+Since pixel clusters are categories associated with land cover types on the Earth's shape, the clusters automatically defined by the GRASS GIS are used for further steps in classification. Clustering approach of the GRASS GIS uses a k-means algorithm. During the process of k-means clustering by 'i.cluster', the means of the groups where pixels are assigned are constantly change, as soon as new pixels are assigned and the means are recalculated iteratively to reach the maximal distances between the groups. The bands used for generating signatures of clusters are stored in the group $'L8\_2014'$, Listing \ref{lst04}.
+
+\begin{lstlisting}[language=bash,caption=GRASS GIS code for creating signature file by k-means clustering algorithm,style=mystyle,label={lst04}]
+# generating signature file and report for 10 classes
+i.cluster group=L8_2014 subgroup=res_30m \
+signaturefile=cluster_L8_2014 classes=10 reportfile=rep_clust_L8_2014.txt
+\end{lstlisting}
+
+The next step included the classification of the images by the 'i.maxlik' module which uses the maximum likelihood discriminant analysis classifier as a core algorithm approach to classify the cells according to their spectral reflectances in satellite imagery. the main approach of this algorithm is that it uses the cluster means and covariance matrices generated during the previous steps in  signature file by the 'i.cluster' module to determine the categories of spectral classes according to the probability of belonging of each cell in the image based on the distance to the cluster's centroids. The technical implementation was performed using Listing \ref{lst05}. 
+
+\begin{lstlisting}[language=bash,caption=GRASS GIS code for image classification by maximal likelihood algorithm clustering,style=mystyle,label={lst05}]
+i.maxlik group=L8_2014 subgroup=res_30m \
+  signaturefile=cluster_L8_2014 \
+  output=L8_2014_cluster_classes reject=L8_2014_cluster_reject
+\end{lstlisting}
+
+Mapping the results of the classification was done using the 'd.rast' module as shown in the following GRASS GIS code in Listing \ref{lst06}:
+  
+\begin{lstlisting}[language=bash,caption=GRASS GIS code for image classification by maximal likelihood algorithm clustering,style=mystyle,label={lst06}]
+d.mon wx0
+d.rast.leg L8_2014_cluster_classes
+d.rast.leg L8_2014_cluster_reject
+\end{lstlisting}
+
+To make classification by the 'i.maxlik' more accurate, a thresholding procedure was applied by k-means clustering using the 'i.cluster' modules aimed to separate the target image classes using the distance from the centroids. The identification of segments (objects) from imagery data was perform by the 'i.segment' module of GRASS GIS using Listing \ref{lst07}:
+
+\begin{lstlisting}[language=bash,caption=GRASS GIS code for image segmentation by 'i.segment' algorithm clustering,style=mystyle,label={lst07}]
+i.segment group=L8_2014 output=L8_2014_seg_14 threshold=0.4 memory=1000
+\end{lstlisting}
+
+This workflow of the GRASS GIS software, briefly outlined above was used for classification satellite images. The sequence of the utilised modules aimed to classify pixels signed them into clusters based on their features, discriminate spectral properties of the land cover objects using signature file and generate classification maps to assign land cover classes. The landscapes categories are recognised according to contrast in DNs, assigned to land cover classes and mapped using colour palettes. These solutions have advances and high level of automation which enabled to process a time series of the nine images. 
+
+Once the images were classified in GRASS GIS, the land cover classes were assigned to classify the variety of landscapes in the target region of north-eastern Algeria. The land cover classes indicate dominant feature classes of the landscapes identified on the images that have specific characteristics and vegetation pattern unique for that given spot on the image. These include the following types derived for the FAO and adopted by generalisation for the given study area: 1) Bare areas (desert sands); 2) Salt hardpans; 3) Water bodies (Melrhir and Merouane Chotts); 4) Non-consolidated soils 5) Consolidated soils; 6) Sparse grassland; 7) Sparse shrubland; 8) Sparse trees 9) Sparse vegetation; 9) Grassland; 10) Broadleaved shrubland. The land cover classes were used as representative areas in the classified maps to compare and distinguish the changes over eight years. They also allowed to assess the shrinkage of lakes and extent of salt areas, and analyse the visualised landscapes. 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\pagebreak
+\section{Results}
+
+The qualitative evaluation of the water level coverage in the Melrhir and Merouane Chotts on the satellite images for each Landsat scene is based on the number of land cover classes as landscape segments, Figure \ref{fig06}.
+
+\begin{figure}[H]
+\hspace{-32pt}\makebox[1.00\linewidth][r]{%
+	\begin{subfigure}[b]{.55\textwidth}
+		\centering
+			\includegraphics[width=7cm]{Fig_06a}
+		\caption{\centering{2014}}
+	\end{subfigure}%
+	\begin{subfigure}[b]{.55\textwidth}
+		\centering
+			\includegraphics[width=7cm]{Fig_06b}
+		\caption{\centering{2014}}
+	\end{subfigure}%
+}\\
+\vfill \vspace{1mm}
+\hspace{-32pt}\makebox[1.00\linewidth][r]{%
+	\begin{subfigure}[b]{.55\textwidth}
+		\centering
+			\includegraphics[width=7cm]{Fig_06c}
+		\caption{\centering{2015}}
+	\end{subfigure}
+	\begin{subfigure}[b]{.55\textwidth}
+		\centering
+			\includegraphics[width=7cm]{Fig_06d}
+		\caption{\centering{2015}}
+	\end{subfigure}%
+}\caption{Classification the Landsat 8-9 OLI/TIRS of the Algeria with pixels classified into 10 classes and rejection probability values with pixel classification confidence levels: (\textbf{a}) 2014 map, (\textbf{b}) 2014 rejected classes (\textbf{c}) 2015 map, (\textbf{d}) 2015 rejected classes.}\label{fig06}
+\end{figure}
+
+The land cover types are automatically detected and visualised in Figure \ref{fig06} for years 2014 and 2015, Figure \ref{fig07} for years 2016 and 2017, Figure \ref{fig08} for years 2018 and 2019, Figure \ref{fig09} for years 2020 and 2021, and Figure \ref{fig10} for year 2022. The classification was succeeded for images representing nine Landsat scenes. The percentage of the pixels images with rejection probability values and pixel classification confidence levels is computed based on the reject threshold results. The statistical data on classification results for processed scenes obtained from the GRASS GIS 'i.maxlik' is summarised in monochrome images, right to the classification maps, Figures \ref{fig06} to \ref{fig10}. 
+
+The comparison of the classified image on 2016 (Figure \ref{fig07}, a) and 2017 (Figure \ref{fig07}, c) shows the visible increase of salt areas in the northern part of the study area during one calendar year, Figure \ref{fig07}. Such fluctuations show that significant changes in the hydrology reflect the sensibility of a chott as a closed hydrological systems to regional changes in rainfall patterns, as also noted earlier \cite{Mahowald}.
+
+\begin{figure}[H]
+\hspace{-32pt}\makebox[1.00\linewidth][r]{%
+	\begin{subfigure}[b]{.55\textwidth}
+		\centering
+			\includegraphics[width=7.3cm]{Fig_07a}
+		\caption{\centering{2016}}
+	\end{subfigure}%
+	\begin{subfigure}[b]{.55\textwidth}
+		\centering
+			\includegraphics[width=7.3cm]{Fig_07b}
+		\caption{\centering{2016}}
+	\end{subfigure}%
+}\\
+\vfill \vspace{1mm}
+\hspace{-32pt}\makebox[1.00\linewidth][r]{%
+	\begin{subfigure}[b]{.55\textwidth}
+		\centering
+			\includegraphics[width=7.3cm]{Fig_07c}
+		\caption{\centering{2017}}
+	\end{subfigure}
+	\begin{subfigure}[b]{.55\textwidth}
+		\centering
+			\includegraphics[width=7.3cm]{Fig_07d}
+		\caption{\centering{2017}}
+	\end{subfigure}%
+}\caption{Classification the Landsat 8-9 OLI/TIRS of the Algeria with pixels classified into 10 classes and rejection probability values with pixel classification confidence levels: (\textbf{a}) 2016 map, (\textbf{b}) 2016 rejected classes (\textbf{c}) 2017 map, (\textbf{d}) 2017 rejected classes.}\label{fig07}
+\end{figure}
+
+The solutions evolve to halite and potassium and magnesium salts that are visible on the satellite images covering chotts for several years for comparison. For instance, when comparing the distribution of salt areas in 2018 (Figure \ref{fig08}, a) against 2019 (Figure \ref{fig08}, c), the increase in water level in the Melrhir Chott is visible in the latter case. Besides salt minerals, the structure of the chotts is complicated by the occasional presence of sparse vegetation downstream the depression where the palm grove gives way to the salty soils, the sebkha. 
+
+\begin{figure}[H]
+\hspace{-32pt}\makebox[1.00\linewidth][r]{%
+	\begin{subfigure}[b]{.55\textwidth}
+		\centering
+			\includegraphics[width=7.3cm]{Fig_08a}
+		\caption{\centering{2018}}
+	\end{subfigure}%
+	\begin{subfigure}[b]{.55\textwidth}
+		\centering
+			\includegraphics[width=7.3cm]{Fig_08b}
+		\caption{\centering{2018}}
+	\end{subfigure}%
+}\\
+\vfill \vspace{1mm}
+\hspace{-32pt}\makebox[1.00\linewidth][r]{%
+	\begin{subfigure}[b]{.55\textwidth}
+		\centering
+			\includegraphics[width=7.3cm]{Fig_08c}
+		\caption{\centering{2019}}
+	\end{subfigure}
+	\begin{subfigure}[b]{.55\textwidth}
+		\centering
+			\includegraphics[width=7.3cm]{Fig_08d}
+		\caption{\centering{2019}}
+	\end{subfigure}%
+}\caption{Classification the Landsat 8-9 OLI/TIRS of the Algeria with pixels classified into 10 classes and rejection probability values with pixel classification confidence levels: (\textbf{a}) 2018 map, (\textbf{b}) 2018 rejected classes (\textbf{c}) 2019 map, (\textbf{d}) 2019 rejected classes.}\label{fig08}
+\end{figure}
+
+During the dry periods in summer time, the salt in the Algerian chotts is concentrated by evaporation, the pH increases as well as the level of carbonate calcium increases. During wet periods or rains, a calcium carbonate precipitates, and the pH decreases while the residual alkalinity becomes negative \cite{Bourrie}. Such fluctuations affect the content of the evaporites (anhydrite) and soft sulfate minerals such as gypsum halites. 
+
+
+Figure \ref{fig09} shows the comparison of the results of classification between the year 2020 and the 2021 with the visualised classified maps and the rejected classes. Exporting files to the rejection probability values  for processing the pixel classification confidence levels has been performed using 'i.maxlike' GRASS GIS module, which shows the probability of the correct classification of pixels for quality control. 
+
+A higher salinity level in the Chott Melrhir in January 2020 (Figure \ref{fig09}, a) compared to January 2021 (Figure \ref{fig09} c) shows dry period and lesser atmospheric precipitation, while in year 2021, the sale lake is fulled by water which indicated intense rainfalls. In contrast, the Merouane Chott demonstrated lesser variability in salinity which can be explained by the topographic structure of the basin and access to groundwaters. The automatic recognition of the salinity in both chotts and other land cover classes presented in the GRASS GIS algorithm of a maximum-likelihood discriminant analysis classifier was performed using the empirical trials of pixels assignments into classes by clustering with the most appropriate parameters of the Algerian landscapes detected for the classification of the satellite images. 
+
+\begin{figure}[H]
+\hspace{-32pt}\makebox[1.00\linewidth][r]{%
+	\begin{subfigure}[b]{.55\textwidth}
+		\centering
+			\includegraphics[width=7.3cm]{Fig_09a}
+		\caption{\centering{2020}}
+	\end{subfigure}%
+	\begin{subfigure}[b]{.55\textwidth}
+		\centering
+			\includegraphics[width=7.3cm]{Fig_09b}
+		\caption{\centering{2020}}
+	\end{subfigure}%
+}\\
+\vfill \vspace{1mm}
+\hspace{-32pt}\makebox[1.00\linewidth][r]{%
+	\begin{subfigure}[b]{.55\textwidth}
+		\centering
+			\includegraphics[width=7.3cm]{Fig_09c}
+		\caption{\centering{2021}}
+	\end{subfigure}
+	\begin{subfigure}[b]{.55\textwidth}
+		\centering
+			\includegraphics[width=7.3cm]{Fig_09d}
+		\caption{\centering{2021}}
+	\end{subfigure}%
+}\caption{Classification the Landsat 8-9 OLI/TIRS of the Algeria with pixels classified into 10 classes and rejection probability values with pixel classification confidence levels: (\textbf{a}) 2020 map, (\textbf{b}) 2020 rejected classes (\textbf{c}) 2021 map, (\textbf{d}) 2021 rejected classes.}\label{fig09}
+\end{figure}
+
+The proposed algorithm of GRASS GIS scripting by a sequence of several modules enabled to detect 10 land cover classes in the norther-east Algerian landscapes by quantitative evaluations and comparison of pixels' values against the neighbouring pixels which enabled to assigned them into cluster groups. This presented a fully automated GRASS GIS-based workflow that utilises spectral reflectance values of the pixles extracted from the satellite images for a parameter-defined analysis aimed at identification of land cover features, Figure \ref{fig10}. 
+
+\begin{figure}[H]
+\hspace{-32pt}\makebox[1.00\linewidth][r]{%
+	\begin{subfigure}[b]{.55\textwidth}
+		\centering
+			\includegraphics[width=7.3cm]{Fig_10a}
+		\caption{\centering{2022}}
+	\end{subfigure}%
+	\begin{subfigure}[b]{.55\textwidth}
+		\centering
+			\includegraphics[width=7.3cm]{Fig_10b}
+		\caption{\centering{2022}}
+	\end{subfigure}%
+}\caption{Classification the Landsat 8-9 OLI/TIRS of the Algeria with pixels classified into 10 classes and rejection probability values with pixel classification confidence levels: (\textbf{a}) 2022 map, (\textbf{b}) 2022 rejected classes.}\label{fig10}
+\end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Discussion}
+
+Detecting land cover classes on the images strongly depends on the contrast of pixels digital numbers (DN) against the one of neighbour. In case of clear cloud-free images and distinct landscape contours, the detecting can be performed smoothly. However, in case of image containing cloud coverage and noise on the images can seriously affect the inspected scene and worsen recognition and identification of the land cover classes. Therefore, the images were selected with minimal cloudiness and other noise. The second issue concerns specific characteristics of Landsat 8-9 OLI/TIRS scenes with multi-spectral spatial resolution of 30 m where the identification of the land objects is limited to those of 30-m extent, while more detailed landscape patterns are ignored due to resolution and image sharpness. 
+
+In contrast to the existing state-of-the-art commercial GIS (e.g., ArcGIS or Erdas Imagine), the GRASS GIS presents a free open source approach to satellite image processing. Moreover, it accurately detects variations in pixels's reflectance by identifying the pixels and assigning them into land cover classes as well as discriminating signatures of the pixels as cluster and covariance matrices calculated earlier by the GRASS GIS module i.cluster. The results of the image classification performed by the GRASS GIS compared to the state-of-the-art methods present robust automated classification of remote sensing data such as Landsat OLI/TIRS which worked accurately according to the resolution of the original image (30 m), which is applicable to all the images from the evaluated time series. 
+
+The presented application of geospatial data processing using the GRASS GIS for environmental monitoring of Saharan deserts and saline lakes was used for the two selected chotts -- the Melrhir Chott and Merouane Chott in Algeria. The demonstrated and explained workflow included collecting images from the USGS EarthExplorer repository, dataset storage, organising and analysis, and image processing by the GRASS GIS. Besides creating spectral signatures that determine the categories of the land cover classes to which image pixels are assigned during the classification process, the higher-level interpretation process includes the identification and recognition of pixels and their assignment to these land cover classes based on the threshold defined using chi square test. 
+
+The demonstrated approach of the GRASS GIS for image processing is useful in case of big data where hundreds of images are to be processed for multi-temporal interpretation of landscapes that experience changes during decades due to the climate effects. For these purposes, future applications of the presented algorithms of the GRASS GIS foresees the use of the presented workflow for automatic classification of other regions of the African Sahara using Landsat OLI/TIRS or Sentinel-2A images. The 10 satellite images Landsat 8-9 OLI/TIRS were classified using scripting methods and minimised manmade routine with scripts presented in the Appendix of this paper for further reuse. Compared to the existing commercial software, the presented free GRASS GIS-based framework demonstrated high automation of image processing which reduces the potential errors and increases the machine-based routine in classification of the remote sensing data. 
+
+Such effectiveness of the GRASS GIS is especially useful for multi-temporal analysis of the long year environmental trends analysing the processes of desertification using a time series of the satellite images by the automated data processing which is an actual task for environmental modelling. Satellite image classification is central to many environmental and ecological applications including analysis of land cover changes, landscape monitoring, vegetation pattern recognition, risk assessment, and evaluation of desertification. Such applications heavily depend on accurate and automated classification of the satellite images from the archives of Landsat since some tasks require processing of old datasets (since 1970s from the launch of the Landsat mission), for example, for retrospective analysis and creating time series in environmental prognosis. 
+
+Classified images provide information for further data processing in environmental monitoring and enable to acquire the geometry of landscapes (extent) and to get information about the changes over time by comparison of several images, as demonstrated in this paper. Therefore, classification of several Landsat OLI/TIRS images as time series is a challenging task. The approach of the GRASS GIS, demonstrated in this study, enables to convert bitmap raster images into maps of land cover changes based on the data on spectral reflectance of the land cover types corresponding to the objects on the shape of the Earth.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Conclusions}
+This work addressed the challenges of the classification of satellite images using modules of the GRASS GIS which supports the environmental analysis of the salt lakes distribution using scripting methods. The functionality of the GRASS GIS syntax was used for automated segmentation of the Landsat 8-9 OLI/TIRS data. The developed workflow presented in this paper includes automated classification of the remote sensing data using GRASS GIS approach as a combination of modules 'i.maxlik' to classify the cell spectral reflectances in imagery data, 'i.segment' to identify segment objects from imagery data and 'i.cluster' to define spectral signature information. Auxiliary graphical modules were used as well such as 'i.landsat.toar' and others.
+
+While different software for satellite image processing exist, scripting methods, such as GRASS GIS, remain the most accurate ones due to the high level of automation that minimises human-induced errors and maximises the speed of geospatial data processing. This article presents an advanced GRASS GIS-based algorithm developed to accurately and automatically classify bitmap images into the map of land cover types in northern Algeria based on the cell spectral reflectances in imagery data. The objective of the presented article was a classification of the satellite images Landsat OLI/TIRS covering the recent decade (2013-2023) obtained from the USGS sources. 
+
+The principle of using GRASS GIS modules ' i.maxlik ' and 'i.cluster' for creating clusters and image classification, the usage of the scripts by ' i.composite' for color composites from the Landsat bands and the example cases of the used workflow are presented in the scripts. The implemented methods of image analysis are presented together with the examples of GRASS GIS usage in image processing showing identified levels of lakes accurately discriminated from the other land cover types and sand areas of the Sahara desert (Grand Erg Oriental). Maintained geometric shape and topology of classes, automated recognition of pixel’ colours are presented by the GRASS GIS. 
+
+The tasks included converting the raster satellite images into the maps of land cover types using maximum-likelihood discriminant analysis classifier by the GRASS GIS. The input dataset included 9 images of the Landsat OLI/TIRS satellite images in a raster TIFF format. The core of the algorithms lies in the recognition of the spectral reflectance properties of the pixels on the images against the others, identifying the land cover classes of northern Algeria (sand, chotts, saline areas, bare rocks etc.) and discriminating them from each other using clustering in 'i.cluster' module. The algorithms of the GRASS GIS demonstrated the efficiently processing of the satellite images and recognition of the fluctuated salt lakes (dry or filled by water) during the period of 8 years. 
+
+Remote sensing data contain information regarding the landscapes of the Earth detected in the satellite images. Accurate classification of the time series of the satellite images can drive environmental modelling of African Sahara through the analysis of changes in ephemeral salt lakes, obtained from the classified images Landsat OLI/TIRS. The detection of land cover types is possible using the algorithms of GRASS GIS scripts as advanced solution for geospatial data processing by defining and characterising objects that belong to the same category of the land cover classes using information retrieved from the satellite images based on spectral reflectance of the objects. 
+
+The use of GRASS GIS for satellite image processing demonstrated excellence and high effectiveness. Therefore, in the future work, we consider developing the algorithms of the GRASS GIS to seek the specific applications in other regions of the Earth's deserts. We will also test other algorithms such as automatic detecting of classes using supervised classification. By comparing all the land cover classes of the satellite images obtained during the 10 years, it is possible to discriminate changes in salt lake level that illustrate fluctuation in the climate changes which are reflected in variations of the lake level that is located in the northern segment of Sahara. 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\authorcontributions{Supervision, conceptualization, methodology, software, resources, funding acquisition, project administration, writing---original draft preparation, methodology, software, data curation, visualization, formal analysis, validation, writing---review and editing, and investigation, P.L. }
+
+\funding{The publication was funded by the Editorial Office of the Applied Systems Innovation, Multidisciplinary Digital Publishing Institute (MDPI), by providing 100\% discount for the APC of this manuscript.}
+
+\institutionalreview{Not applicable.}
+
+\informedconsent{Not applicable.}
+
+\dataavailability{Not applicable} 
+
+\acknowledgments{The author thanks the anonymous reviewers for reading, suggestions and comments that improved an earlier version of this manuscript.}
+
+\conflictsofinterest{The author declares no conflict of interest.} 
+
+\abbreviations{Abbreviations}{
+The following abbreviations are used in this manuscript:\\
+
+\noindent 
+\begin{tabular}{@{}ll}
+DCW & Digital Chart of the World\\
+EPSG & European Petroleum Survey Group \\
+FAO & Food and Agriculture Organization\\
+GEBCO & General Bathymetric Chart of the Oceans \\
+GIS & Geographic Information System\\
+GRASS GIS & Geographic Resources Analysis Support System GIS\\
+Landsat OLI/TIRS & Landsat Operational Land Imager and Thermal Infrared Sensor\\
+LCLR & Land Cover Legend Registry \\
+NIR & Near Infra Red\\
+NWSAS & North-Western Sahara Aquifer System\\
+SRTM & Shuttle Radar Topography Mission\\
+USGS & United States Geological Survey\\
+UTM & Universal Transverse Mercator \\
+WGS84 & World Geodetic System 1984
+\end{tabular}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{adjustwidth}{-\extralength}{0cm}
+%\printendnotes[custom] % Un-comment to print a list of endnotes
+
+\reftitle{References}
+\nocite{*}
+
+%=====================================
+% References, variant A: external bibliography
+%=====================================
+\bibliography{Algeria.bib}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{adjustwidth}
+\end{document}
