@@ -149,7 +149,7 @@ The existing approaches rarely consider these methods, which makes classificatio
 
 The study area is located in northern Algeria (Figure \ref{fig01}) with a special focus on the ephemeral salt lakes Chott Melrhir and Chott Merouane, Maghreb \cite{RAMDANI2009544,1991246,KARA2004361}. The formation of the chotts is caused by complex geologic setting and tectonic development of northern Algeria. Northern Algeria is located in the North African Alpine chain that is formed by large three mountain domains: the Tell, the pre-Atlas, and the Atlas, which present the deformed margin of the stable African craton. The crust undergone a complex deformation during the Alpine orogeny \cite{ASFIRANE199561}. South and east of the South Atlas Front, the Saharan topography presents longitudinal asymmetry and decreases in altitude eastwards. In Eastern Algeria, the Atlas foreland corresponds to the distribution of chotts and sebkhas, which is an active subsiding area with topographic depressions where chotts are located. 
 
-Chotts are located within a large asymmetrical syncline of Northern Sahara Sedimentary Basin which was formed due to complex tectonic movements \cite{askri1995geology,Flotte}. Algerian chotts, like playas, present the endorrheic lakes located at the bottom of a large hydrographic basin and depressions \cite{Joly}. These salt lakes present an immense area (nearly 3 M hectares) of shallow topographic depressions in northern Algeria located in the arid region of the Sahara with a specific hydrological regime and high level of salinity \cite{chabour2018africa}. The topographic depression occupied by the Melrhir and Merouane Chotts (Figure \ref{fig02}) is located southwards of the Maghrebian Atlas in the Northern Sahara Sedimentary Basin. Their formation was largely influenced by vertical movements in the Atlas system during Mesozoic and Cenozoic periods, and Triassic-Lower Jurassic faults \cite{DELAMOTTE20099}. The aquifer is composed of Quaternary sediments such as sand, sandstone, clayey sand and gypsum with northwards groundwater flow orientation \cite{BOUSELSAL2022100747,BALLAIS1991209} which controls the geochemical content of groundwaters \cite{daoud1995caracterisation}.
+Chotts are located within a large asymmetrical syncline of Northern Sahara Sedimentary Basin which was formed due to complex tectonic movements \cite{askri1995geology,Flotte}. Algerian chotts, like playas, present the endorrheic lakes located at the bottom of a large hydrographic basin and depressions \cite{Joly}. These salt lakes present an immense area (nearly 3 M hectares) of shallow topographic depressions in northern Algeria located in the arid region of the Sahara with a specific hydrological regime and high level of salinity \cite{chabour2018africa}. 
 
 \begin{figure}[H]
 \begin{adjustwidth}{-\extralength}{0cm}
@@ -159,6 +159,8 @@ Chotts are located within a large asymmetrical syncline of Northern Sahara Sedim
 \caption{Topographic map of Algeria. Software: GMT v. 6.1.1. Data sources: GEBCO and DCW. Rotated red square indicates study area with Chotts Melrhir and Merouane. Map source: author.
 \label{fig01}}
 \end{figure}
+
+The topographic depression occupied by the Melrhir and Merouane Chotts (Figure \ref{fig02}) is located southwards of the Maghrebian Atlas in the Northern Sahara Sedimentary Basin. Their formation was largely influenced by vertical movements in the Atlas system during Mesozoic and Cenozoic periods, and Triassic-Lower Jurassic faults \cite{DELAMOTTE20099}. The aquifer is composed of Quaternary sediments such as sand, sandstone, clayey sand and gypsum with northwards groundwater flow orientation \cite{BOUSELSAL2022100747,BALLAIS1991209} which controls the geochemical content of groundwaters \cite{daoud1995caracterisation}.
 
 The Algerian chotts occupy a large area mainly located in the east of the country. Their geographic situation and extent is largely influenced by a complex combination of the topographic and climatic factors: the extent of the depression which favours the accumulation of water, sediments and dust \cite{Klose,Goudie2022}, and a higher level of precipitation and moisture in the eastern region of Sahara which presents the wettest region in the country \cite{Nedjraoui,Benkhaled}. At the same time, regional environmental setting of the eastern Algeria and northern Sahara experiences the contrasting influence of the Mediterranean climate in the north and the arid Sahara in the south \cite{Ficheur,Mebarki}. 
 
@@ -196,7 +198,7 @@ The geologic structures in sedimentary basins of the Sahara include large and de
 %----------- subsection ----------->
 \subsection{Data}
 
-The GRASS GIS-based image classification workflow is based on a Landsat 8-9 dataset containing nine satellite images (Figure \ref{fig03}) covering the region of Chott Melrhir and Chott Merouane, Algeria. The major metadata are listed in Table \ref{tab1}. The data were obtained from the USGS EarthExplorer repository always on January from 2014 to 2022. The Landsat OLI/TIRS data include spectral bands in visible and NIR ranges. The images were downloaded and the TIFF files with the necessary bands were stored in GRASS GIS location (project storage folder). The images are stored in TIFF format which presents a matrix of the 2D arrays of pixels assigned to values in a grey scale with data on spectral reflectance associated to pixels, used for image classification. 
+The GRASS GIS-based image classification workflow is based on a Landsat 8-9 dataset containing nine satellite images (Figure \ref{fig03}) covering the region of Chott Melrhir and Chott Merouane, Algeria. The major metadata are listed in Table \ref{tab1}. 
 
 \begin{table}[H]
 \scriptsize
@@ -217,6 +219,8 @@ The GRASS GIS-based image classification workflow is based on a Landsat 8-9 data
 			\bottomrule
 		\end{tabularx}
 \end{table}
+
+The data were obtained from the USGS EarthExplorer repository always on January from 2014 to 2022. The Landsat OLI/TIRS data include spectral bands in visible and NIR ranges. The images were downloaded and the TIFF files with the necessary bands were stored in GRASS GIS location (project storage folder). The images are stored in TIFF format which presents a matrix of the 2D arrays of pixels assigned to values in a grey scale with data on spectral reflectance associated to pixels, used for image classification. 
 
 \begin{figure}[H]
 \makebox[0.90\linewidth][r]{%
@@ -283,14 +287,14 @@ The data of the nine (9) Landsat satellite scenes used in this study include eig
 %----------- subsection ----------->
 \subsection{Methods}
 
-The remote sensing data were processing by scripting methods, Figure \ref{fig04}.  
+The remote sensing data were \hl{processed} by scripting methods, Figure \ref{fig04}.  
 
 \begin{figure}[H]
 \begin{adjustwidth}{-\extralength}{0cm}
 %\centering
-	\hspace{100pt}\includegraphics[width=12.0 cm]{Fig_04.jpeg}
+	\hspace{150pt}\includegraphics[width=12.0 cm]{Fig_04.jpeg}
 \end{adjustwidth}
-\caption{Data and workflow processes used for study project. Diagram flowchart made in R mermaid library, source: author.\label{fig04}}
+\caption{Data and workflow processes used for study project. Diagram flowchart made in R mermaid library\hl{. }Source: author.\label{fig04}}
 \end{figure}
 
 The GRASS GIS modules, 'i.cluster' and 'i.maxlik' enable to perform a key procedure converting raster images into classified objects \cite{Neteleretal2008}. The approach of unsupervised classification by the GRASS GIS is based on discriminating the pixels on the image based on their spectral signatures. Upon classification, the areas identified as different land cover classes are represented as geometrical primitives, contoured areas that represent the extent and topological structures of the distinct land cover classes \cite{NetelerMitasova2008}. In the same way, classification enables to treat pixels as different  objects according to the spectral signatures for land cover types grouping them into polygonal segments based on the defined parameters using a clustering algorithm.
