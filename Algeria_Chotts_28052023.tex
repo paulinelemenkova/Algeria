@@ -218,13 +218,7 @@ The GRASS GIS-based image classification workflow is based on \hl{the} Landsat 8
 		\end{tabularx}
 \end{table}
 
-The data were obtained from the USGS EarthExplorer repository always on January from 2014 to 2022. The Landsat OLI/TIRS data include spectral bands in visible and NIR ranges. \hl{The atmospheric correction with the example of code as applied as top-of-atmosphere reflectance using the GRASS GIS module  "i.landsat.toar ". It enables to calibrate the DN of the pixels on Landsat images using data on top-of-atmosphere reflectance and convert the updated image. The procedure was performed using the code in Listing} \ref{lst01}: 
-
-\begin{lstlisting}[language=bash,caption=GRASS GIS code for atmospheric correction of the reflectance values of pixels (here: a case of the image on 2014 repeated likewise for all other images on different years).,style=mystyle,label={lst01}]
-i.landsat.toar input=L8_2014. output=L8_2014_toar. sensor=oli8 method=dos1 date=2014-01-01 sun_elevation=28.79978934 product_date=2014-01-01 gain=HHHLHLHHL"
-\end{lstlisting}
-
-The images were downloaded \hl{as} TIFF files with \hl{ }necessary bands \hl{and} stored in \hl{a} GRASS GIS location (\hl{i.e., a }project storage folder). The images \hl{ present }a matrix of the 2D arrays of pixels assigned to \hl{the }values in a grey scale with data on spectral reflectance associated to pixels\hl{ }used for image classification. 
+\hl{All the images were selected on January period, for two reasons. First, the water level in chotts is fluctuating with highest level during wet period (i.e., spring and winter) when the lakes are filled by water from the occasional rainwater or groundwater sources. In contrast, during summer and autumn periods, the majority of the lakes are completely dry due to the highest temperature and evaporation rates in Sahara desert. Therefore, to detect changes on the images, it is necessary to select the wet period in the calendar year. Second reason was related to the quality of the data covering target area related to the cloudiness of the images. Many scenes of the Landsat 8-9 OLI/TIRS were checked, and only those with low cloud coverage (below 10\%) were selected for classification. Such conditions corresponded to the images taken on January during the period of 2014--2022, Figure }\ref{fig03}.
 
 \begin{figure}[H]
 \captionsetup{justification=centering}
@@ -284,6 +278,12 @@ The images were downloaded \hl{as} TIFF files with \hl{ }necessary bands \hl{and
 \caption{Landsat 8-9 OLI/TIRS images in natural RGB colours: lake changes for \hl{9} years (2014-2022).}\label{fig03}
 \end{figure}
 
+The data were obtained from the USGS EarthExplorer repository always on January from 2014 to 2022. The Landsat OLI/TIRS data include spectral bands in visible and NIR ranges. \hl{The atmospheric correction with the example of code as applied as top-of-atmosphere reflectance using the GRASS GIS module  "i.landsat.toar ". It enables to calibrate the DN of the pixels on Landsat images using data on top-of-atmosphere reflectance and convert the updated image. The procedure was performed using the code in Listing} \ref{lst01}: 
+
+\begin{lstlisting}[language=bash,caption=GRASS GIS code for atmospheric correction of the reflectance values of pixels (here: a case of the image on 2014 repeated likewise for all other images on different years).,style=mystyle,label={lst01}]
+i.landsat.toar input=L8_2014. output=L8_2014_toar. sensor=oli8 method=dos1 date=2014-01-01 sun_elevation=28.79978934 product_date=2014-01-01 gain=HHHLHLHHL"
+\end{lstlisting}
+
 The series of the Landsat images demonstrated high quality of\hl{ }scenes as input data source: distinct colours, contrasting and clearly recognised areas corresponding to various land cover classes, no defects, faults or technical noise on the imagery, distinguishable landscape patterns and continuity, identical coverage of the scene over years and availability of multi-spectral bands. The images were processed, preliminary analysed and stored in a working directory for \hl{further processing by the }GRASS GIS. Additional mapping was performed using the Generic Mapping Tools (GMT) scripting toolset \cite{Wessel} following the existing technical cartographic workflow \cite{Lemenkova202206,Lemenkova202203}. The metadata on the Landsat images were collected by the EarthExplorer file with the .xml extension and summarised in Table \ref{tab1}. 
 
 The data of the nine (9) Landsat satellite scenes used in this study include \hl{nine} consecutive years from 2014 to 2022 with scenes taken always in January on the following exact dates: \textbf{a}) 2014/01/01, (\textbf{b}) 2015/01/04, (\textbf{c}) 2016/01/07, (\textbf{d}) 2017/01/25, (\textbf{e}) 2018/01/28, (\textbf{f}) 2019/01/15, (\textbf{g}) 2020/01/02, (\textbf{h}) 2021/01/04, (\textbf{i}) 2022/01/15. Visible inspection of the images enables to see the dynamics of the salinity on the ephemeral salt lakes where bright cyan regions signify salted regions \hl{while dark blue areas indicate water, brownish and beige colour -- bare soil and sands with diverse landforms, and green -- vegetation areas}. 
@@ -291,7 +291,7 @@ The data of the nine (9) Landsat satellite scenes used in this study include \hl
 %----------- subsection ----------->
 \subsection{Methods}
 
-The remote sensing data were \hl{processed} by \hl{the sequence of the }scripting methods\hl{ using several GRASS GIS modules}, Figure \ref{fig04}.  
+The remote sensing data were \hl{processed} by \hl{the sequence of the }scripting methods\hl{ using several GRASS GIS modules}, Figure \ref{fig04}. 
 
 \begin{figure}[H]
 \begin{adjustwidth}{-\extralength}{0cm}
@@ -300,6 +300,8 @@ The remote sensing data were \hl{processed} by \hl{the sequence of the }scriptin
 \end{adjustwidth}
 \caption{Data and workflow processes used for study project. Diagram flowchart made in R mermaid library\hl{. }Source: author.\label{fig04}}
 \end{figure}
+
+The images were downloaded \hl{as} TIFF files with\hl{ }necessary bands \hl{and} stored in \hl{a} GRASS GIS location (\hl{i.e., a }project storage folder). The images \hl{ present }a matrix of the 2D arrays of pixels assigned to \hl{the }values in a grey scale with data on spectral reflectance associated to pixels\hl{ }used for image classification.  
 
 The 'i.cluster' and 'i.maxlik'\hl{ }GRASS GIS modules\hl{ }enable to perform a key procedure converting raster images into \hl{the }classified objects \cite{Neteleretal2008}. The approach of \hl{the }unsupervised classification by the GRASS GIS is based on discriminating the pixels on the image based on their spectral signatures. Upon classification, the areas identified as different land cover classes are represented as geometrical primitives \hl{identified as} contoured areas that represent the extent and topological structures of the distinct land cover classes \cite{NetelerMitasova2008}. In the same way, classification enables to treat pixels as different objects according to the spectral signatures for land cover types grouping them into polygonal segments based on the defined parameters using\hl{ }clustering algorithm.
 
