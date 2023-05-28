@@ -143,7 +143,7 @@ The need to automate classification of the satellite images \hl{raises the quest
 
 The existing approaches rarely consider these methods, which makes classification of the remote sensing data \hl{by GRASS GIS }an actual process of environmental monitoring of African Sahara. In case of a satellite images, the shape and extent of land cover types for the evaluation of desertification can be\hl{ }accurately applied \cite{oussedik2003realisation}. More complex cases arise with partially eroded soil which can be also detected on the images where the mask for the erosion areas and surrounding background should be defined \cite{Toumietal}. \hl{Moreover, the} fluctuations in the lake level detected by the time series analysis \hl{on} the satellite images should include extensive data processing to derive information on land cover types. \hl{To fill in the existing gaps}, this paper contributes to this problem by presenting a GRASS GIS scripting framework for automatic classification of the satellite images. \hl{The study objective is }to identify \hl{and detect }changes in the \hl{level of saline }lake over years.
 
-\hl{The main strength of this GRASS GIS-based framework consists in several advantages. These include the open source availability of the software which enables to freely use it in educational or research purposes, extended functionality with a wide variety of geospatial processing tools, and flexible mode Graphical User Interface (GUI) and command line mode enabling scripting. Moreover, similar to standard existing GIS, GRASS GIS supports both raster and vector processing tools, satellite image analysis and cartographic production. Such features of the GRASS GIS makes it a beneficial tool for remote sensing data analysis.} First, it is able to classify the land cover types \hl{based on remote sensing data }using clustering data partition and maximum-likelihood discriminant analysis classifier. Second, the algorithm can identify classes over one year intervals on the \hl{satellite }images using repeated time series. Third, the workflow has a \hl{high automation} and speed of data processing\hl{, }due to scripting \hl{approach which supports machine-based data processing}.
+\hl{The main strength of this GRASS GIS-based framework consists in several advantages. These include the open source availability of the software which enables to freely use it in educational or research purposes, extended functionality with a wide variety of geospatial processing tools, and flexible mode Graphical User Interface (GUI) and command line mode enabling scripting. Moreover, similar to standard existing GIS, GRASS GIS supports both raster and vector processing tools, satellite image analysis and cartographic production. Such features of the GRASS GIS makes it a beneficial tool for remote sensing data analysis. For instance}, it is able to classify the land cover types \hl{based on remote sensing data }using clustering data partition and maximum-likelihood discriminant analysis classifier. \hl{Moreover}, the algorithm can identify classes over one year intervals on the \hl{satellite }images using repeated time series. Third, the workflow has a \hl{high automation} and speed of data processing\hl{, }due to scripting \hl{approach which supports machine-based data processing}.
 
 \section{Study Area}
 
@@ -218,7 +218,13 @@ The GRASS GIS-based image classification workflow is based on \hl{the} Landsat 8
 		\end{tabularx}
 \end{table}
 
-The data were obtained from the USGS EarthExplorer repository always on January from 2014 to 2022. The Landsat OLI/TIRS data include spectral bands in visible and NIR ranges. The images were downloaded \hl{as} TIFF files with \hl{ }necessary bands \hl{and} stored in \hl{a} GRASS GIS location (\hl{i.e., a }project storage folder). The images \hl{ present }a matrix of the 2D arrays of pixels assigned to \hl{the }values in a grey scale with data on spectral reflectance associated to pixels\hl{ }used for image classification. 
+The data were obtained from the USGS EarthExplorer repository always on January from 2014 to 2022. The Landsat OLI/TIRS data include spectral bands in visible and NIR ranges. \hl{The atmospheric correction with the example of code as applied as top-of-atmosphere reflectance using the GRASS GIS module  "i.landsat.toar ". It enables to calibrate the DN of the pixels on Landsat images using data on top-of-atmosphere reflectance and convert the updated image. The procedure was performed using the code in Listing} \ref{lst01}: 
+
+\begin{lstlisting}[language=bash,caption=GRASS GIS code for atmospheric correction of the reflectance values of pixels (here: a case of the image on 2014).,style=mystyle,label={lst01}]
+i.landsat.toar input=L8_2014. output=L8_2014_toar. sensor=oli8 method=dos1 date=2014-01-01 sun_elevation=28.79978934 product_date=2014-01-01 gain=HHHLHLHHL"
+\end{lstlisting}
+
+The images were downloaded \hl{as} TIFF files with \hl{ }necessary bands \hl{and} stored in \hl{a} GRASS GIS location (\hl{i.e., a }project storage folder). The images \hl{ present }a matrix of the 2D arrays of pixels assigned to \hl{the }values in a grey scale with data on spectral reflectance associated to pixels\hl{ }used for image classification. 
 
 \begin{figure}[H]
 \makebox[0.90\linewidth][r]{%
@@ -338,9 +344,9 @@ The general workflow of the GRASS GIS algorithm for image processing is outlined
 %----------- subsection ----------->
 \subsection{Scripting in GRASS GIS}
 
-First, a work project 'Algeria' was \hl{created and }defined using spatial location. \hl{The geospatial information on the} coordinate reference system (CRS) \hl{was derived from }the Landsat images \hl{and included the following data}: WGS84 datum and ellipsoid (EPSG:4326) UTM Projection Zone 32. The Landsat bands were \hl{then }imported into the project using 'r.import' module using the bilinear resampling method for reprojection \hl{which applies} the extent of \hl{the }current region and \hl{maintains the} resolution of \hl{the }output raster map (\hl{i.e., }30 m for Landsat bands in visible spectrum). The information on raster metadata was checked using the 'r.info' module, and the computational region was defined to match the scene using the 'g.region' module. The GRASS GIS code is shown in Listing \ref{lst01}:
+First, a work project 'Algeria' was \hl{created and }defined using spatial location. \hl{The geospatial information on the} coordinate reference system (CRS) \hl{was derived from }the Landsat images \hl{and included the following data}: WGS84 datum and ellipsoid (EPSG:4326) UTM Projection Zone 32. The Landsat bands were \hl{then }imported into the project using 'r.import' module using the bilinear resampling method for reprojection \hl{which applies} the extent of \hl{the }current region and \hl{maintains the} resolution of \hl{the }output raster map (\hl{i.e., }30 m for Landsat bands in visible spectrum). The information on raster metadata was checked using the 'r.info' module, and the computational region was defined to match the scene using the 'g.region' module. The GRASS GIS code is shown in Listing \ref{lst02}:
 
-\begin{lstlisting}[language=bash,caption=GRASS GIS code for importing the data (here: a case of the bands of Landsat image on 2014),style=mystyle,label={lst01}]
+\begin{lstlisting}[language=bash,caption=GRASS GIS code for importing the data (here: a case of the bands of Landsat image on 2014),style=mystyle,label={lst02}]
 r.import input=/Users/polinalemenkova/grassdata/Algeria/LC08_L2SP_193036_20140101_20200912_02_T1_SR_B1.TIF output=L8_2014_01 resample=bilinear extent=region resolution=region
 r.import input=/Users/polinalemenkova/grassdata/Algeria/LC08_L2SP_193036_20140101_20200912_02_T1_SR_B2.TIF output=L8_2014_02 resample=bilinear extent=region resolution=region
 r.import input=/Users/polinalemenkova/grassdata/Algeria/LC08_L2SP_193036_20140101_20200912_02_T1_SR_B3.TIF output=L8_2014_03 resample=bilinear extent=region resolution=region
@@ -351,16 +357,16 @@ r.info -r L8_2014_07
 g.list rast
 \end{lstlisting}
 
-The next step included \hl{the creation of} the groups and subgroups of the Landsat imagery data using GRASS GIS module 'i.group'\hl{. The groups and subgroups were then used to generate the} signature file. The aim of this step was to create raster map layers in a Landsat imagery group by assigning them to the subgroups with 30-m resolution with only necessary bands (visible spectra), \hl{following the code in }Listing \ref{lst02}:
+The next step included \hl{the creation of} the groups and subgroups of the Landsat imagery data using GRASS GIS module 'i.group'\hl{. The groups and subgroups were then used to generate the} signature file. The aim of this step was to create raster map layers in a Landsat imagery group by assigning them to the subgroups with 30-m resolution with only necessary bands (visible spectra), \hl{following the code in }Listing \ref{lst03}:
 
-\begin{lstlisting}[language=bash,caption=GRASS GIS code for grouping and subgrouping Landsat bands,style=mystyle,label={lst02}]
+\begin{lstlisting}[language=bash,caption=GRASS GIS code for grouping and subgrouping Landsat bands,style=mystyle,label={lst03}]
 # store VIZ, NIR, MIR into group and a subgroup with 30 m resolution without TIR
 i.group group=L8_2014 subgroup=res_30m \ input=L8_2014_01,L8_2014_02,L8_2014_03,L8_2014_04,L8_2014_05,L8_2014_06,L8_2014_07
 \end{lstlisting}
 
-Created group and a subgroup \hl{enabled} to run \hl{the }classification \hl{using} a combination of the raster map layers in a group for each year. \hl{The} Landsat OLI/TIRS images for several years (2014 to 2022) were inspected and processed\hl{. Grouping} and subgrouping \hl{of }the data supported \hl{the }organisation and management of data and raster map layers in a project 'Algeria'. Since current study included several images for different years,\hl{ }the semantic labels were set up for each group of bands\hl{. This was done with the aim }to re-use the signature file for the classification of different imagery groups for these years. \hl{the semantic labels were generated }before\hl{ }the signature files using 'r.support' module of the GRASS GIS\hl{, }as shown in Listing \ref{lst03}: 
+Created group and a subgroup \hl{enabled} to run \hl{the }classification \hl{using} a combination of the raster map layers in a group for each year. \hl{The} Landsat OLI/TIRS images for several years (2014 to 2022) were inspected and processed\hl{. Grouping} and subgrouping \hl{of }the data supported \hl{the }organisation and management of data and raster map layers in a project 'Algeria'. Since current study included several images for different years,\hl{ }the semantic labels were set up for each group of bands\hl{. This was done with the aim }to re-use the signature file for the classification of different imagery groups for these years. \hl{the semantic labels were generated }before\hl{ }the signature files using 'r.support' module of the GRASS GIS\hl{, }as shown in Listing \ref{lst04}: 
 
-\begin{lstlisting}[language=bash,caption=GRASS GIS code for creating semantic labels for the Landsat OLI/TIRS,style=mystyle,label={lst03}]
+\begin{lstlisting}[language=bash,caption=GRASS GIS code for creating semantic labels for the Landsat OLI/TIRS,style=mystyle,label={lst04}]
 # Defining semantic labels for all Landsat OLI/TIRS bands
 r.support map=L8_2014_01 semantic_label=OLI_1
 r.support map=L8_2014_02 semantic_label=OLI_2
@@ -373,33 +379,33 @@ r.support map=L8_2014_07 semantic_label=OLI_7
 
 The following steps of the classification \hl{included} modules 'i.cluster' and 'i.maxlik' \hl{which }used the \hl{previously defined }imagery group for each year (2014 to 2022) and subgroups of the Landsat bands with defined year and resolution. The signature file generated in the snippet of code above \hl{allowed} to classify the current imagery group only. This means\hl{ }that the data \hl{included }only\hl{ }visible Landsat bands with 30 m resolution without panchromatic and Thermal Infrared bands, which \hl{were} not necessary in this case. The methodological approach of the 'i.cluster' technique is based on reading the bands of the Landsat satellite \hl{images} and assigning pixels into \hl{the }clusters according to the difference in \hl{their }spectral reflectances. 
 
-\hl{The} pixel clusters \hl{represent} categories \hl{(or landscape patches with 30 m size)} associated with land cover types on the Earth's shape\hl{. Therefore, }the clusters \hl{were }automatically defined by the GRASS GIS \hl{and }used for further steps in classification. Clustering approach of the GRASS GIS uses\hl{ }k-means algorithm. During the process of k-means clustering by 'i.cluster', the means of the groups where pixels are assigned are constantly \hl{changing}, as soon as new pixels are assigned and the means are recalculated iteratively to reach the maximal distances between the groups \hl{until all pixels are assigned into clusters}. The bands used for generating signatures of clusters are stored in the group $'L8\_2014'$, Listing \ref{lst04}.
+\hl{The} pixel clusters \hl{represent} categories \hl{(or landscape patches with 30 m size)} associated with land cover types on the Earth's shape\hl{. Therefore, }the clusters \hl{were }automatically defined by the GRASS GIS \hl{and }used for further steps in classification. Clustering approach of the GRASS GIS uses\hl{ }k-means algorithm. During the process of k-means clustering by 'i.cluster', the means of the groups where pixels are assigned are constantly \hl{changing}, as soon as new pixels are assigned and the means are recalculated iteratively to reach the maximal distances between the groups \hl{until all pixels are assigned into clusters}. The bands used for generating signatures of clusters are stored in the group $'L8\_2014'$, Listing \ref{lst05}.
 
-\begin{lstlisting}[language=bash,caption=GRASS GIS code for creating signature file by k-means clustering algorithm,style=mystyle,label={lst04}]
+\begin{lstlisting}[language=bash,caption=GRASS GIS code for creating signature file by k-means clustering algorithm,style=mystyle,label={lst05}]
 # generating signature file and report for 10 classes
 i.cluster group=L8_2014 subgroup=res_30m \
 signaturefile=cluster_L8_2014 classes=10 reportfile=rep_clust_L8_2014.txt
 \end{lstlisting}
 
-The next step included the classification of the images by the 'i.maxlik' module\hl{. It }uses\hl{ }maximum likelihood discriminant analysis classifier as a core algorithm approach to classify the cells according to their spectral reflectances in satellite imagery. \hl{The} main approach of this algorithm is that it \hl{applies} the cluster means and covariance matrices generated during\hl{ }previous steps in \hl{a} signature file by the 'i.cluster' module. \hl{They serve} to determine the categories of spectral classes\hl{. The determination is performed }according to the \hl{degree of suitability} of each cell in the image \hl{to a given class }based on the distance to the cluster's centroids. The technical implementation was performed using Listing \ref{lst05}. 
+The next step included the classification of the images by the 'i.maxlik' module\hl{. It }uses\hl{ }maximum likelihood discriminant analysis classifier as a core algorithm approach to classify the cells according to their spectral reflectances in satellite imagery. \hl{The} main approach of this algorithm is that it \hl{applies} the cluster means and covariance matrices generated during\hl{ }previous steps in \hl{a} signature file by the 'i.cluster' module. \hl{They serve} to determine the categories of spectral classes\hl{. The determination is performed }according to the \hl{degree of suitability} of each cell in the image \hl{to a given class }based on the distance to the cluster's centroids. The technical implementation was performed using Listing \ref{lst06}. 
 
-\begin{lstlisting}[language=bash,caption=GRASS GIS code for image classification by maximal likelihood algorithm clustering,style=mystyle,label={lst05}]
+\begin{lstlisting}[language=bash,caption=GRASS GIS code for image classification by maximal likelihood algorithm clustering,style=mystyle,label={lst06}]
 i.maxlik group=L8_2014 subgroup=res_30m \
   signaturefile=cluster_L8_2014 \
   output=L8_2014_cluster_classes reject=L8_2014_cluster_reject
 \end{lstlisting}
 
-Mapping the results of the classification was done using the 'd.rast' module as shown in the following GRASS GIS code in Listing \ref{lst06}:
+Mapping the results of the classification was done using the 'd.rast' module as shown in the following GRASS GIS code in Listing \ref{lst07}:
   
-\begin{lstlisting}[language=bash,caption=GRASS GIS code for image classification by maximal likelihood algorithm clustering,style=mystyle,label={lst06}]
+\begin{lstlisting}[language=bash,caption=GRASS GIS code for image classification by maximal likelihood algorithm clustering,style=mystyle,label={lst07}]
 d.mon wx0
 d.rast.leg L8_2014_cluster_classes
 d.rast.leg L8_2014_cluster_reject
 \end{lstlisting}
 
-To make classification by the 'i.maxlik' more accurate, a thresholding procedure was applied by \hl{the }k-means clustering\hl{. This is implemented }using the 'i.cluster' modules aimed to separate the target image classes using the distance from the centroids. The identification of segments (objects) from \hl{the }imagery data was perform by the 'i.segment' module of GRASS GIS using Listing \ref{lst07}:
+To make classification by the 'i.maxlik' more accurate, a thresholding procedure was applied by \hl{the }k-means clustering\hl{. This is implemented }using the 'i.cluster' modules aimed to separate the target image classes using the distance from the centroids. The identification of segments (objects) from \hl{the }imagery data was perform by the 'i.segment' module of GRASS GIS using Listing \ref{lst08}:
 
-\begin{lstlisting}[language=bash,caption=GRASS GIS code for image segmentation by 'i.segment' algorithm clustering,style=mystyle,label={lst07}]
+\begin{lstlisting}[language=bash,caption=GRASS GIS code for image segmentation by 'i.segment' algorithm clustering,style=mystyle,label={lst08}]
 i.segment group=L8_2014 output=L8_2014_seg_14 threshold=0.4 memory=1000
 \end{lstlisting}
 
