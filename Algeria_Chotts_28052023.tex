@@ -220,63 +220,64 @@ The GRASS GIS-based image classification workflow is based on \hl{the} Landsat 8
 
 The data were obtained from the USGS EarthExplorer repository always on January from 2014 to 2022. The Landsat OLI/TIRS data include spectral bands in visible and NIR ranges. \hl{The atmospheric correction with the example of code as applied as top-of-atmosphere reflectance using the GRASS GIS module  "i.landsat.toar ". It enables to calibrate the DN of the pixels on Landsat images using data on top-of-atmosphere reflectance and convert the updated image. The procedure was performed using the code in Listing} \ref{lst01}: 
 
-\begin{lstlisting}[language=bash,caption=GRASS GIS code for atmospheric correction of the reflectance values of pixels (here: a case of the image on 2014).,style=mystyle,label={lst01}]
+\begin{lstlisting}[language=bash,caption=GRASS GIS code for atmospheric correction of the reflectance values of pixels (here: a case of the image on 2014 repeated likewise for all other images on different years).,style=mystyle,label={lst01}]
 i.landsat.toar input=L8_2014. output=L8_2014_toar. sensor=oli8 method=dos1 date=2014-01-01 sun_elevation=28.79978934 product_date=2014-01-01 gain=HHHLHLHHL"
 \end{lstlisting}
 
 The images were downloaded \hl{as} TIFF files with \hl{ }necessary bands \hl{and} stored in \hl{a} GRASS GIS location (\hl{i.e., a }project storage folder). The images \hl{ present }a matrix of the 2D arrays of pixels assigned to \hl{the }values in a grey scale with data on spectral reflectance associated to pixels\hl{ }used for image classification. 
 
 \begin{figure}[H]
+\captionsetup{justification=centering}
 \makebox[0.90\linewidth][r]{%
 	\begin{subfigure}[b]{.40\textwidth}
-		\centering
-			\includegraphics[width=0.87\textwidth]{Fig_03a.jpg}
+%		\centering
+			\hspace{60pt}\includegraphics[width=0.87\textwidth]{Fig_03a.jpg}
 		\caption{2014}
 	\end{subfigure}%
 	\begin{subfigure}[b]{.40\textwidth}
-		\centering
-		\includegraphics[width=0.87\textwidth]{Fig_03b.jpg}
+%		\centering
+			\hspace{60pt}\includegraphics[width=0.87\textwidth]{Fig_03b.jpg}
 		\caption{2015}
 	\end{subfigure}%
 	\begin{subfigure}[b]{.40\textwidth}
-		\centering
-		\includegraphics[width=0.87\textwidth]{Fig_03c.jpg}
+%		\centering
+			\hspace{60pt}\includegraphics[width=0.87\textwidth]{Fig_03c.jpg}
 		\caption{2016}
 	\end{subfigure}%
 }\\
 \vfill \vspace{1mm}
 \makebox[0.90\linewidth][r]{%
 	\begin{subfigure}[b]{.40\textwidth}
-		\centering
-			\includegraphics[width=0.87\textwidth]{Fig_03d.jpg}
+		%\centering
+			\hspace{60pt}\includegraphics[width=0.87\textwidth]{Fig_03d.jpg}
 		\caption{2017}
 	\end{subfigure}%
 	\begin{subfigure}[b]{.40\textwidth}
-		\centering
-		\includegraphics[width=0.87\textwidth]{Fig_03e.jpg}
+		%\centering
+			\hspace{60pt}\includegraphics[width=0.87\textwidth]{Fig_03e.jpg}
 		\caption{2018}
 	\end{subfigure}%
 	\begin{subfigure}[b]{.40\textwidth}
-		\centering
-		\includegraphics[width=0.87\textwidth]{Fig_03f.jpg}
+		%\centering
+			\hspace{60pt}\includegraphics[width=0.87\textwidth]{Fig_03f.jpg}
 		\caption{2019}
 	\end{subfigure}%
 }\\
 \vfill \vspace{1mm}
 \makebox[0.90\linewidth][r]{%
 	\begin{subfigure}[b]{.40\textwidth}
-		\centering
-			\includegraphics[width=0.87\textwidth]{Fig_03g.jpg}
+		%\centering
+			\hspace{60pt}\includegraphics[width=0.87\textwidth]{Fig_03g.jpg}
 		\caption{2020}
 	\end{subfigure}%
 	\begin{subfigure}[b]{.40\textwidth}
-		\centering
-		\includegraphics[width=0.87\textwidth]{Fig_03h.jpg}
+		%\centering
+			\hspace{60pt}\includegraphics[width=0.87\textwidth]{Fig_03h.jpg}
 		\caption{2021}
 	\end{subfigure}%
 	\begin{subfigure}[b]{.40\textwidth}
-		\centering
-		\includegraphics[width=0.87\textwidth]{Fig_03i.jpg}
+		%\centering
+			\hspace{60pt}\includegraphics[width=0.87\textwidth]{Fig_03i.jpg}
 		\caption{2022}
 	\end{subfigure}%
 }
