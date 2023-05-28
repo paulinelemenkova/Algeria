@@ -420,7 +420,9 @@ Once the images were classified in \hl{the }GRASS GIS,\hl{ }land cover classes w
 %\pagebreak
 \section{Results}
 
-The qualitative evaluation of the water level coverage in the Melrhir and Merouane Chotts on the satellite images for each Landsat scene is based on the number of land cover classes as landscape segments, Figure \ref{fig06}.
+\hl{In this section, we evaluate the results and evaluate the performance of the classification algorithms on the nine images. The evaluation is performed using pixel classification confidence levels using rejection probability values. The process of classification has a flaw related to the assignment of pixels to the classes using their spectral signatures. The allocation of pixels may be different from one year to another due to different nuances in spectral signatures caused by the wetland brightness, greenness and other remote sensing characteristics caused by the level of chlorophyll in leaves. Besides, the sand dust creating dunes on the surface cause selected pixels to be assigned to neighbouring classes such as non-consolidated and consolidated soils.}
+
+The qualitative evaluation of the water level coverage in the Melrhir and Merouane Chotts on the satellite images for each Landsat scene is based on the number of land cover classes as landscape segments, Figure \ref{fig06}. \hl{The GRASS GIS framework of image classification is developed considering a principle of confidence. Consequently, it was adapted to the recognition of the dominant land cover classes by selecting landscape patches with homogeneous spectral reflectance of pixels within each cluster group. In order to evaluate the classification results objectively, we test all implemented algorithms of the GRASS GIS on nine classified images for comparative analysis with different probability values of pixels that beling to the identical land cover classes in different years.}
 
 \begin{figure}[H]
 \hspace{-32pt}\makebox[1.00\linewidth][r]{%
