@@ -1,0 +1,1690 @@
+%  LaTeX support: latex@mdpi.com 
+%  For support, please attach all files needed for compiling as well as the log file, and specify your operating system, LaTeX version, and LaTeX editor.
+
+%=================================================================
+\documentclass[asi,article,accept,pdftex,moreauthors]{Definitions/mdpi} 
+
+%=================================================================
+%\usepackage{showframe}
+% MDPI internal commands
+\firstpage{1} 
+\makeatletter 
+\setcounter{page}{\@firstpage} 
+\makeatother
+\pubvolume{1}
+\issuenum{1}
+\articlenumber{0}
+\pubyear{2023}
+\copyrightyear{2023}
+\externaleditor{\hl{Academic Editor:} %MDPI: please add the names.
+ }
+\datereceived{10 May 2023} 
+\daterevised{28 May 2023}
+\dateaccepted{} 
+\datepublished{} 
+\hreflink{https://doi.org/} % If needed use \linebreak
+%\doinum{}
+
+%=================================================================
+% Add packages and commands here. The following packages are loaded in our class file: fontenc, inputenc, calc, indentfirst, fancyhdr, graphicx, epstopdf, lastpage, ifthen, lineno, float, amsmath, setspace, enumitem, mathpazo, booktabs, titlesec, etoolbox, tabto, xcolor, soul, multirow, microtype, tikz, totcount, changepage, attrib, upgreek, cleveref, amsthm, hyphenat, natbib, hyperref, footmisc, url, geometry, newfloat, caption
+
+\graphicspath{{figures/}} % path to folder with figures
+\usepackage[labelformat=simple]{subcaption}
+\renewcommand\thesubfigure{\alph{subfigure}}
+\DeclareCaptionLabelFormat{subcaptionlabel}{\normalfont(\textbf{#2}\normalfont)}
+\captionsetup[subfigure]{labelformat=subcaptionlabel}
+
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{gensymb} % for \textdegree
+\usepackage{tabularx}
+\usepackage{lipsum} 
+\usepackage{makecell}
+\usepackage{enumitem}
+
+\usepackage{listings}
+\usepackage{xcolor}
+
+\definecolor{deepblue}{rgb}{0,0,0.5}
+\definecolor{deepred}{rgb}{0.6,0,0}
+\definecolor{deepmagenta}{RGB}{195,12,214}
+\definecolor{deepgreen}{RGB}{29,122,30}
+\definecolor{mintgreen}{RGB}{192,249,192}
+\definecolor{codepurple}{RGB}{204, 0, 153}
+\definecolor{LightCyan}{rgb}{0.88,1,1}
+\definecolor{GainsboroPurple}{RGB}{247,176,247}
+\definecolor{LightSlateGrey}{RGB}{124,118,118}
+%    
+\lstdefinestyle{mystyle}{
+    commentstyle=\color{LightSlateGrey},
+    keywordstyle=\color{deepgreen}\bfseries,
+    emphstyle=\color{deepred},
+    numberstyle=\tiny\color{deepmagenta},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\scriptsize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=t,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,  
+    xleftmargin=2.5mm                
+ %   tabsize=2
+}
+\lstset{style=mystyle}
+
+%=================================================================
+% Full title of the paper (Capitalized)
+\Title{\textls[-15]{A GRASS GIS Scripting Framework for Monitoring Changes in the Ephemeral Salt Lakes of Chotts Melrhir and Merouane, \mbox{Algeria}}} %Please ensure that your intended meaning is retained in the title.
+
+% MDPI internal command: Title for citation in the left column
+\TitleCitation{A GRASS GIS Scripting Framework for Monitoring Changes in the Ephemeral Salt Lakes of Chotts Melrhir and Merouane, Algeria} %Please ensure that your intended meaning is retained in the title.
+
+
+% Author Orchid ID: enter ID or remove command
+\newcommand{\orcidauthorA}{0000-0002-5759-1089} % Polina Add \orcidA{} behind the author's name
+\newcommand{\orcidauthorB}{0000-0002-6461-1551} % Olivier Add \orcidB{} behind the author's name
+
+% Authors, for the paper (add full first names)
+\Author{\hl{Polina Lemenkova} %MDPI: Please carefully check the accuracy of name and affiliation.
+ \orcidA{}}
+
+%\longauthorlist{yes}
+
+% MDPI internal command: Authors, for metadata in PDF
+\AuthorNames{Polina Lemenkova}
+
+% MDPI internal command: Authors, for citation in the left column
+\AuthorCitation{\hl{Lemenkova, P.} %MDPI: Please carefully check the accuracy of name .
+}
+% If this is a Chicago style journal: Lastname, Firstname, Firstname Lastname, and Firstname Lastname.
+
+% Affiliations / Addresses (Add [1] after \address if there is only one affiliation.)
+\address[1]{ Laboratory of Image Synthesis and Analysis (LISA), \highlighting{École} Polytechnique de Bruxelles (Brussels \hl{Faculty} of Engineering), \highlighting{Université} Libre de Bruxelles (ULB), \hl{Building L, Campus du Solbosch, ULB---LISA CP165/57,} %MDPI: please check if there are two address, if so, please split it to two affs; if it's one address, the provided information should be arranged from subordinate to superior, please check and rearrange it.
+ Avenue Franklin D. Roosevelt 50, 1050 Brussels, Belgium; polina.lemenkova@ulb.be; Tel.: +32-471-86-04-59
+}
+
+% Contact information of the corresponding author
+%\corres{Correspondence: polina.lemenkova@ulb.be; Tel.: +32 471 86 04 59 (P.L.)}
+
+% Current address and/or shared authorship
+%\firstnote{Current address: Affiliation 3.} 
+
+% Abstract (Do not insert blank lines, i.e. \\) 
+%Please ensure that your intended meaning is retained throughout the manuscript.
+\abstract{Automated classification of satellite images is a challenging task that enables the use of remote sensing data for environmental modeling of Earth's landscapes. In this document, we implement a GRASS GIS-based framework for discriminating land cover types to identify changes in the endorheic basins of the ephemeral salt lakes Chott Melrhir and Chott Merouane, Algeria; we employ embedded algorithms for image processing. This study presents a dataset of the nine Landsat 8--9 OLI/TIRS satellite images obtained from the USGS for a {9}-year period, from 2014 to 2022. The images were analyzed to detect changes in water levels in ephemeral lakes that experience temporal fluctuations; these lakes are dry most of the time and are fed with water during rainy periods. The unsupervised classification of images was performed using GRASS GIS algorithms through several modules: `i.cluster' was used to generate image classes; `i.maxlik' was used for classification using the maximal likelihood discriminant analysis, and auxiliary modules, such as `i.group', `r.support', `r.import', etc., were used. This document includes technical descriptions of the scripts used for image processing with detailed comments on the functionalities of the GRASS GIS {modules}. The results include the identified variations in the ephemeral salt lakes within the Algerian part of the Sahara over {a 9}-year period (2014--2022), using a time series of Landsat OLI/TIRS multispectral images that were classified using GRASS GIS. The main strengths of the GRASS GIS framework are the high speed, accuracy, and effectiveness of the programming codes for image processing in environmental monitoring. The presented GitHub repository, which contains scripts used for the satellite image analysis, serves as a reference for the interpretation of remote sensing data for the environmental monitoring of arid and semi-arid areas of Africa.
+}
+
+% Keywords
+\keyword{Sahara Desert; Africa; salt lake; cartography; image analysis; satellite image; remote sensing; geography; GRASS GIS; mapping} 
+
+% The fields PACS, MSC, and JEL may be left empty or commented out if not applicable
+\PACS{\highlighting{91.10.Da;} %MDPI: PACS, MSC, JEL are not necessary for this journal, please check if need keep them.
+ 91.10.Jf; 91.10.Sp; 91.10.Xa; 96.25.Vt; 91.10.Fc; 95.40.+s; 95.75.Qr; 95.75.Rs; 42.68.Wt}
+\MSC{\highlighting{86A30;} 86-08; 86A99; 86A04}
+\JEL{\highlighting{Y91;} Q20; Q24; Q23; Q3; Q01; R11; O44; O13; Q5; Q51; Q55; N57; C6; C61}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+
+\section{Introduction}
+
+\subsection{Background}
+Detecting changes in the water levels of ephemeral salt lakes using remote sensing data is an important task in the hydrological analysis of arid regions{. It forms the foundation} for higher-level applications, such as environmental monitoring, water resource management, climate change studies, {and} the analysis of groundwater distribution{. }Located in Northern Africa's Maghreb region in the Sahara Desert, salt lakes (or ``chotts'') are subject to temporal water level fluctuations throughout the calendar year. Chotts remain dry for  most of the {year and} are fed by water during the winter{, }occasional rains, {and wadi}. Monitoring changes in the water supplies {of chotts} is possible by using satellite image classification{. This} is based on {evaluating }spectral reflectances of objects that are visible on the surface~\cite{Medjani}. Changes in lake contours are used as indicators for monitoring land cover changes and hydrological modeling {through } the variability of contours in ephemeral stream beds.
+
+Satellite images are key data sources in computational ecology and environmental monitoring. The various colors and brightness of the land cover classes visible on the images are determined by {the }spectral reflectance of the pixels and can be used for mapping the Earth{'s landscapes}~\cite{Takorabt,Laghouag,Lemenkova202021,Lemenkova202205,Amri}. Using remote sensing data allows for the detection of heterogeneity in the Earth's landscapes~\cite{Abbas}, enabling the recording of geological processes ~\cite{ARAIBIA2022104455,LAMRI2016143} {} and the analysis of environmental  {connections}~\cite{Deroin2019,data7060074}. {Furthermore}, spectral reflectances of land cover types identified on the satellite image may be used to detect soil salinity~\cite{abdennour2019detection}. {More applications of  spaceborne data include} geomorphological studies and terrain {analyses}~\cite{Rebillard,Lemenkova202127,Lemenkova202105}{. Finally, remote sensing data are widely used in} climate studies, including the mapping of evapotranspiration and droughts~\cite{ijgi11090473}, and the characterization  of soil layers~\cite{MULDER20111}.  
+
+Satellite images serve as data sources in many applications of Earth science, such as in mapping the distribution of dust in arid regions~\cite{Parajuli}, assessing and mapping erosion~\cite{Mihi}, aquifer characterization~\cite{AOUDIA2020103920}, evaluating groundwater potential~\cite{Derdour}, {agricultural monitoring of crops}~\cite{Benami,Butte,Daughtry,DAUGHTRY2000229}, {hazard risk assessments}~\cite{KUCHARCZYK2021112577}, and geological investigations of rock physics, tectonics, and hydrogeological simulations~\cite{NEDJRAOUI2021104348}. The analysis of satellite images can also be used for geophysical {assessments} in the desert areas {of} the African Sahara by integrating geological and spatial data modeling \cite{ZERROUK2017146}. 
+
+{The goal of this study was to create a GRASS GIS framework for image classification by using scripts that yield good image-processing capabilities, and to create a series of maps based on the automated land cover classification. }An important consideration for the use of satellite images for cartographic data analysis is that they {need} to be classified into maps of land cover types for the interpretation and analysis of landscapes. {Manual }classification is a time-consuming process involving many iterations, which might lead to errors and result in low accuracy. The problem is, therefore, focused on finding  effective algorithms for the classification of satellite images.
+
+Landsat 8--9 OLI/TIRS images, which have been recorded since 2013 as a continuation of the Landsat data collection, form a valuable pool of Earth's geospatial data to evaluate land cover types and landscapes of the Earth. However, such datasets should be processed and classified {by GIS }to enable the use of satellite images in the environmental applications. {At the same time, the use of commercial \hl{GIS software} %MDPI: Please state the version number of the software.
+ is subject to the availability of the license, which can lead to restrictions on its usage. In this regard, the use of the freely available open-source GRASS GIS for satellite image processing is advantageous. Moreover, it includes the Python API and libraries as extended functionalities. Therefore, this paper proposes}  using GRASS GIS {as a free open-source GIS for image classification. Furthermore, using} scripts {of GRASS GIS allows for the } automation of remote sensing data classification. {This is possible }by employing algorithms involving image processing and geospatial analysis for the discrimination of land cover types and detecting changes{. }Moreover, the existing applications in geomorphometry~\cite{HOFIERKA2009387} can also be used for satellite image processing for environmental applications~\cite{Lemenkova202125}.
+
+\subsection{Motivation}
+
+The need to automate the classification of satellite images {raises the question} of developing tools that enable automated image processing, with reduced workloads. {This is aimed at building} a structured workflow for remote sensing data processing. {The }existing types of classification methods, {such as }clustering, maximal likelihood, {or} k-means have revealed the importance of the optimization of image-processing algorithms. {In this regard, }scripting techniques in GRASS GIS ensure {the level} of {automation } and accelerate the speed of the classification process. {Another question concerns the lack of similar studies. To the best of our knowledge, no existing studies have investigated the use of the GRASS GIS scripts for the classification of satellite images for Chotts Melrhir and Merouane in Algeria.}
+
+{Most} of the existing studies investigating chotts in Algeria are limited to geochemical analyses~\cite{Hacini,Hacinietal2006,MOULLA201264} or geological evaluations of saline brine environments in terms of their potential for lithium resource exploration~\cite{KESLER201255,FLEXER20181188}. {This is because} salt pan brines in desert regions of the Sahara are known to be rich sources of lithium~\cite{ZATOUT2020104566}{, which has garnered attention in the field of geochemical research}. Nevertheless, {processing} remote sensing data for investigating environmental changes in water levels of saline lakes {through GIS } presents more advanced and complex approaches, due to the task of image interpretation. These include the use of algorithms for image clustering and classification, {using} the spectral reflectance of pixels in the imagery.
+
+{Existing} mapping techniques {used} in cartographic works on chotts in Algeria and environmental monitoring {use other software approaches }\cite{ABDENNOUR2020100087,OUERDACHI2012426,HADOUR2020100671}. {More }examples include geological studies using traditional methods of GIS for visualization~\cite{RAHAL2021104983,LAOUINI201959,HADDANE2017228}. Most general methods of landscape monitoring in saline Saharan {environments} operate via specific identification approaches, where surface features of arid environments are assessed based on {}geomorphologic analysis {and} modeling~\cite{Callot}. {For instance, risk assessment methods} {utilizing  information on the concentration of }metals in water were implemented at the Ramsar site of Chott Merouane~\cite{Benhaddya}. 
+
+The existing approaches rarely consider these methods, which makes the classification of remote sensing data {via GRASS GIS }an actual process for environmental monitoring in the African Sahara region. With satellite images, the shape and extent of land cover types for the evaluation of desertification can be accurately applied~\cite{oussedik2003realisation}. More complex cases arise with partially eroded soil, which can also be detected in images where the masks for the erosion areas and surrounding backgrounds should be defined~\cite{Toumietal}. {Moreover, the} fluctuations in the lake levels detected by the time series analysis {on} satellite images should include extensive data processing to derive information on land cover types. {To fill in the existing gaps}, this paper contributes to this problem by presenting a GRASS GIS scripting framework for the automatic classification of satellite images. {The study's objective is }to identify {and detect }changes in the {level of the saline }lake over a span of several years.
+
+{The GRASS GIS-based framework has several advantages. These include the open-source availability of the software, which enables one to freely use it for educational or research purposes; it provides extended functionality with a wide variety of geospatial processing tools; it offers a flexible mode with a  graphical user interface (GUI) and command-line mode, enabling scripting. Moreover, similar to a standard GIS, GRASS GIS supports both raster and vector processing tools, satellite image analysis, and cartographic production. Such features of the GRASS GIS make it a beneficial tool for remote sensing data analysis. For instance}, it is able to classify land cover types {based on remote sensing data }by using clustering data partitions and the maximum-likelihood discriminant analysis classifier. {Moreover}, the algorithm can identify classes at one-year intervals on the {satellite }images using repeated time series. Third, the workflow has a {high level of automation} and data processing speed due to its scripting {approach, which supports machine-based data processing}.
+
+\section{Study Area}
+
+The study area is located in northern Algeria (Figure \ref{fig01}){. A} special focus {is placed} on the ephemeral salt lakes---Chott Melrhir and Chott Merouane---in the Maghreb region~\cite{RAMDANI2009544,1991246,KARA2004361}. The formation of {these} chotts is caused by complex geologic settings and tectonic developments {in} northern Algeria. {This region belongs to} the North African Alpine chain, {which} is formed by three large mountain domains: Tell, pre-Atlas, and Atlas, which {each }present the deformed margin of the stable African Craton. The {Earth's }crust {in this area } has undergone a complex deformation during the Alpine orogeny~\cite{ASFIRANE199561}.{ To the }south and east of the South Atlas Front, the Saharan topography presents {a} longitudinal asymmetry and decreases in altitude eastwards. In eastern Algeria, the Atlas foreland corresponds to the distribution of chotts and sabkhas, which {are located within the} active subsiding area with topographic depressions{.}
+
+Chotts are {situated} within a large asymmetrical syncline of the Northern Sahara Sedimentary Basin, which was formed as a result of complex tectonic movements~\cite{askri1995geology,Flotte}. {Similar to} playas, {chotts in Algeria }are endorheic lakes located at the bottom of a large hydrographic basin~\cite{Joly}. These salt lakes {encompass} immense areas (nearly 3 M hectares) of shallow topographic depressions in northern Algeria, located in the arid region of{ the }Sahara, characterized by a specific hydrological regime and a high level of salinity~\cite{chabour2018africa}. 
+\vspace{-7pt}
+\begin{figure}[H]
+\begin{adjustwidth}{-\extralength}{0cm}
+\centering
+	\includegraphics[width=16.0 cm]{Fig_01.jpg}
+\end{adjustwidth}
+\caption{\hl{Topographic} %MDPI: non-English is not allowed in the image, please replace it or ensure it will not affect understanding.
+ map of Algeria. Software: GMT v. 6.1.1. Data sources: GEBCO and DCW. The rotated red square indicates the study area with Chotts Melrhir and Merouane. Map source: author.
+\label{fig01}}
+\end{figure}
+
+The topographic depression occupied by Chotts Melrhir and Merouane (Figure \ref{fig02}) is located south of the Maghrebian Atlas in the Northern Sahara Sedimentary Basin. Their formation was largely influenced by vertical movements in the Atlas system during the Mesozoic and Cenozoic periods, as well as  Triassic--Lower Jurassic faults~\cite{DELAMOTTE20099}. The aquifer is composed of Quaternary sediments, such as sand, sandstone, clayey sand, and gypsum; the groundwater flow is predominantly oriented in a northward direction~\cite{BOUSELSAL2022100747,BALLAIS1991209}, which controls the geochemical content of groundwater~\cite{daoud1995caracterisation}.
+
+The chotts in Algeria occupy a large area, mainly located in the eastern part of the country. Their geographic situation and extent are largely influenced by a complex combination of topographic and climatic factors: the extent of the depression favors the accumulation of water, sediments, and dust~\cite{Klose,Goudie2022}, {while} the eastern Sahara experiences a higher level of precipitation and moisture, making it the wettest region in the country~\cite{Nedjraoui,Benkhaled}. {Moreover}, the regional environmental setting of eastern Algeria and the northern Sahara is characterized by the contrasting influences of the Mediterranean climate in the north and the arid Sahara in the south~\cite{Ficheur,Mebarki}. 
+
+The largest chotts of Algeria include Chotts Merouane and Melrhir (Figure \ref{fig02})~\cite{HACINI2006284}. {Moreover,~}{Algeria's large chotts include multiple minor chotts of smaller sizes,} including Chott Ech Chergui, which is the second largest chott in North Africa~\cite{Maizi,habibi2013analyse,Demnati,Larnaude}, Chott El Beida (Chott El Beïdha--Hammam Essoukhna), Chott Oum El Raneb~\cite{KHAZNADAR2009369}, Chott El-Gharbi~\cite{CHERCHALI2023105537}, and Chott El Hodna~\cite{AISSAOUI1989413}. The specific hydrological setting of chotts exhibits {a highly} contrasting regime: chotts remain dry for much of the year but collect drainage water in the winter period from the occasional rain, {wadi} flow, spring thaw water, or groundwater~\cite{Larfa,achour2014vulnerabilite}. The level of a chott surface depends on the position of the water table. {Overall}, sediment deflation occurs during the decline of the water table, and sediment accumulation occurs during {the }water rise{. }Such highly specific hydrogeological and hydrochemical settings of the chotts in Algeria are a result of the complex geological  development of Algeria~\cite{CABY1987335,BOUBEKRI2015471,DARLING2018277,BENYOUCEF2023105547}{. This has led} to the formation of saline minerals and lithium in the lake sediments~\cite{HACINI20081583,MEFTAH20222105,DIAZCUEVAS2021101445}. 
+
+\begin{figure}[H]
+\makebox[1.0\linewidth][r]{%
+	\begin{subfigure}[b]{.5\textwidth}
+		\centering
+			\includegraphics[width=6.8cm]{Fig_02a.jpg}
+			\captionsetup{justification=centering}
+		\caption{}
+	\end{subfigure}%
+	\begin{subfigure}[b]{.5\textwidth}
+		\centering
+			\includegraphics[width=6.8cm]{Fig_02b.jpg}
+			\captionsetup{justification=centering}
+		\caption{}
+	\end{subfigure}%
+}
+\caption{(\textbf{a}): Chott Melrhir and Chott Merouane (also known as %Felrhir
+Melrhir Chott) %please confirm intended meaning retained.
+enlarged on the Google Maps (2023); (\textbf{b}): Chott Melrhir and Chott Merouane on the Google Earth aerial scene (2023)}\label{fig02}
+\end{figure}
+
+Chotts Merouane and Melrhir in Algeria are located within the Northwestern Sahara Aquifer System (NWSAS){, which is }one of the largest transboundary aquifer systems in the world{, }and is shared between Algeria, Tunisia, and Libya. With a size of over 1 M km$^2$, the NWSAS largely contributes to the water supply of chotts through groundwater~\cite{HAKIMI2021100791}. Another water supply source of Chotts Melrhir and Merouane is {}occasional rainfall{. The} third type {is} derived from spring thaw waters {and wadi flows }from the Atlas mountains. Thus, the water levels in Chotts Melrhir and Merouane are supported by three {different} types of water: occasional rainfalls, spring thaw, and groundwater~\cite{Ballais,fabre2005geologie,aubert1983observations}. 
+
+A crystallized salt layer forms on the surface of the lake during the periods when the lakes remain dry due to fluctuations in the hydrology of the lake~\cite{Remli}. The chotts in Algeria receive water intermittently{; }the lake level is subject to {frequent} shrinkages and{ a }high evaporation rate, which leads to the accumulation of a salt layer on the surface of the sediment at the ground level of the lakes. The distribution of the salt differs within the salt pan, with gypsum- and halite-rich deposits occupying the centers of the depressions and carbonate outliers found at {the} medium level, {as well as} lacustrine calcareous deposits located on the aeolian sands~\cite{GASSE19871}. {Soil types are largely controlled by the }geologic structures in sedimentary basins, {which }include large and deep reservoirs{ of the Sahara contoured} by chotts filled by water during rainy periods~\cite{HAMICHE2015261}. 
+
+Specific soil properties and salinity gradients in chotts in Algeria largely affect the distribution of flora and vegetation types around the saline lakes~\cite{Neffar}. For instance, the contents of gypsum {affect the }variation of {the }vegetation cover of halophyte plants. Other geochemical parameters of soil in chotts, such as pH, Na, and Cl concentrations, control the distribution of plants in moderately to low saline soils within chotts~\cite{CHENCHOUNI2017660}. The biogeochemical cycles of carbon, nitrogen, sulfur, and other elements within {the }arid lands of chotts, result in specific types and distributions of species populations and microbial  communities~\cite{BOUTAIBA2011909,QUADRI2016119}. {Further} details on geochemical settings and soil salinity {are discussed in } existing papers on the chotts in Algeria \cite{Abdennour}, {with details on} hydrogeological evaluations of {}geothermal resources~\cite{BENMARCE2021104285,MELOUAH2021102211,Abdelaziz}, analysis of mineralogy in desert alluvial soils in wadis of the northern Sahara~\cite{Djili}, brine geochemistry and mineralogy of the Algerian playa~\cite{HamdiAissa,Valles}, and hydrological and environmental modeling in chotts~\cite{Samie}.
+
+{The salt }pans of {}Chott Merouane and Chott Melrhir serve as examples of sensitive wetlands within the {}arid climate {of Algeria}. {The} agricultural and vegetation potential {of chotts is largely controlled by soil in} the northern Sahara {which lacks} organic carbon. {As a result, the vegetation of chotts is characterized by a} specific type of flora that has adapted to the highly depleted and dry soil of the semi-arid climate~\cite{BOUBEHZIZ2020104539}. While  most areas of chotts are devoid of vegetation due to high salt concentrations in soil, there are occasional types distributed over the moist areas and edges of wetlands. {Such} plants are mostly composed of halophytic, succulent, and perennial species{, e.g.,} the \emph{Chenopodiaceae} family adapted to droughts and salty soils~\cite{KHAZNADAR2009369}. The social {advantages} of such unique landscapes include {three} types of benefits: (1) salt mining in the pan; (2) palm inter-cropping and palm monoculture; (3) grazing areas in a palm oasis on the border of the lake~\cite{Demnati2012}. Despite the ecological importance, special geochemical settings, unique landscapes, and specific biodiversity {of the saline lakes, }studies on the chotts in Algeria remain scarce. In view of this, this current study contributes to the investigation of the chotts in Algeria through image processing. 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Materials and Methods}
+
+%----------- subsection ----------->
+\subsection{Data}
+
+The GRASS GIS-based image classification workflow is based on {the} Landsat 8--9 dataset containing nine satellite images (Figure \ref{fig03}{. The images cover} the region of Chott Melrhir and Chott Merouane in Algeria. The major metadata are listed in Table \ref{tab1}. 
+
+\begin{table}[H]
+
+\caption{\hl{Satellite} %MDPI: we removed vertical lines and change table center align, please confirm.
+ \textls[-15]{images used for computing the VIs: Landsat-8 OLI/TIRS collected from the USGS} \hl{\textsuperscript{1}.} %MDPI: please add an explanation for superscript number 1 or remove it
+\label{tab1}}
+
+\begin{adjustwidth}{-\extralength}{0cm}
+%\centering %% If there is a figure in wide page, please release command \centering
+
+
+		\begin{tabularx}{\fulllength}{ccCC}
+			\toprule
+			\textbf{Date} & \textbf{Spacecraft} & \textbf{Landsat Product ID} & \textbf{Scene ID} \\
+			\midrule
+			\hl{2014/01/01} %MDPI: please check if the date format should be changed to English format, such as 1 January 2014.
+ & 8 & \makecell{LC08\_L2SP\_193036\_20140101\_20200912\_02\_T1} & LC81930362014001LGN01 \\
+			2015/01/04 & 8 & \makecell{LC08\_L2SP\_193036\_20150104\_20200910\_02\_T1} & LC81930362015004LGN01 \\
+			2016/01/07 & 8 & \makecell{LC08\_L2SP\_193036\_20160107\_20200907\_02\_T1} & LC81930362016007LGN02 \\
+			2017/01/25 & 8 & \makecell{LC08\_L2SP\_193036\_20170125\_20201013\_02\_T1} & LC81930362017025LGN02 \\
+			2018/01/28 & 8 & \makecell{LC08\_L2SP\_193036\_20180128\_20200902\_02\_T1} & LC81930362018028LGN00 \\
+			2019/01/15 & 8 & \makecell{LC08\_L2SP\_193036\_20190115\_20200830\_02\_T1} & LC81930362019015LGN00 \\	
+			2020/01/02 & 8 & \makecell{LC08\_L2SP\_193036\_20200102\_20200824\_02\_T1} & LC81930362020002LGN00 \\
+			2021/01/04 & 8 & \makecell{LC08\_L2SP\_193036\_20210104\_20210309\_02\_T1} & LC81930362021004LGN00 \\
+			2022/01/15 & 9 & \makecell{LC09\_L2SP\_193036\_20220115\_20220118\_02\_T1} & LC91930362022015LGN00 \\		
+			\bottomrule
+		\end{tabularx}
+		\end{adjustwidth}
+\end{table}
+
+{All of the images were selected during the January period for two reasons. First, the water levels in the chotts fluctuate, with the highest levels occurring during the wet periods (i.e., spring and winter), when the lakes are filled by water from occasional rainwater or groundwater sources. In contrast, during the summer and autumn periods, the majority of lakes are completely dry due to the highest temperature and evaporation rates in the Sahara Desert. Therefore, to detect changes on the images, it is necessary to select the wet period in the calendar year. The second reason is related to the quality of the data covering target areas related to the cloudiness of the images. Many scenes from Landsat 8--9 OLI/TIRS were checked, and only those with low cloud coverage (below 10\%) were selected for classification. Such conditions corresponded to the images taken on January during the time period of 2014--2022, Figure }\ref{fig03}.
+
+\begin{figure}[H]
+
+\begin{adjustwidth}{-\extralength}{0cm}
+\centering %% If there is a figure in wide page, please release command \centering
+
+
+\captionsetup{justification=centering}
+\makebox[0.90\linewidth][r]{%
+	\begin{subfigure}[b]{.40\textwidth}
+%		\centering
+			\includegraphics[width=0.87\textwidth]{Fig_03a.jpg}
+		\caption{2014}
+	\end{subfigure}%
+	\begin{subfigure}[b]{.40\textwidth}
+%		\centering
+			\includegraphics[width=0.87\textwidth]{Fig_03b.jpg}
+		\caption{2015}
+	\end{subfigure}%
+	\begin{subfigure}[b]{.40\textwidth}
+%		\centering
+			\includegraphics[width=0.87\textwidth]{Fig_03c.jpg}
+		\caption{2016}
+	\end{subfigure}%
+}\\
+\vfill \vspace{1mm}
+\makebox[0.90\linewidth][r]{%
+	\begin{subfigure}[b]{.40\textwidth}
+		%\centering
+			\includegraphics[width=0.87\textwidth]{Fig_03d.jpg}
+		\caption{2017}
+	\end{subfigure}%
+	\begin{subfigure}[b]{.40\textwidth}
+		%\centering
+			\includegraphics[width=0.87\textwidth]{Fig_03e.jpg}
+		\caption{2018}
+	\end{subfigure}%
+	\begin{subfigure}[b]{.40\textwidth}
+		%\centering
+		\includegraphics[width=0.87\textwidth]{Fig_03f.jpg}
+		\caption{2019}
+	\end{subfigure}%
+}\\
+\vfill \vspace{1mm}
+\makebox[0.90\linewidth][r]{%
+	\begin{subfigure}[b]{.40\textwidth}
+		%\centering
+		\includegraphics[width=0.87\textwidth]{Fig_03g.jpg}
+		\caption{2020}
+	\end{subfigure}%
+	\begin{subfigure}[b]{.40\textwidth}
+		%\centering
+			\includegraphics[width=0.87\textwidth]{Fig_03h.jpg}
+		\caption{2021}
+	\end{subfigure}%
+	\begin{subfigure}[b]{.40\textwidth}
+		%\centering
+			\includegraphics[width=0.87\textwidth]{Fig_03i.jpg}
+		\caption{2022}
+	\end{subfigure}%
+}
+\end{adjustwidth}
+\caption{Landsat 8--9 OLI/TIRS images in natural RGB colors: lake changes over a period of {9} years (2014--2022).}\label{fig03}
+\end{figure}
+
+The data were obtained from the USGS EarthExplorer repository (from the January period, spanning from 2014 to 2022). The Landsat OLI/TIRS data include spectral bands in visible and NIR ranges. {The atmospheric correction was performed using an example code that applies top-of-atmosphere reflectance using the GRASS GIS module  ``i.landsat.toar ''. It enables calibrating the DN of the pixels on Landsat images using data on top-of-atmosphere reflectance and converting the updated image. The procedure was performed using the code in} \ref{lst01}: 
+  \begin{listing}[H]
+\begin{lstlisting}[language=bash,caption=GRASS GIS code for atmospheric correction of the reflectance values of pixels (here: a case of the image from 2014 repeated for all other images from different years).,style=mystyle,label={lst01}]
+i.landsat.toar input=L8_2014. output=L8_2014_toar. sensor=oli8 method=dos1 date=2014-01-01 sun_elevation=28.79978934 product_date=2014-01-01 gain=HHHLHLHHL''
+\end{lstlisting}  \end{listing}\vspace{-12pt}
+
+The series of Landsat images exhibited high-quality scenes as input data sources: distinct colors, contrasting and clearly recognized areas corresponding to various land cover classes, no defects, faults, or technical noise on the imagery, distinguishable landscape patterns and continuity, identical coverage of the scene over the years, and the availability of multi-spectral bands. The images were processed, analyzed, and stored in a working directory for {further processing by the }GRASS GIS. Additional mapping was performed using the Generic Mapping Tools (GMT) scripting toolset~\cite{Wessel}, following the existing technical cartographic workflow~\cite{Lemenkova202206,Lemenkova202203}. The metadata from Landsat images were collected by the EarthExplorer file with the .xml extension, as summarized in Table \ref{tab1}. 
+
+The data used in this study consisted of nine (9) consecutive Landsat satellite scenes spanning from 2014 to 2022, with scenes taken in January on the following exact dates: (\textbf{\hl{a}%MDPI: Please confirm if the bold is unnecessary and can be removed. The following highlights are the same.
+}) \hl{2014/01/01,} %MDPI: please check if the date format should be changed to English format, such as 1 January 2014..
+ (\textbf{b}) 2015/01/04, (\textbf{c}) 2016/01/07, (\textbf{d}) 2017/01/25, (\textbf{e}) 2018/01/28, (\textbf{f}) 2019/01/15, (\textbf{g}) 2020/01/02, (\textbf{h}) 2021/01/04, (\textbf{\hl{i}}) \hl{2022/01/15}. Through a visual inspection of the images, it is possible to see the dynamics of the salinity on the ephemeral salt lakes where bright cyan regions signify salted regions, {while dark blue areas indicate water, brownish and beige colors indicate bare soil and sands with diverse landforms, and green areas indicate vegetation areas}. 
+
+%----------- subsection ----------->
+\subsection{Methods}
+
+The remote sensing data were {processed} using  {a sequence of }scripting methods,{ using several GRASS GIS modules}; see Figure \ref{fig04}. 
+\vspace{-5pt}
+\begin{figure}[H]
+
+%\centering
+\includegraphics[width=12.0 cm]{Fig_04.jpeg}
+
+\caption{Data and workflow processes used for the study project. Diagram flowchart made in the R mermaid library{. }Source: author.\label{fig04}}
+\end{figure}
+
+The images were downloaded {as} TIFF files with necessary bands {and} stored in {a} GRASS GIS location ({i.e., a }project storage folder). The images { present }a matrix of 2D arrays of pixels, where each pixel is assigned {a }value in a grayscale representing the spectral reflectance associated with that pixel  used for image classification.  
+
+The `i.cluster' and `i.maxlik' GRASS GIS modules enable the performance of a key procedure for converting raster images into classified objects~\cite{Neteleretal2008}. The approach of {}unsupervised classification by the GRASS GIS is based on discriminating pixels in an image according to their spectral signatures. Upon classification, the areas identified as different land cover classes are represented as geometrical primitives, {identified as} contoured areas that represent the extent and topological structures of distinct land cover classes~\cite{NetelerMitasova2008}. In a similar manner, classification allows for treating pixels as distinct objects, according to the spectral signatures for land cover types, grouping them into polygonal segments, based on the defined parameters using a clustering algorithm.
+
+\subsection{Process Flowchart}
+
+{A} general workflow consists of the following steps performed in the GRASS GIS: (1) Image preprocessing using the `i.landsat.toar' module, which computes and corrects the images for the top-of-atmosphere radiance or reflectance and temperature for Landsat 8--9 OLI/TIRS; (2) Creating the group and subgroup of Landsat bands to select map layers for classification, using imagery data by the `i.group' module;  (3) unsupervised image classification performed by {the }`i.cluster' module, which creates cluster means and {computes }covariance matrices as cluster spectral signatures; (4) image classification by the maximum-likelihood discriminant analysis classifier using the `i.maxlik' module; (5) plotting, analysis, and {interpretation of} the obtained maps of the land cover types in {northern} Algeria. 
+
+Figure \ref{fig05} shows the outline of the general structure of the libraries within the GRASS GIS framework for image processing. The workflow of the GRASS GIS includes several modules that handle remote sensing data: g.region, i.group, i.cluster, i.maxlik, d.rast.leg, and d.mon wx0. The GRASS GIS has several modules that actually process the data; the content and connections of these processes are presented in Figure \ref{fig05}. 
+\vspace{-4pt}
+\begin{figure}[H] 
+	\centering
+		\includegraphics[width=13.8cm]{Fig_05}
+	\caption{The outline of the general structure of the GRASS GIS framework. The hierarchical structure of the process used for image processing with the functionality of the key modules of the GRASS GIS and sequential workflow of the data processing. Flowchart made in R library 'mermaid'. Source: author.} \label{fig05}
+\end{figure} 
+
+%----------- subsection ----------->
+\subsection{GRASS GIS Framework Workflow and Process Organization}
+
+The general workflow of the GRASS GIS algorithm for image processing is outlined stepwise as followed: 
+ 
+\begin{enumerate}
+\itemsep0em
+	\item \emph{\hl{USGS---data:} %MDPI: Please confirm if the italics is unnecessary and can be removed. please check all italic format
+} The images were collected from USGS and organized within {a} workspace of the GRASS GIS {(`location/mapset')}. The dataset consisted of 9 files, each approximately \mbox{200 MB}, organized to facilitate the viewing and analysis of the images. 
+	\begin{enumerate}
+		\item \emph{EarthExplorer: }The EarthExplorer repository was used to obtain and download the imagery; it is a powerful resource for satellite {images and }remote sensing data management, and is a storage place for large datasets of Landsat 8--9 OLI/TIRS images.
+		\item \emph{Image capture: }Raster images were downloaded using a path to the Landsat files located in the EarthExplorer repository. The images were fetched by accessing the USGS open-access files, and stored in a working folder of the GRASS GIS.		
+	\end{enumerate}
+	\item \emph{GMT---mapping:} The map of the study area in Algeria, showing the exact location of the Landsat images, was plotted using GEBCO/SRTM raster grids{ through} {conventional }cartographic methods.	
+	\item \emph{DCW---adding annotations}: The Digital Chart of the World (DCW) Gazetteer database was utilized within the cartographic workflow to trace, mark, and add annotations to the map of Algeria. The DCW data, including annotation features derived from 1:1,000,000 data, were applied to Algeria. Generalized annotations were added to the maps using coordinates.	
+	\item \emph{GRASS GIS---image processing:} The images were processed in the GRASS GIS using a a sequence of modules: `g.region', `i.group', `i.cluster', `r.support', `i.maxlik', `d.mon', `d.legend'.	
+		\begin{enumerate}
+			\item \emph{`i.group'---detection of the groups:} The group and subgroups were selected by identifying visible bands in the Landsat collection and {OLI/TIRS} sensor (8 or 9). This improved the time of computing and optimized the use of {computer }memory {(M1 chip 2020 of the MacBook Air)} during image processing.  
+			\item \emph{`r.support'---semantic labeling: }Semantic labels were assigned using the `r.support' module for repeatability of regularly used images in the time series. The labels were assigned using the Landsat sensor OLI for each band correspondingly, using the `map' function (e.g., map = rastername). Annotating the labels was done using the `r.support' module in GRASS GIS.
+			\item \emph{`i.cluster'---grouping:} Each cluster on the image was generated via {the k-means clustering} algorithm, configured as a loop of {codes} processing the image by the GRASS GIS. This resulted in 10 defined clusters visualized as groups of pixels on the images. This procedure was performed automatically through k-means clustering using the GRASS GIS `i.cluster' module. The following parameters were tested: the input imagery group, the input imagery subgroup (30 m visible Landsat bands), and the signature file containing threshold levels for the assignment of the pixels based on the intensity of brightness, and according to the spectral reflectance (level of color in pixels considered or ignored).
+			\item \emph{`i.maxlik'---classification:} The classification of the Landsat {8--9} OLI/TIRS images was applied to each scene with extracted bands in the visible spectrum (bands 1 to 7 with a resolution of 30 m). The classes on the images were adjusted using the cycles of the algorithm executed iteratively until only the 10 classes of the land cover types {remained}.
+			\item \emph{Analysis: }The validation of errors was performed by the computed rejection probability values with pixel classification confidence levels for each map. This was necessary for the analysis of the classification {accuracy of} the {images, covering }Chotts Melrhir and Merouane Lakes, where neighboring pixels cross each other in similar classes.
+			 \item \emph{`d.mon wx0' and `d.rast.leg'---visualization:} The maps were visualized as several images of the land cover types, based on the performed automated classification, and separated by  one-year gaps between each map. The sequence of maps representing the segments of land cover classes was converted into a graphical format. The maps were visualized with legends using the `d.mon' and `d.legend' GRASS GIS modules.	
+		\end{enumerate}
+	        \item \emph{Algeria---land cover classes:} The following 10 land cover classes were generated based on the spectral reflectance features of objects observed on the images: (1) Bare areas (desert sands); (2) salt hardpans; (3) water bodies (Chotts Melrhir and Merouane); {(4) non-consolidated} soils (5) consolidated soils; (6) sparse grassland; (7) sparse shrubland; (8) sparse trees (9) sparse vegetation; (9) grassland; \mbox{(10) broadleaved shrublands.} 
+	         \item \emph{\hl{FAO classes---identification:}} The features on the images and associated land cover classes were identified, annotated, and compared for changes in the years 2014--2022. These included visible changes in the time period for each year and fluctuations in salt levels. The number of classes was chosen based on the Food and Agriculture Organization's (FAO) Land Cover Legend Registry (LCLR); it was then modified and adapted to effectively represent the land cover types on the {images with }30 m resolution, fit easily into memory during computer processing, and was large enough to illustrate the landscape structure in northeastern Algeria{. Moreover,} the vegetation parameters were chosen to ensure that patterns were included in the maps. 
+\end{enumerate}
+
+%----------- subsection ----------->
+\subsection{Scripting in GRASS GIS}
+
+First, the work project `Algeria' was {created and }defined using the spatial location. {The geospatial information on the} coordinate reference system (CRS) {was derived from }the Landsat images {and included the following data}: WGS84 datum and ellipsoid (EPSG: 4326) UTM Projection Zone 32. The Landsat bands were {then }imported into the project using the `r.import' module, using the bilinear resampling method for reprojection, {which applies} the extent of {the }current region and {maintains the} resolution of {the }output raster map ({i.e., }\mbox{30 m} for Landsat bands in the visible spectrum). The raster metadata were checked using the `r.info' module, and the computational region was defined to match the scene using the `g.region' module. The GRASS GIS code is shown in Listing \ref{lst02}: \vspace{-12pt}
+  \begin{listing}[H]
+\begin{lstlisting}[language=bash,caption=GRASS GIS code for importing the data (here: a case of the bands of Landsat image on 2014).,style=mystyle,label={lst02}]
+r.import input=/Users/polinalemenkova/grassdata/Algeria/LC08_L2SP_193036_20140101_20200912_02_T1_SR_B1.TIF output=L8_2014_01 resample=bilinear extent=region resolution=region
+r.import input=/Users/polinalemenkova/grassdata/Algeria/LC08_L2SP_193036_20140101_20200912_02_T1_SR_B2.TIF output=L8_2014_02 resample=bilinear extent=region resolution=region
+r.import input=/Users/polinalemenkova/grassdata/Algeria/LC08_L2SP_193036_20140101_20200912_02_T1_SR_B3.TIF output=L8_2014_03 resample=bilinear extent=region resolution=region
+# repeated likewise for all the VIS bands until 7.
+# check raster metadata:
+r.info -r L8_2014_07
+# list the imported files
+g.list rast
+\end{lstlisting}  \end{listing}\vspace{-12pt}
+
+The next step included {the creation of} the groups and subgroups of the Landsat imagery data using the GRASS GIS module `i.group'{. The groups and subgroups were then used to generate the} signature file. The aim of this step was to create raster map layers in a Landsat imagery group by assigning them to the subgroups with a 30 m resolution, including only the necessary bands (visible spectra). The code used for this step is shown in Listing \ref{lst03}: \vspace{-12pt}
+  \begin{listing}[H]
+\begin{lstlisting}[language=bash,caption=GRASS GIS code for grouping and subgrouping Landsat bands.,style=mystyle,label={lst03}]
+# store VIZ, NIR, MIR into the group and a subgroup with a 30 m resolution without TIR
+i.group group=L8_2014 subgroup=res_30m \ input=L8_2014_01,L8_2014_02,L8_2014_03,L8_2014_04,L8_2014_05,L8_2014_06,L8_2014_07
+\end{lstlisting}  \end{listing}
+
+A group and a subgroup were created to run {the }classification {using} a combination of raster map layers within a group for each year. {The} Landsat OLI/TIRS images for multiple years (2014 to 2022) were inspected and processed{. Grouping} and subgrouping the data facilitated the organization and management of data and raster map layers within the `Algeria' project. Since the current study included several images for multiple years, the semantic labels were set up for each group of bands{. This was conducted with the aim }of reusing the signature file for the classification of different imagery groups across these years. {The semantic labels were generated }before the signature files using the `r.support' module of the GRASS GIS{, }as shown in Listing \ref{lst04}: \vspace{-12pt}
+  \begin{listing}[H]
+\begin{lstlisting}[language=bash,caption=GRASS GIS code for creating semantic labels for the Landsat OLI/TIRS.,style=mystyle,label={lst04}]
+# Defining semantic labels for all Landsat OLI/TIRS bands
+r.support map=L8_2014_01 semantic_label=OLI_1
+r.support map=L8_2014_02 semantic_label=OLI_2
+r.support map=L8_2014_03 semantic_label=OLI_3
+r.support map=L8_2014_04 semantic_label=OLI_4
+r.support map=L8_2014_05 semantic_label=OLI_5
+r.support map=L8_2014_06 semantic_label=OLI_6
+r.support map=L8_2014_07 semantic_label=OLI_7
+\end{lstlisting}  \end{listing}\vspace{-12pt}
+
+The following steps of the classification {included} the `i.cluster' and `i.maxlik' modules, {which }used the {previously defined }imagery group for each year (2014 to 2022) and subgroups of the Landsat bands with the defined year and resolution. The signature file generated in the snippet of code above was {allowed} to classify the current imagery group only. This means that the data {included }only visible Landsat bands with a 30 m resolution without panchromatic and thermal infrared bands, which {were} not necessary in this case. The methodological approach of the `i.cluster' technique is based on reading the bands of the Landsat satellite {images} and assigning pixels into {the }clusters according to the differences in {their }spectral reflectances. 
+
+{The} pixel clusters {represent} categories {(or landscape patches with 30 m sizes)} associated with land cover types on the Earth's shape{. Therefore, }the clusters {were }automatically defined by the GRASS GIS {and }used for further steps in classification. The clustering approach of the GRASS GIS uses the k-means algorithm. During the process of k-means clustering by `i.cluster', the means of the groups to which pixels are assigned are constantly changing. As new pixels are assigned, the means are recalculated iteratively to maximize the distances between the groups until all pixels are assigned into clusters. The bands used for generating signatures of clusters are stored in the group `$L8\_2014$', as shown in Listing \ref{lst05}. \vspace{-12pt}
+  \begin{listing}[H]
+\begin{lstlisting}[language=bash,caption=GRASS GIS code for creating a signature file by the k-means clustering algorithm.,style=mystyle,label={lst05}]
+# generating a signature file and report for 10 classes
+i.cluster group=L8_2014 subgroup=res_30m \
+signaturefile=cluster_L8_2014 classes=10 reportfile=rep_clust_L8_2014.txt
+\end{lstlisting}  \end{listing}\vspace{-12pt}
+
+The next step includes the classification of images by the `i.maxlik' module{. It }uses the maximum likelihood discriminant analysis classifier as a core algorithm approach to classify the cells according to their spectral reflectances in satellite imagery. {The} main approach of this algorithm is that it {applies} the cluster means and covariance matrices generated during previous steps in {a} signature file by the `i.cluster' module. {They serve} to determine the categories of spectral classes{. The determination is performed }according to the {degree of suitability} of each cell in the image {to a given class }based on the distance to the cluster's centroids. The technical implementation was performed using Listing \ref{lst06}. 
+  \begin{listing}[H]
+\begin{lstlisting}[language=bash,caption=GRASS GIS code for image classification by maximal likelihood algorithm clustering.,style=mystyle,label={lst06}]
+i.maxlik group=L8_2014 subgroup=res_30m \
+  signaturefile=cluster_L8_2014 \
+  output=L8_2014_cluster_classes reject=L8_2014_cluster_reject
+\end{lstlisting}
+\end{listing}
+Mapping the results of the classification was conducted using the `d.rast' module, as shown in the following GRASS GIS code in Listing \ref{lst07}:
+  \begin{listing}[H]
+\begin{lstlisting}[language=bash,caption=GRASS GIS code for image classification by maximal likelihood algorithm clustering.,style=mystyle,label={lst07}]
+d.mon wx0
+d.rast.leg L8_2014_cluster_classes
+d.rast.leg L8_2014_cluster_reject
+\end{lstlisting}
+\end{listing}\vspace{-12pt}
+To make the classification by `i.maxlik' more accurate, a thresholding procedure was applied by {the }k-means clustering{. This was implemented }using the `i.cluster' modules aimed at separating the target image classes, using the distance from the centroids. The identification of segments (objects) from {the }imagery data was performed by the `i.segment' module of GRASS GIS using Listing \ref{lst08}:\vspace{-12pt}
+
+\begin{listing}[H]
+\begin{lstlisting}[language=bash,caption=GRASS GIS code for image segmentation by `i.segment' algorithm clustering.,style=mystyle,label={lst08}]
+i.segment group=L8_2014 output=L8_2014_seg_14 threshold=0.4 memory=1000
+\end{lstlisting}
+\end{listing}\vspace{-12pt}
+
+This workflow of the GRASS GIS software briefly outlined above was used in the classification {of }satellite images. The sequence of the utilized modules aimed to classify pixels {and }sign them into clusters based on their features{. Furthermore, this enabled }the discrimination of spectral properties of the land cover objects using signature files and generated classification maps {according }to {the }assigned land cover classes. The landscape categories are recognized, {based on the} contrast in the {digital numbers} (DNs) {of the pixels}, which are assigned to land cover classes and mapped using color palettes. These solutions have advanced features and a high level of automation, which enabled the processing of a time series of the nine images.
+
+Once the images were classified in {the }GRASS GIS, land cover classes were assigned to {interpret} the variety of landscapes in {the} target region of {}northeastern Algeria. The land cover classes indicate the dominant feature classes of the landscapes identified on the images, which have specific characteristics and vegetation patterns that are unique for that given spot on the image. These include the following types derived from the FAO and adopted  with generalization for the study area: (1) Bare areas (desert sands); (2) salt hardpans; (3) water bodies (Chotts Melrhir and Merouane); (4) non-consolidated soils (5) consolidated soils; (6) sparse grassland; (7) sparse shrubland; (8) sparse trees (9) sparse vegetation; \hl{(10)} %MDPI: please confirm this change.
+ grassland; \hl{(11)} broadleaved shrubland. The land cover classes were used as representative areas {on} the classified maps to compare and distinguish{ landscape dynamics }over {nine} years. They also permitted {the evaluation of} lake shrinkages, the extent of {}salt areas, {} and the {extent of the patches within the }visualized landscapes. 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\pagebreak
+\section{Results}
+
+{In this section, we evaluate the results and evaluate the performances of the classification algorithms on the nine images. The evaluation is performed using pixel classification confidence levels and rejection probability values. The process of classification has a flaw related to the assignment of pixels to the classes using their spectral signatures. The allocation of pixels may be different between years due to different nuances in spectral signatures caused by the wetland brightness, greenness, and other remote sensing characteristics caused by the level of chlorophyll in leaves. Moreover, the presence of sand dust and dunes on the surface cause selected pixels to be assigned to neighboring classes, such as non-consolidated and consolidated soils.}
+
+The qualitative evaluation of the water level coverage in Chotts Melrhir and Merouane on the satellite images for each Landsat scene is based on the number of land cover classes as landscape segments; see Figure \ref{fig06}. {The GRASS GIS framework of image classification was developed, considering the principle of confidence. Consequently, it was adapted to the recognition of the dominant land cover classes by selecting landscape patches with homogeneous spectral reflectances of pixels within each cluster group. In order to evaluate the classification results objectively, we tested all implemented GRASS GIS algorithms on nine classified images to conduct a comparative analysis of the classification results with different probability values of pixels that belong to  identical land cover classes in different years. This is shown in the grayscale plots for each pair of images in Figures }\ref{fig06}--\ref{fig09}.
+
+{The numerical pairwise comparison of each pair of images was performed using  a quantitative evaluation of the output raster map holding reject threshold results. This was performed by the \emph{\hl{chi-squared} %MDPI: Please confirm if the italics is unnecessary and can be removed. The following highlights are the same.
+} test and is shown as the grayscale monochrome images for the maps of all corresponding years. Using this contingency test for each pair of images, the data were verified by the statistical hypothesis test adopted to the large sample sizes of each 16-bit Landsat scene. Hence, for each image,  the test evaluated the independence of the two categorical variables corresponding to the two dimensions of land cover classes.}
+
+\begin{figure}[H]
+\hspace{-32pt}\makebox[1.00\linewidth][r]{%
+	\begin{subfigure}[b]{.55\textwidth}
+		\centering
+			\includegraphics[width=7cm]{Fig_06a}
+		\caption{\centering{2014}}
+	\end{subfigure}%
+	\begin{subfigure}[b]{.55\textwidth}
+		\centering
+			\includegraphics[width=7cm]{Fig_06b}
+		\caption{\centering{2014}}
+	\end{subfigure}%
+}\\
+\vfill \vspace{1mm}
+\hspace{-32pt}\makebox[1.00\linewidth][r]{%
+	\begin{subfigure}[b]{.55\textwidth}
+		\centering
+			\includegraphics[width=7cm]{Fig_06c}
+		\caption{\centering{2015}}
+	\end{subfigure}
+	\begin{subfigure}[b]{.55\textwidth}
+		\centering
+			\includegraphics[width=7cm]{Fig_06d}
+		\caption{\centering{2015}}
+	\end{subfigure}%
+}\vspace{3pt}
+\caption{Classification of the Landsat 8--9 OLI/TIRS Algeria images with pixels classified into 10 classes, and rejection probability values with pixel classification confidence levels: (\textbf{a}) 2014 map, (\textbf{b}) 2014 rejected classes, (\textbf{c}) 2015 map, (\textbf{d}) 2015 rejected classes.}\label{fig06}
+\end{figure}
+
+The land cover types are automatically detected and visualized in Figure \ref{fig06} for the years 2014 and 2015, in Figure \ref{fig07} for the years 2016 and 2017, in Figure \ref{fig08} for the years 2018 and 2019, in \mbox{Figure \ref{fig09}} for the years 2020 and 2021, and in Figure \ref{fig10} for the year 2022. The classification  succeeded for images representing nine Landsat scenes. The percentage of pixel images with rejection probability values and pixel classification confidence levels was computed based on the reject threshold {level}. The statistical data on {the }classification results for processed scenes obtained from the GRASS GIS `i.maxlik' is summarized in {the} monochrome images, to the right of the classification maps, Figures \ref{fig06}--\ref{fig10}. 
+
+The comparison of the classified images in 2016 (Figure \ref{fig07}a) and 2017 (Figure \ref{fig07}c) shows the visible increase of {the }salt areas in the northern part of the study area during one calendar year, Figure \ref{fig07}. Such fluctuations show that significant changes in the hydrology reflect the sensibility of a chott as a closed hydrological system to regional changes in rainfall patterns, as also noted earlier~\cite{Mahowald}.
+
+\begin{figure}[H]
+\hspace{-32pt}\makebox[1.00\linewidth][r]{%
+	\begin{subfigure}[b]{.55\textwidth}
+		\centering
+			\includegraphics[width=7.3cm]{Fig_07a}
+		\caption{\centering{2016}}
+	\end{subfigure}%
+	\begin{subfigure}[b]{.55\textwidth}
+		\centering
+			\includegraphics[width=7.3cm]{Fig_07b}
+		\caption{\centering{2016}}
+	\end{subfigure}%
+}\\
+\vfill \vspace{1mm}
+\hspace{-32pt}\makebox[1.00\linewidth][r]{%
+	\begin{subfigure}[b]{.55\textwidth}
+		\centering
+			\includegraphics[width=7.3cm]{Fig_07c}
+		\caption{\centering{2017}}
+	\end{subfigure}
+	\begin{subfigure}[b]{.55\textwidth}
+		\centering
+			\includegraphics[width=7.3cm]{Fig_07d}
+		\caption{\centering{2017}}
+	\end{subfigure}%
+}\vspace{3pt}
+\caption{Classification of the Landsat 8--9 OLI/TIRS images of Algeria with pixels classified into 10 classes, and rejection probability values with pixel classification confidence levels: (\textbf{a}) 2016 map, (\textbf{b}) 2016 rejected classes,~(\textbf{c}) 2017 map, (\textbf{d}) 2017 rejected classes.}\label{fig07}
+\end{figure}
+
+The solutions evolve to include halite, potassium, and magnesium salts that are visible on the satellite images covering chotts for several years (for a comparison). For instance, when comparing the distribution of salt areas between 2018 (Figure \ref{fig08}a) and 2019 (\mbox{Figure \ref{fig08}c}), the water level increase in Chott Melrhir is visible in the latter {image}. Moreover, {}the structure of the chotts is complicated by the occasional presence of sparse vegetation downstream of the depression where the palm grove gives way to the salty soils, known as sabkha. During the dry periods in the summer, the salt in the chotts in Algeria is concentrated by evaporation, and the pH increases {along with the increase in }the level of carbonate calcium{. }During wet periods or rains, calcium carbonate precipitates, the pH decreases, while the residual alkalinity becomes negative~\cite{Bourrie}. Such fluctuations affect the content of the evaporite (anhydrite) and soft sulfate minerals, such as gypsum and halite. 
+
+\begin{figure}[H]
+\hspace{-32pt}\makebox[1.00\linewidth][r]{%
+	\begin{subfigure}[b]{.55\textwidth}
+		\centering
+			\includegraphics[width=7.3cm]{Fig_08a}
+		\caption{\centering{2018}}
+	\end{subfigure}%
+	\begin{subfigure}[b]{.55\textwidth}
+		\centering
+			\includegraphics[width=7.3cm]{Fig_08b}
+		\caption{\centering{2018}}
+	\end{subfigure}%
+}\\
+\vfill \vspace{1mm}
+\hspace{-32pt}\makebox[1.00\linewidth][r]{%
+	\begin{subfigure}[b]{.55\textwidth}
+		\centering
+			\includegraphics[width=7.3cm]{Fig_08c}
+		\caption{\centering{2019}}
+	\end{subfigure}
+	\begin{subfigure}[b]{.55\textwidth}
+		\centering
+			\includegraphics[width=7.3cm]{Fig_08d}
+		\caption{\centering{2019}}
+	\end{subfigure}%
+}\caption{Classification of the Landsat 8--9 OLI/TIRS Algeria images with pixels classified into 10 classes, and rejection probability values with pixel classification confidence levels: (\textbf{a}) 2018 map, (\textbf{b}) 2018 rejected classes, (\textbf{c}) 2019 map, (\textbf{d}) 2019 rejected classes.}\label{fig08}
+\end{figure}
+
+Figure \ref{fig09} shows the comparison of the {image }classification results between 2020 and 2021 with the visualized classified maps and the rejected classes. Exporting files to the rejection probability values for processing pixel classification confidence levels was performed using {the }`i.maxlike' GRASS GIS module, which shows the probability of the correct classification of pixels for quality control. 
+
+A higher salinity level in the Chott Melrhir in January 2020 (Figure \ref{fig09}a) compared to January 2021 (Figure \ref{fig09}c) shows a dry period and less atmospheric precipitation{. Compared to 2020,} in 2021, the salt %sale
+lake {was} filled with water, which indicated intense rainfalls. In contrast, the Chott Merouane demonstrated less variability in salinity, which can be explained by the topographic structure of the basin and {better} access to groundwater. The automatic recognition of salinity in both chotts and other land cover classes was achieved through the implementation of a maximum-likelihood discriminant analysis classifier in the GRASS GIS algorithm. {This }was performed using the empirical trials of pixel assignments into classes by clustering {algorithms }with the most appropriate parameters of the Algerian landscapes detected for the classification of satellite images. 
+
+\begin{figure}[H]
+\hspace{-32pt}\makebox[1.00\linewidth][r]{%
+	\begin{subfigure}[b]{.55\textwidth}
+		\centering
+			\includegraphics[width=7.3cm]{Fig_09a}
+		\caption{\centering{2020}}
+	\end{subfigure}%
+	\begin{subfigure}[b]{.55\textwidth}
+		\centering
+			\includegraphics[width=7.3cm]{Fig_09b}
+		\caption{\centering{2020}}
+	\end{subfigure}%
+}\\
+\vfill \vspace{1mm}
+\hspace{-32pt}\makebox[1.00\linewidth][r]{%
+	\begin{subfigure}[b]{.55\textwidth}
+		\centering
+			\includegraphics[width=7.3cm]{Fig_09c}
+		\caption{\centering{2021}}
+	\end{subfigure}
+	\begin{subfigure}[b]{.55\textwidth}
+		\centering
+			\includegraphics[width=7.3cm]{Fig_09d}
+		\caption{\centering{2021}}
+	\end{subfigure}%
+}\caption{Classification of the Landsat 8--9 OLI/TIRS Algeria images with pixels classified into 10 classes, and rejection probability values with pixel classification confidence levels: (\textbf{a}) 2020 map, (\textbf{b}) 2020 rejected classes, (\textbf{c}) 2021 map, (\textbf{d}) 2021 rejected classes.}\label{fig09}
+\end{figure}
+
+The proposed algorithm of GRASS GIS scripting {presents} a sequence of several modules, {which }enabled the detection of 10 land cover classes in the {northeastern region of } Algeria through quantitative evaluations {of the  landscapes. The }comparison of {land cover types was based on }pixel values, which enabled assigning them into cluster groups {representing land cover types}. This presents a fully automated GRASS GIS-based workflow that utilizes spectral reflectance values of {pixels} extracted from  satellite images for a parameter-defined analysis aimed at identifying {the }land cover features; see Figure \ref{fig10}. 
+
+\begin{figure}[H]
+\hspace{-32pt}\makebox[1.00\linewidth][r]{%
+	\begin{subfigure}[b]{.55\textwidth}
+		\centering
+			\includegraphics[width=7.3cm]{Fig_10a}
+		\caption{\centering{2022}}
+	\end{subfigure}%
+	\begin{subfigure}[b]{.55\textwidth}
+		\centering
+			\includegraphics[width=7.3cm]{Fig_10b}
+		\caption{\centering{2022}}
+	\end{subfigure}%
+}\caption{Classification of the Landsat 8--9 OLI/TIRS Algeria images with pixels classified into 10 classes, and rejection probability values with pixel classification confidence levels: (\textbf{a}) 2022 map, (\textbf{b}) 2022 rejected classes.}\label{fig10}
+\end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Discussion}
+
+{In this section, we discuss the relationships between the approaches to land cover classification by GIS. Despite the need for a standard approach to the classification system, none of the current methods has been accepted as the standard, and many approaches exist. Methods of automated image classification include k-means clustering}~\cite{PAOLAPATRICIA2020129}, {principal component analysis}~\cite{SHARMA2023100963}, {hierarchical clustering}~\cite{ZHANG2023129590}, {segmentation}~\cite{rs15082027}, {object-based classification, and deep learning approaches}~\cite{ijgi12010014}. {Among these, clustering uses algorithms that group pixels with common characteristics into clusters that represent different land cover types. With this approach, the coplanarity constraint solution introduces an indeterminacy in the geometric positions of pixels within a given land cover class. Such ambiguity can be efficiently solved by using positional data of proposed classes that are predetermined and known based on land use data from FAO classification schemes.}
+
+{On the other hand, the second approach explicitly uses object-oriented segmentation  algorithms to solve the ambiguity of landscape patches in cases involving similar land cover classes (e.g., sparse grassland and sparse shrubland)}~\cite{Lilay}. {In this method, segments are arranged by grouping neighboring pixels together based on similarities in color and shape features. Note that the problem is the same as the deep learning process of semantic land object detection}~\cite{Yang,Kattenborn,LI2021105763}. {Several approaches have been proposed to solve the problem with a single image, e.g., a composite pattern of multiple bands}~\cite{SEYDI2023112961}, {or as a time series analysis with the assumption of dynamically developed landscape structures}~\cite{YE2023113462}. {Our solution provides an alternative method for land cover change detection based on image classification using scripts within the GRASS GIS framework}
+
+The presented application of geospatial data processing using GRASS GIS for the environmental monitoring of Saharan deserts and saline {ephemeral }lakes was used for the two selected chotts, i.e., Melrhir and Merouane, {located }in Algeria. The demonstrated and explained workflow includes {the collection of }images from the USGS EarthExplorer repository, dataset storage, organization, analysis, and image processing using the GRASS GIS.{ Creating the }spectral signatures{ determined} the categories of the land cover classes to which image pixels were assigned during the classification process{. The }higher-level {image }interpretation process includes the identification and recognition of pixels and their assignments to these land cover classes based on the threshold defined using the chi-square test. {This solution is based on the technical application of scripts instead of using several different image-processing phases in the existing classification workflow methods, which include the procedures of image preprocessing, training samples, classification, and reclassification with merging and assigning classes.}
+
+Detecting the land cover classes on the images strongly depends on the contrast of {the} digital numbers (DNs) {of the pixels compared to those of }neighboring {classes}. In the cases of clear, cloud-free images and distinct landscape contours, {detection} can be performed smoothly. However, {high cloud coverage on the }image,{ or }noise, can seriously affect the inspected {scenes} and worsen the recognition and identification of land cover classes. Therefore, the images were selected with minimal cloudiness and other noise. The second issue concerns specific characteristics of {the }Landsat 8--9 OLI/TIRS scenes, {which have 30 m} resolution {in multi-spectral channels. This limits the }identification of land objects to {a spatial scale} of 30 m{. } More detailed landscape patterns are ignored due to {the restrictions of }resolution and image sharpness. 
+
+In contrast to the existing state-of-the-art GIS (e.g., {commercial }ArcGIS, or ERDAS Imagine), GRASS GIS offers a free and open-source approach to satellite image processing. Moreover, it accurately detects variations in the pixel reflectances {which enable the identification of land cover classes. The assignment of pixels} into land cover classes {and} discriminating signatures of the pixels {are performed during clustering, which involves computing the }covariance matrices calculated by the  `i.cluster' module. The results of the image classification performed by GRASS GIS, compared to the {existing} methods, demonstrate a robust and automated classification of remote sensing data, such as Landsat {8--9 }OLI/TIRS{. Such an approach} worked accurately, according to the resolution of the original image (30 m), which is applicable to all images from the evaluated time series. 
+
+{For future applications, }the demonstrated GRASS GIS approach for image processing will be useful {for} big data {processing. Possible cases will include the }multi-temporal interpretation of landscapes {as spatially and temporally varying vegetation patterns, as responses to climate forcing}~\cite{McDermid,Peteretal2020,Pengetal2020}. For these purposes, future applications of the presented GRASS GIS algorithms will foresee the use of the presented workflow for the automatic classification of other regions of the African Sahara { that experience changes over decades due to  climate effects. While this study used nine} satellite images from Landsat 8--9 OLI/TIRS, {which }were classified using scripting methods{, the extended studies may include other spaceborne data, such as Sentinel-2A images from MODIS temperature data}. Compared to the existing {proprietary} software, the presented GRASS GIS-based framework {is free and available and can be utilized for educational purposes in studies and research. This study }demonstrates the high automation of image processing {using scripts, }which reduces potential errors {and minimizes workflow routines due to} machine-based {data processing} in the classification of remote sensing data.{ For the sake of replicability, the scripts utilized for image processing are provided in the appendix of this paper, allowing for their future reuse.}
+
+{A significant advantage of the presented method compared to the previous methods is that it only requires one script to run the process, instead of having to select various separate procedures in the GIS menu. }The effectiveness of GRASS GIS is especially useful for the multi-temporal analysis of {long-term} environmental trends{ and modeling. In particular, automated geospatial data processing is applicable for the analysis of} desertification, {which can be performed }using a time series of satellite images{. }Satellite image classification is central to many ecological applications, including the analysis of land cover changes, landscape monitoring, {recognition of }vegetation {patterns, and} risk assessment{. }Such applications heavily depend on accurate and automated classifications of satellite images{. The} archives of the Landsat{ mission, beginning from the 1970s, can serve as reliable data sources for the }tasks, {which }require {comparisons} between old {and new }datasets{.} 
+
+Classified images provide information for further {analysis} in environmental monitoring{, }and enable the acquisition of the geometry {and the extent }of {the }landscapes {(in order }to obtain information {about} changes over time through the comparison of several images){. }Therefore, the classification of several Landsat OLI/TIRS images as time series is {an actual} task {in environmental studies}. The  GRASS GIS approach demonstrated in this study enables the conversion of bitmap raster images into {the }maps of land cover changes, based on the spectral reflectance of the {pixels corresponding to }land cover types {and} objects on the Earth.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Conclusions}
+{This} article {presents} an advanced GRASS GIS-based algorithm that was developed to accurately and automatically classify bitmap images into the maps of land cover types in northern Algeria, based on the cell spectral reflectances in imagery data. While different software types for satellite image processing exist, scripting methods {of } GRASS GIS remain the most accurate{. This is} due to the high levels of automation {and machine-based data processing }that minimize human-induced errors and maximize the speed of {the workflow}. The objective of the presented article was to classify the  Landsat OLI/TIRS satellite images covering a span of nine years {(2014--2022)}, obtained from  USGS sources. The implemented image analysis methods are presented along with the {given } image-processing examples in the GRASS GIS {application}. 
+
+{The} identified levels of lakes were accurately discriminated from other land cover types and sand areas of the Sahara Desert (Grand Erg Oriental). {The }maintained geometric shapes and topologies of classes and automated recognition of pixel colors are presented by the GRASS GIS. {In this way, this} work addressed the challenges of  satellite {image classification} using GRASS GIS{. A sequence of several modules was used to }support the environmental analysis of the {changes in the }salt lakes {of Algeria} using {scripts}. The functionality of the GRASS GIS syntax was used for the automated {classification} of Landsat 8--9 OLI/TIRS data {as the developed workflow presented in this paper}. The {modules included }`i.maxlik', which is {used for} classifying the cell spectral reflectances in imagery data, `i.segment', which is to identify segment objects from imagery data, and `i.cluster',  which is to define spectral {signatures}. Auxiliary graphical modules were also used, {for instance, }`i.landsat.toar', and others. 
+
+The use of GRASS GIS for satellite image processing {showed }high effectiveness{. In}  future work, we will consider developing the GRASS GIS algorithms to seek specific applications in other regions of the Earth's deserts. We will also test other algorithms, such as the automatic detection of classes using supervised classification {and segmentation}. By comparing all of the land cover classes of satellite images obtained during a period of 10 years, it was possible to discriminate changes in salt lake levels that illustrated climate change,{ which affected land cover types }in the northern part of the Sahara{, in Algeria}. The principles of using the GRASS GIS  `i.maxlik' and `i.cluster' modules {are explained in detail, in regard to }creating clusters and image classification{. The} use of the `i.composite' scripts for color composites from the Landsat bands, as well as the example cases of the used workflow, are presented in the {provided }scripts. 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\authorcontributions{Supervision, conceptualization, methodology, software, resources, funding acquisition, project administration, writing---original draft preparation, methodology, software, data curation, visualization, formal analysis, validation, writing---review and editing, and investigation, P.L. }
+\vspace{6pt}
+\funding{\hl{The} %MDPI: Information regarding the funder and the funding number should be provided. Please check the accuracy of funding data and any other information carefully..
+ publication was funded by the Editorial Office of the Applied Systems Innovation, Multidisciplinary Digital Publishing Institute (MDPI), which provided a 100\% discount for the APC of this manuscript.}
+
+\institutionalreview{Not applicable.}
+
+\informedconsent{Not applicable.}
+
+\dataavailability{Not applicable} 
+
+\acknowledgments{The author thanks the anonymous reviewers for their valuable feedback, suggestions, and comments, which improved an earlier version of this manuscript.}
+
+\conflictsofinterest{The author declares no conflict of interest.} 
+\clearpage 
+\abbreviations{Abbreviations}{
+The following abbreviations are used in this manuscript:\\
+
+\noindent 
+\begin{tabular}{@{}ll}
+DCW & Digital Chart of the World\\
+EPSG & European Petroleum Survey Group \\
+FAO & Food and Agriculture Organization\\
+GEBCO & General Bathymetric Chart of the Oceans \\
+GIS & Geographic Information System\\
+GRASS GIS & Geographic Resources Analysis Support System GIS\\
+Landsat OLI/TIRS & Landsat Operational Land Imager and Thermal Infrared Sensor\\
+LCLR & Land Cover Legend Registry \\
+NIR & Near Infrared\\
+NWSAS & Northwestern Sahara Aquifer System\\
+SRTM & Shuttle Radar Topography Mission\\
+USGS & United States Geological Survey\\
+UTM & Universal Transverse Mercator \\
+WGS84 & World Geodetic System 1984
+\end{tabular}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{adjustwidth}{-\extralength}{0cm}
+%\printendnotes[custom] % Un-comment to print a list of endnotes
+
+\reftitle{References}
+%\nocite{*}
+\begin{thebibliography}{999}
+
+\bibitem[Medjani \em{et~al.}(2017)Medjani, Aissani, Labar, Djidel, Ducrot,
+  Masse, and {Mei-Ling Hamilton}]{Medjani}
+Medjani, F.; Aissani, B.; Labar, S.; Djidel, M.; Ducrot, D.; Masse, A.;
+  {Mei-Ling Hamilton}, C.
+\newblock {Identifying saline wetlands in an arid desert climate using Landsat
+  remote sensing imagery. Application on Ouargla Basin, southeastern Algeria}.
+\newblock {\em Arab. J. Geosci.} {\bf 2017}, {\em 10},~176.
+\newblock {\url{https://doi.org/10.1007/s12517-017-2956-6}}.
+
+\bibitem[Takorabt \em{et~al.}(2018)Takorabt, Toubal, Haddoum, and
+  Zerrouk]{Takorabt}
+Takorabt, M.; Toubal, A.C.; Haddoum, H.; Zerrouk, S.
+\newblock {Determining the role of lineaments in underground hydrodynamics
+  using Landsat 7 ETM+ data, case of the Chott El Gharbi Basin (western
+  Algeria)}.
+\newblock {\em Arab. J. Geosci.} {\bf 2018}, {\em 11},~76.
+\mbox{\newblock {\url{https://doi.org/10.1007/s12517-018-3412-y}}.}
+
+\bibitem[Laghouag(2011)]{Laghouag}
+Laghouag, M.Y.
+\newblock Apport de la Télédétection (Images Landsat 7 ETM+) pour la
+  Cartographie Géologique de la Région d’Aflou (Atlas Saharien).
+\newblock Ph.D. Thesis, Université de Sétif, Sétif, Algeria,  2011.
+\newblock \highlighting{Mémoire Ingénieur,} %MDPI: please check if the information is necessary, whether it can be removed.
+ 87p.
+
+\bibitem[Lemenkova(2020)]{Lemenkova202021}
+Lemenkova, P.
+\newblock {Sentinel-2 for High Resolution Mapping of Slope-Based Vegetation
+  Indices Using Machine Learning by SAGA GIS}.
+\newblock {\em Transylv. Rev. Syst. Ecol. Res.}
+  {\bf 2020}, {\em 22},~17--34.
+\newblock {\url{https://doi.org/10.2478/trser-2020-0015}}.
+
+\bibitem[Lemenkova(2022)]{Lemenkova202205}
+Lemenkova, P.
+\newblock {Seismicity in the Afar Depression and Great Rift Valley, Ethiopia}.
+\newblock {\em Environ. Res. Eng. Manag.} {\bf 2022},
+  {\em 78},~83--96.
+\newblock {\url{https://doi.org/10.5755/j01.erem.78.1.29963}}.
+
+\bibitem[Amri \em{et~al.}(2017)Amri, Rabai, Benbakhti, and Khennouche]{Amri}
+Amri, K.; Rabai, G.; Benbakhti, I.M.; Khennouche, M.N.
+\newblock {Mapping geology in Djelfa District (Saharan Atlas, Algeria), using
+  Landsat 7 ETM+ data: An alternative method to discern lithology and
+  structural elements}.
+\newblock {\em Arab. J. Geosci. Vol.} {\bf 2017}, {\em 10},~87.
+\newblock {\url{https://doi.org/10.1007/s12517-017-2883-6}}.
+
+\bibitem[Abbas \em{et~al.}(2019)Abbas, Deroin, and Bouaziz]{Abbas}
+Abbas, K.; Deroin, J.P.; Bouaziz, S.
+\newblock Multitemporal Remote Sensing for Monitoring Highly Dynamic Phenomena:
+  Case of the Ephemeral Lakes in the Chott El Jerid, Tunisia.
+\newblock In \emph{Advances in Remote Sensing and Geo Informatics
+  Applications}; El-Askary, H.M., Lee, S., Heggy, E., Pradhan, B., Eds.;
+  Springer International Publishing: Cham,  Switzerland, 2019; pp. 101--103.
+
+\bibitem[Araïbia \em{et~al.}(2022)Araïbia, Amri, Amara, Bendaoud, Hamoudi,
+  Pedrosa-Soares, and {de Andrade Caxito}]{ARAIBIA2022104455}
+Araïbia, K.; Amri, K.; Amara, M.; Bendaoud, A.; Hamoudi, M.; Pedrosa-Soares,
+  A.; {de Andrade Caxito}, F.
+\newblock Characterizing terranes and a Neoproterozoic suture zone in Central
+  Hoggar (Tuareg Shield, Algeria) with airborne geophysics and Landsat 8 OLI
+  data.
+\newblock {\em J. Afr. Earth Sci.} {\bf 2022}, {\em
+  187},~104455.
+\newblock {\url{https://doi.org/10.1016/j.jafrearsci.2022.104455}}.
+
+\bibitem[Lamri \em{et~al.}(2016)Lamri, Djemaï, Hamoudi, Zoheir, Bendaoud,
+  Ouzegane, and Amara]{LAMRI2016143}
+Lamri, T.; Djemaï, S.; Hamoudi, M.; Zoheir, B.; Bendaoud, A.; Ouzegane, K.;
+  Amara, M.
+\newblock Satellite imagery and airborne geophysics for geologic mapping of the
+  Edembo area, Eastern Hoggar (Algerian Sahara).
+\newblock {\em J. Afr. Earth Sci.} {\bf 2016}, {\em
+  115},~143--158.
+\newblock {\url{https://doi.org/10.1016/j.jafrearsci.2015.12.008}}.
+
+\bibitem[Deroin(2019)]{Deroin2019}
+Deroin, J.P., An Overview on 40 Years of Remote Sensing Geology Based on Arab
+  Examples.
+\newblock \textls[-15]{In {\em The Geology of the Arab World---An Overview}; Springer
+  International Publishing: Cham,  Switzerland, 2019; pp. 427--453.}
+\mbox{\newblock {\url{https://doi.org/10.1007/978-3-319-96794-3_12}}.}
+
+\bibitem[Lemenkova(2022)]{data7060074}
+Lemenkova, P.
+\newblock Handling Dataset with Geophysical and Geological Variables on the
+  Bolivian Andes by the GMT Scripts.
+\newblock {\em Data} {\bf 2022}, {\em 7}, 74.
+\newblock {\url{https://doi.org/10.3390/data7060074}}.
+
+\bibitem[Abdennour \em{et~al.}(2019)Abdennour, DOUAOUI, BENNACER, Manuel, and
+  BRADAI]{abdennour2019detection}
+Abdennour, M.A.; Douaoui, A.; Bennacer, A.; Manuel, P.F.; BRADAI, A.
+\newblock Detection of soil salinity as a consequence of land cover changes at
+  El Ghrous (Algeria) irrigated area using satellite images.
+\newblock {\em Agrobiologia} {\bf 2019}, {\em 9},~1458--1470.
+
+\bibitem[Rebillard and Evans(1983)]{Rebillard}
+Rebillard, P.; Evans, D.
+\newblock Analysis of coregistered Landsat, Seasat and SIR-A images of varied
+  terrain types.
+\newblock {\em Geophys. Res. Lett.} {\bf 1983}, {\em 10},~277--280.
+\newblock {\url{https://doi.org/10.1029/GL010i004p00277}}.
+
+\bibitem[Lemenkova(2021{\natexlab{a}})]{Lemenkova202127}
+Lemenkova, P.
+\newblock {Submarine tectonic geomorphology of the Pliny and Hellenic Trenches
+  reflecting geologic evolution of the southern Greece}.
+\newblock {\em Rud.-Geološko Zb.} {\bf 2021}, {\em 36},~33--48.
+\newblock {\url{https://doi.org/10.17794/rgn.2021.4.4}}.
+
+\bibitem[Lemenkova(2021{\natexlab{b}})]{Lemenkova202105}
+Lemenkova, P.
+\newblock {The visualization of geophysical and geomorphologic data from the
+  area of Weddell Sea by the Generic Mapping Tools}.
+\newblock {\em Stud. Quat.} {\bf 2021}, {\em 38},~19--32.
+\newblock {\url{https://doi.org/10.24425/sq.2020.133759}}.
+
+\bibitem[Lemenkova(2022)]{ijgi11090473}
+Lemenkova, P.
+\newblock Mapping Climate Parameters over the Territory of Botswana Using GMT
+  and Gridded Surface Data from TerraClimate.
+\newblock {\em ISPRS Int. J. Geo-Inf.} {\bf 2022}, {\em
+  11}, 473.
+\newblock {\url{https://doi.org/10.3390/ijgi11090473}}.
+
+\bibitem[Mulder \em{et~al.}(2011)Mulder, {de Bruin}, Schaepman, and
+  Mayr]{MULDER20111}
+Mulder, V.; {de Bruin}, S.; Schaepman, M.; Mayr, T.
+\newblock The use of remote sensing in soil and terrain mapping---A review.
+\newblock {\em Geoderma} {\bf 2011}, {\em 162},~1--19.
+\newblock {\url{https://doi.org/10.1016/j.geoderma.2010.12.018}}.
+
+\bibitem[Parajuli \em{et~al.}(2014)Parajuli, Yang, and Kocurek]{Parajuli}
+Parajuli, S.P.; Yang, Z.L.; Kocurek, G.
+\newblock Mapping erodibility in dust source regions based on geomorphology,
+  meteorology, and remote sensing.
+\newblock {\em J. Geophys. Res. Earth Surf.} {\bf 2014}, {\em
+  119},~1977--1994.
+\newblock {\url{https://doi.org/10.1002/2014JF003095}}.
+
+\bibitem[Mihi and Benaradj(2022)]{Mihi}
+Mihi, A.; Benaradj, A.
+\newblock {Assessing and mapping wind erosion-prone areas in Northeastern
+  Algeria using additive linear model, fuzzy logic, multicriteria, GIS, and
+  remote sensing}.
+\newblock {\em Environ. Earth Sci.} {\bf 2022}, {\em 81},~47.
+\newblock {\url{https://doi.org/10.1007/s12665-021-10154-2}}.
+
+\bibitem[Aoudia \em{et~al.}(2020)Aoudia, Issaadi, Bersi, Maizi, and
+  Saibi]{AOUDIA2020103920}
+Aoudia, M.; Issaadi, A.; Bersi, M.; Maizi, D.; Saibi, H.
+\newblock Aquifer characterization using vertical electrical soundings and
+  remote sensing: A case study of the Chott Ech Chergui Basin, Northwest
+  Algeria. {\em J. Afr. Earth Sci.} {\bf 2020}, {\em
+  170},~103920.
+\newblock {\url{https://doi.org/10.1016/j.jafrearsci.2020.103920}}.
+
+\bibitem[Derdour \em{et~al.}(2022)Derdour, Benkaddour, and Bendahou]{Derdour}
+Derdour, A.; Benkaddour, Y.; Bendahou, B.
+\newblock {Application of remote sensing and GIS to assess groundwater
+  potential in the transboundary watershed of the Chott-El-Gharbi
+  (Algerian--Moroccan border)}.
+\newblock {\em Appl. Water Sci.} {\bf 2022}, {\em 12},~136.
+\newblock {\url{https://doi.org/10.1007/s13201-022-01663-x}}.
+
+\bibitem[Benami \em{et~al.}(2021)Benami, Jin, Carter, Ghosh, Hijmans, Hobbs,
+  Kenduiywo, and Lobell]{Benami}
+Benami, E.; Jin, Z.; Carter, M.R.; Ghosh, A.; Hijmans, R.J.; Hobbs, A.;
+  Kenduiywo, B.; Lobell, D.B.
+\newblock {Uniting remote sensing, crop modelling and economics for
+  agricultural risk management}.
+\newblock {\em Nat. Rev. Earth Environ.} {\bf 2021}, {\em
+  2},~140--159.
+\newblock {\url{https://doi.org/10.1038/s43017-020-00122-y}}.
+
+\bibitem[Butte \em{et~al.}(2021)Butte, Vakanski, Duellman, Wang, and
+  Mirkouei]{Butte}
+Butte, S.; Vakanski, A.; Duellman, K.; Wang, H.; Mirkouei, A.
+\newblock Potato crop stress identification in aerial images using deep
+  learning-based object detection.
+\newblock {\em Agron. J.} {\bf 2021}, {\em 113},~3991--4002.
+\newblock {\url{https://doi.org/10.1002/agj2.20841}}.
+
+\bibitem[Daughtry(2001)]{Daughtry}
+Daughtry, C.S.
+\newblock Discriminating Crop Residues from Soil by Shortwave Infrared
+  Reflectance.
+\newblock {\em Agron. J.} {\bf 2001}, {\em 93},~125--131.
+\newblock {\url{https://doi.org/10.2134/agronj2001.931125x}}.
+
+\bibitem[Daughtry \em{et~al.}(2000)Daughtry, Walthall, Kim, {de Colstoun}, and
+  McMurtrey]{DAUGHTRY2000229}
+Daughtry, C.; Walthall, C.; Kim, M.; {de Colstoun}, E.; McMurtrey, J.
+\newblock Estimating Corn Leaf Chlorophyll Concentration from Leaf and Canopy
+  Reflectance.
+\newblock {\em Remote Sens. Environ.} {\bf 2000}, {\em 74},~229--239.
+\newblock {\url{https://doi.org/10.1016/S0034-4257(00)00113-9}}.
+
+\bibitem[Kucharczyk and Hugenholtz(2021)]{KUCHARCZYK2021112577}
+Kucharczyk, M.; Hugenholtz, C.H.
+\newblock Remote sensing of natural hazard-related disasters with small drones:
+  Global trends, biases, and research opportunities.
+\newblock {\em Remote Sens. Environ.} {\bf 2021}, {\em 264},~112577.
+\newblock {\url{https://doi.org/10.1016/j.rse.2021.112577}}.
+
+\bibitem[Nedjraoui \em{et~al.}(2021)Nedjraoui, Hamoudi, {Ben El Khaznadji},
+  Oughou, and Bendaoud]{NEDJRAOUI2021104348}
+Nedjraoui, K.; Hamoudi, M.; {Ben El Khaznadji}, R.; Oughou, S.; Bendaoud, A.
+\newblock Structural mapping and interpretation of lineaments related to the In
+  Teria volcanism (southeastern Algeria) using Landsat 8 OLI TIRS images and
+  aeromagnetic data.
+\newblock {\em J. Afr. Earth Sci.} {\bf 2021}, {\em
+  184},~104348.
+\newblock {\url{https://doi.org/10.1016/j.jafrearsci.2021.104348}}.
+
+\bibitem[Zerrouk \em{et~al.}(2017)Zerrouk, Bendaoud, Hamoudi, Liégeois,
+  Boubekri, and {El Khaznadji}]{ZERROUK2017146}
+Zerrouk, S.; Bendaoud, A.; Hamoudi, M.; Liégeois, J.P.; Boubekri, H.; {El
+  Khaznadji}, R.B.
+\newblock Mapping and discriminating the Pan-African granitoids in the Hoggar
+  (southern Algeria) using Landsat 7 ETM+ data and airborne geophysics.
+\newblock {\em J. Afr. Earth Sci.} {\bf 2017}, {\em
+  127},~146--\hl{158.} %MDPI: we removed the extra information, please confirm. same meanings for below
+%\newblock Magmatism, metamorphism and associated mineralization in North Africa
+%  and related areas, 
+  {\url{https://doi.org/10.1016/j.jafrearsci.2016.10.003}}.
+
+\bibitem[Hofierka \em{et~al.}(2009)Hofierka, Mitášová, and
+  Neteler]{HOFIERKA2009387}
+Hofierka, J.; Mitášová, H.; Neteler, M.
+\newblock Chapter 17 Geomorphometry in GRASS GIS. {\em \hl{Dev. Soil Sci.} %MDPI: we changed it to journal type and removed extra information, please confirm.
+}
+\textbf{2009}, \emph{33}, 387--410.
+\newblock {\url{https://doi.org/10.1016/S0166-2481(08)00017-2}}.
+
+\bibitem[Lemenkova(2021)]{Lemenkova202125}
+Lemenkova, P.
+\newblock {Dataset compilation by GRASS GIS for thematic mapping of Antarctica:
+  Topographic surface, ice thickness, subglacial bed elevation and sediment
+  thickness}.
+\newblock {\em Czech Polar Rep.} {\bf 2021}, {\em 11},~67--85.
+\newblock {\url{https://doi.org/10.5817/CPR2021-1-6}}.
+
+\bibitem[Hacini and Oelkers(2011)]{Hacini}
+Hacini, M.; Oelkers, E.
+\newblock {Geochemistry and Behavior of Trace Elements During the Complete
+  Evaporation of the Merouane Chott Ephemeral Lake: Southeast Algeria}.
+\newblock {\em Aquat. Geochem.} {\bf 2011}, {\em 17},~51--70.
+\newblock {\url{https://doi.org/10.1007/s10498-010-9106-z}}.
+
+\bibitem[M. \em{et~al.}(2006)M., E.H., and N.]{Hacinietal2006}
+M., H.; E.H., O.; N., K.
+\newblock {\hl{Retrieval and interpretation of precipitation rates generated from
+  the composition of the Merouane Chott ephemeral lake}}. %MDPI: Refs. 32 and 65 are duplicated. Please remove duplicated references and rearrange all the references to appear in numerical order. Please ensure that there are no duplicated references.
+\newblock {\em J. Geochem. Explor.} {\bf 2006}, {\em
+  88},~284–287.
+
+\bibitem[Moulla \em{et~al.}(2012)Moulla, Guendouz, Cherchali, Chaid, and
+  Ouarezki]{MOULLA201264}
+Moulla, A.; Guendouz, A.; Cherchali, M.H.; Chaid, Z.; Ouarezki, S.
+\newblock Updated geochemical and isotopic data from the Continental
+  Intercalaire aquifer in the Great Occidental Erg sub-basin (south-western
+  Algeria).
+\newblock {\em Quat. Int.} {\bf 2012}, {\em 257},~64--\hl{73.}
+%\newblock Palaeogroundwater dynamics and their importance for past human
+%  settlements and today's water management,
+  {\url{https://doi.org/10.1016/j.quaint.2011.08.038}}.
+
+\bibitem[Kesler \em{et~al.}(2012)Kesler, Gruber, Medina, Keoleian, Everson, and
+  Wallington]{KESLER201255}
+Kesler, S.E.; Gruber, P.W.; Medina, P.A.; Keoleian, G.A.; Everson, M.P.;
+  Wallington, T.J.
+\newblock Global lithium resources: Relative importance of pegmatite, brine and
+  other deposits.
+\newblock {\em Ore Geol. Rev.} {\bf 2012}, {\em 48},~55--69.
+\mbox{\newblock {\url{https://doi.org/10.1016/j.oregeorev.2012.05.006}}.}
+
+\bibitem[Flexer \em{et~al.}(2018)Flexer, Baspineiro, and Galli]{FLEXER20181188}
+Flexer, V.; Baspineiro, C.F.; Galli, C.I.
+\newblock Lithium recovery from brines: A vital raw material for green energies
+  with a potential environmental impact in its mining and processing.
+\newblock {\em Sci. Total Environ.} {\bf 2018}, {\em
+  639},~1188--1204.
+\newblock {\url{https://doi.org/10.1016/j.scitotenv.2018.05.223}}.
+
+\bibitem[Zatout \em{et~al.}(2020)Zatout, {López Steinmetz}, Hacini, Fong,
+  M'nif, Hamzaoui, and {López Steinmetz}]{ZATOUT2020104566}
+Zatout, M.; {López Steinmetz}, R.L.; Hacini, M.; Fong, S.B.; M'nif, A.;
+  Hamzaoui, A.; {López Steinmetz}, L.C.
+\newblock Saharan lithium: Brine chemistry of chotts from eastern Algeria.
+\newblock {\em Appl. Geochem.} {\bf 2020}, {\em 115},~104566.
+\newblock {\url{https://doi.org/10.1016/j.apgeochem.2020.104566}}.
+
+\bibitem[Abdennour \em{et~al.}(2020)Abdennour, Douaoui, Piccini, Pulido,
+  Bennacer, Bradaï, Barrena, and Yahiaoui]{ABDENNOUR2020100087}
+Abdennour, M.A.; Douaoui, A.; Piccini, C.; Pulido, M.; Bennacer, A.; Bradaï,
+  A.; Barrena, J.; Yahiaoui, I.
+\newblock Predictive mapping of soil electrical conductivity as a Proxy of soil
+  salinity in south-east of Algeria.
+\newblock {\em Environ. Sustain. Indic.} {\bf 2020}, {\em
+  8},~100087.
+\newblock {\url{https://doi.org/10.1016/j.indic.2020.100087}}.
+
+\bibitem[Ouerdachi \em{et~al.}(2012)Ouerdachi, Boutaghane, Hafsi, Tayeb, and
+  Bouzahar]{OUERDACHI2012426}
+Ouerdachi, L.; Boutaghane, H.; Hafsi, R.; Tayeb, T.; Bouzahar, F.
+\newblock Modeling of Underground Dams Application to Planning in the Semi Arid
+  Areas (Biskra, Algeria).
+\newblock {\em Energy Procedia} {\bf 2012}, {\em 18},~426--437.
+\newblock {\url{https://doi.org/10.1016/j.egypro.2012.05.054}}.
+
+\bibitem[Hadour \em{et~al.}(2020)Hadour, Mahé, and Meddi]{HADOUR2020100671}
+Hadour, A.; Mahé, G.; Meddi, M.
+\newblock Watershed based hydrological evolution under climate change effect:
+  An example from North Western Algeria.
+\newblock {\em J. Hydrol. Reg. Stud.} {\bf 2020}, {\em
+  28},~100671.
+\newblock {\url{https://doi.org/10.1016/j.ejrh.2020.100671}}.
+
+\bibitem[Rahal \em{et~al.}(2021)Rahal, Gouaidia, Fidelibus, Marchina, Natali,
+  and Bianchini]{RAHAL2021104983}
+Rahal, O.; Gouaidia, L.; Fidelibus, M.D.; Marchina, C.; Natali, C.; Bianchini,
+  G.
+\newblock Hydrogeological and geochemical characterization of groundwater in
+  the F'Kirina plain (eastern Algeria).
+\newblock {\em Appl. Geochem.} {\bf 2021}, {\em 130},~104983.
+\newblock {\url{https://doi.org/10.1016/j.apgeochem.2021.104983}}.
+
+\bibitem[Laouini \em{et~al.}(2019)Laouini, Hacini, damnati, Cherif, and
+  Remita]{LAOUINI201959}
+Laouini, H.; Hacini, M.; damnati, B.; Cherif, A.; Remita, A.
+\newblock Sedimentological and paleoenvironmental analysis of chott Baghdad
+  deposit (Northern Algerien Sahara).
+\newblock {\em Energy Procedia} {\bf 2019}, {\em 157},~59--\hl{67.}
+%\newblock Technologies and Materials for Renewable Energy, Environment and
+%  Sustainability (TMREES),
+  {\url{https://doi.org/10.1016/j.egypro.2018.11.164}}.
+
+\bibitem[Haddane \em{et~al.}(2017)Haddane, Hacini, Bellaoueur, Hamzaoui, and
+  M'nif]{HADDANE2017228}
+Haddane, A.; Hacini, M.; Bellaoueur, A.; Hamzaoui, A.H.; M'nif, A.
+\newblock Effect of evaporite paleo-lacustrine facies on the brines
+  geochemistry, economy implication. Case of chott Bagdad El Hadjira Ouargla,
+  South-Eastern Algeria.
+\newblock {\em Energy Procedia} {\bf 2017}, {\em 119},~228--\hl{235.}
+%\newblock International Conference on Technologies and Materials for Renewable
+%  Energy, Environment and Sustainability, TMREES17, 21-24 April 2017, Beirut
+%  Lebanon,
+   {\url{https://doi.org/10.1016/j.egypro.2017.07.072}}.
+
+\bibitem[Callot \em{et~al.}(2000)Callot, Marticorena, and Bergametti]{Callot}
+Callot, Y.; Marticorena, B.; Bergametti, G.
+\newblock Geomorphologic approach for modelling the surface features of arid
+  environments in a model of dust emissions: Application to the Sahara desert.
+\newblock {\em Geodin. Acta} {\bf 2000}, {\em 13},~245--270.
+\newblock {\url{https://doi.org/10.1080/09853111.2000.11105373}}.
+
+\bibitem[Benhaddya \em{et~al.}(2019)Benhaddya, Halis, and Lahcini]{Benhaddya}
+Benhaddya, M.; Halis, Y.; Lahcini, A.
+\newblock {Concentration, Distribution, and Potential Aquatic Risk Assessment
+  of Metals in Water from Chott Merouane (Ramsar Site), Algeria}.
+\newblock {\em Arch. Environ. Contam. Toxicol.} {\bf
+  2019}, {\em 77},~127--143.
+\newblock {\url{https://doi.org/10.1007/s00244-019-00631-y}}.
+
+\bibitem[Oussedik \em{et~al.}(2003)Oussedik, Iftene, and
+  Zegrar]{oussedik2003realisation}
+Oussedik, A.; Iftene, T.; Zegrar, A.
+\newblock R{\'e}alisation par t{\'e}l{\'e}d{\'e}tection de la carte d
+  ‘Alg{\'e}rie de sensibilit{\'e} {\`a} la d{\'e}sertification.
+\newblock {\em Sci. Et Chang. Plan{\'e}taires/S{\'e}cheresse} {\bf
+  2003}, {\em 14},~121--127.
+
+\bibitem[Toumi \em{et~al.}(2013)Toumi, Meddi, Mahé, and Brou]{Toumietal}
+Toumi, S.; Meddi, M.; Mahé, G.; Brou, Y.T.
+\newblock Cartographie de l’érosion dans le bassin versant de l’Oued Mina
+  en Algérie par télédétection et SIG.
+\newblock {\em Hydrol. Sci. J.} {\bf 2013}, {\em 58},~1542--1558.
+\newblock {\url{https://doi.org/10.1080/02626667.2013.824088}}.
+
+\bibitem[Ramdani \em{et~al.}(2009)Ramdani, Elkhiati, and
+  Flower]{RAMDANI2009544}
+Ramdani, M.; Elkhiati, N.; Flower, R.
+\newblock Lakes of Africa: North of Sahara. In {\em Encyclopedia of Inland
+  Waters}; Likens, G.E., Ed.; Academic Press: Oxford, UK, 2009; pp. 544--554.
+\newblock {\url{https://doi.org/10.1016/B978-012370626-3.00035-1}}.
+
+\bibitem[Anson and Böhme(1991)]{1991246}
+Anson, R.; Böhme, R.
+\newblock Algeria. In {\em South America, Central America and Africa};
+  International Cartographic Association, Pergamon: Amsterdam,  The Netherlands,
+1991; pp. 246--255.
+\newblock {\url{https://doi.org/10.1016/B978-1-85166-661-4.50054-2}}.
+
+\bibitem[Kara \em{et~al.}(2004)Kara, Bengraine, Derbal, Chaoui, and
+  Amarouayache]{KARA2004361}
+Kara, M.H.; Bengraine, K.A.; Derbal, F.; Chaoui, L.; Amarouayache, M.
+\newblock Quality evaluation of a new strain of Artemia from Chott Marouane
+  (Northeast Algeria).
+\newblock {\em Aquaculture} {\bf 2004}, {\em 235},~361--369.
+\newblock {\url{https://doi.org/10.1016/j.aquaculture.2004.02.016}}.
+
+\bibitem[Asfirane and Galdeano(1995)]{ASFIRANE199561}
+Asfirane, F.; Galdeano, A.
+\newblock The aeromagnetic map of northern Algeria: Processing and
+  interpretation.
+\newblock {\em Earth Planet. Sci. Lett.} {\bf 1995}, {\em
+  136},~61--78.
+\newblock {\url{https://doi.org/10.1016/0012-821X(95)00043-4}}.
+
+\bibitem[Askri \em{et~al.}(1995)Askri, Belmecheri, Benrabah, Boudjema,
+  Boumendjel, Daoudi, Drid, Ghalem, Docca, and Ghandriche]{askri1995geology}
+Askri, H.; Belmecheri, A.; Benrabah, B.; Boudjema, A.; Boumendjel, K.; Daoudi,
+  M.; Drid, M.; Ghalem, T.; Docca, A.; Ghandriche, H.
+\newblock Geology of Algeria.
+\newblock In Proceedings of the Well Evaluation Conference Algeria, Schlumberger Houston, TX, USA,  \hl{1995;} %MDPI: Please add the conference date (day month year).
+\mbox{ pp. 1--93.}
+
+\bibitem[Flotte~de Roquevaire(1902)]{Flotte}
+Flotte~de Roquevaire, R.
+\newblock Note cartographique (carte hypsométrique de l'Algérie).
+\newblock {\em Ann. Géogr.} {\bf 1902}, {\em 11},~437--438.
+\newblock {\url{https://doi.org/10.3406/geo.1902.20348}}.
+
+\bibitem[Joly(2021)]{Joly}
+Joly, F., Temporary Water Bodies and Lakes.
+\newblock In {\em Mankind and Deserts 2}; John Wiley \& Sons, Ltd:   \hl{Hoboken, NJ, USA,} %We added the location of publisher. Please confirm
+2021;
+  Chapter~2, pp. 39--86.
+\newblock {\url{https://doi.org/10.1002/9781119808275.ch2}}.
+
+\bibitem[Chabour \em{et~al.}(2018)Chabour, Mebrouk, Hassani, Upton,
+  Dochartaigh, and Howard]{chabour2018africa}
+Chabour, N.; Mebrouk, N.; Hassani, I.; Upton, K.; Dochartaigh, B.; Howard, I.
+\newblock \emph{Africa Ground WaterAtlas: Hydrogeology of Algeria};  \hl{British Geological Survey: Nottingham, UK,} %MDPI: newly added, please confirm.
+ 2018.
+
+\bibitem[{de Lamotte} \em{et~al.}(2009){de Lamotte}, Leturmy, Missenard,
+  Khomsi, Ruiz, Saddiqi, Guillocheau, and Michard]{DELAMOTTE20099}
+{de Lamotte}, D.F.; Leturmy, P.; Missenard, Y.; Khomsi, S.; Ruiz, G.; Saddiqi,
+  O.; Guillocheau, F.; Michard, A.
+\newblock Mesozoic and Cenozoic vertical movements in the Atlas system
+  (Algeria, Morocco, Tunisia): An overview.
+\newblock {\em Tectonophysics} {\bf 2009}, {\em 475},~9--\hl{28.}
+%\newblock The geology of vertical movements of the lithosphere,
+  {\url{https://doi.org/10.1016/j.tecto.2008.10.024}}.
+
+\bibitem[Bouselsal and Saibi(2022)]{BOUSELSAL2022100747}
+Bouselsal, B.; Saibi, H.
+\newblock Evaluation of groundwater quality and hydrochemical characteristics
+  in the shallow aquifer of El-Oued region (Algerian Sahara).
+\newblock {\em Groundw. Sustain. Dev.} {\bf 2022}, {\em
+  17},~100747.
+\newblock {\url{https://doi.org/10.1016/j.gsd.2022.100747}}.
+
+\bibitem[Ballais and Ouezdou(1991)]{BALLAIS1991209}
+Ballais, J.; Ouezdou, H.
+\newblock Forms and deposits of the continental quaternary of the Saharan
+  margin of Eastern Maghreb (tentative synthesis).
+\newblock {\em J. Afr. Earth Sci. (Middle East)} {\bf
+  1991}, {\em 12},~209--216.
+\newblock {\url{https://doi.org/10.1016/0899-5362(91)90070-F}}.
+
+\bibitem[Daoud(1995)]{daoud1995caracterisation}
+Daoud, D.
+\newblock Caract{\'e}risation G{\'e}ochimique et Isotopique des Eaux
+  Souterraines et Estimation du Taux d'{\'e}vaporation dans le Bassin du
+  Choot-Chergui (Zone Semi-Aride, Alg{\'e}rie).
+\newblock Ph.D. Thesis, \hl{Paris, France,} %MDPI: please add the name of Degree-Granting University.
+ 1995.
+
+\bibitem[Klose \em{et~al.}(2010)Klose, Shao, Karremann, and Fink]{Klose}
+Klose, M.; Shao, Y.; Karremann, M.K.; Fink, A.H.
+\newblock Sahel dust zone and synoptic background.
+\newblock {\em Geophys. Res. Lett.} {\bf 2010}, {\em 37},~L09802.
+\newblock {\url{https://doi.org/10.1029/2010GL042816}}.
+
+\bibitem[Goudie(2022)]{Goudie2022}
+Goudie, A., Weathering and Surface Materials and Patterns.
+\newblock In {\em Desert Landscapes of the World with Google Earth}; Springer
+  International Publishing: Cham,  Switzerland, 2022; pp. 121--155.
+\newblock {\url{https://doi.org/10.1007/978-3-031-15179-8_5}}.
+
+\bibitem[Nedjraoui \em{et~al.}(2016)Nedjraoui, Amrani, Boughani, Hirche, and
+  Adi]{Nedjraoui}
+Nedjraoui, D.; Amrani, S.; Boughani, A.; Hirche, A.; Adi, N.
+\newblock Diversité biologique et phytogéographique pour des niveaux
+  différents de salinité dans la région du Chott-Ech-Chergui (Sud-Ouest de
+  l’Algérie).
+\newblock {\em Rev. D'Écologie (Terre Vie)} {\bf 2016}, {\em
+  71},~342--355.
+\newblock {\url{https://doi.org/10.3406/revec.2016.1856}}.
+
+\bibitem[Benkhaled \em{et~al.}(2008)Benkhaled, Bouziane, and Achour]{Benkhaled}
+Benkhaled, A.; Bouziane, M.; Achour, B.
+\newblock {Detecting Trends in Annual Discharge and Precipitation in the Chott
+  Melghir Basin in Southeastern Algeria}.
+\newblock {\em Larhyss J.} {\bf 2008}, {\em 7},~103--119.
+
+\bibitem[Ficheur and Bernard(1902)]{Ficheur}
+Ficheur, E.; Bernard, A.
+\newblock \textls[-15]{Les régions naturelles de l'Algérie.
+ {\em Ann. Géogr.} {\bf 1902}, {\em 11},~419--437.
+\mbox{{\url{https://doi.org/10.3406/geo.1902.18191}}.}}
+
+\bibitem[Mebarki(2007)]{Mebarki}
+Mebarki, A.
+\newblock Les bassins hydrologiques de l’Algérie orientale: Ressources en
+  eau, aménagement et environnement.
+\newblock {\em La Houille Blanche} {\bf 2007}, {\em 93},~112--115.
+\newblock {\url{https://doi.org/10.1051/lhb:2007027}}.
+
+\bibitem[Hacini \em{et~al.}(2006)Hacini, Oelkers, and Kherici]{HACINI2006284}
+Hacini, M.; Oelkers, E.H.; Kherici, N.
+\newblock \hl{Retrieval and interpretation of precipitation rates generated from
+  the composition of the Merouane Chott ephemeral lake}.
+\newblock {\em J. Geochem. Explor.} {\bf 2006}, {\em
+  88},~284--287.
+\newblock {\url{https://doi.org/10.1016/j.gexplo.2005.08.057}}.
+
+\bibitem[Maizi(2015)]{Maizi}
+Maizi, D.
+\newblock Etude Hydrologique et Hydrogéologique du Bassin Versant du Chott Ech
+  Chergui Hautes Plaines-Ouest Algérie.
+\newblock Ph.D. Thesis, Université des sciences et de la technologie Houari
+  Boumediène (USTHB), Bab Ezzouar, Algeria,  2015.
+\newblock \hl{Doctorat } %MDPI: please check if the information should be kept.
+Sciences de la Terre et de l’Univers.
+
+\bibitem[Habibi \em{et~al.}(2013)Habibi, Meddi, and
+  Boucefiane]{habibi2013analyse}
+Habibi, B.; Meddi, M.; Boucefiane, A.
+\newblock Analyse fr{\'e}quentielle des pluies journali{\`e}res maximales Cas
+  du Bassin Chott-Chergui.
+\newblock {\em Nat. Technol.} {\bf 2013}, {\em 8},~41B.
+
+\bibitem[Demnati \em{et~al.}(2017)Demnati, Samraoui, Allache, Sandoz, and
+  Ernoul]{Demnati}
+Demnati, F.; Samraoui, B.; Allache, F.; Sandoz, A.; Ernoul, L.
+\newblock {A literature review of Algerian salt lakes: Values, threats and
+  implications}.
+\newblock {\em Environ. Earth Sci.} {\bf 2017}, {\em 76},~127.
+\newblock {\url{https://doi.org/10.1007/s12665-017-6443-x}}.
+
+\bibitem[Larnaude(1948)]{Larnaude}
+Larnaude, M.
+\newblock Le problème hydraulique du chott Ech Chergui (Algérie).
+\newblock {\em Ann. Géogr.} {\bf 1948}, {\em 57},~88--89.
+
+\bibitem[Khaznadar \em{et~al.}(2009)Khaznadar, Vogiatzakis, and
+  Griffiths]{KHAZNADAR2009369}
+Khaznadar, M.; Vogiatzakis, I.; Griffiths, G.
+\newblock Land degradation and vegetation distribution in Chott El Beida
+  wetland, Algeria.
+\newblock {\em \mbox{J. Arid Environ}.} {\bf 2009}, {\em 73},~369--377.
+\newblock {\url{https://doi.org/10.1016/j.jaridenv.2008.09.026}}.
+
+\bibitem[Cherchali \em{et~al.}(2023)Cherchali, Liégeois, Mesbah, Moulla,
+  Ouarezki, Daas, and Achachi]{CHERCHALI2023105537}
+Cherchali, M.E.H.; Liégeois, J.P.; Mesbah, M.; Moulla, A.S.; Ouarezki, S.A.;
+  Daas, N.; Achachi, A.
+\newblock Interconnected multi-layer aquifer with evaporitic fossil waters in
+  Chott-El-Gharbi endorheic basin (Western high plateaus, Algeria):
+  Hydrochemistry, environmental and strontium isotopes.
+\newblock {\em Appl. Geochem.} {\bf 2023}, {\em 148},~105537.
+\newblock {\url{https://doi.org/10.1016/j.apgeochem.2022.105537}}.
+
+\bibitem[Aissaoui(1989)]{AISSAOUI1989413}
+Aissaoui, D.M.
+\newblock Paléogéographie du Jurassique supérieur au sud du choot El Hodna,
+  Algérie.
+\newblock {\em J. Afr. Earth Sci. (Middle East)} {\bf
+  1989}, {\em 9},~413--420.
+\newblock {\url{https://doi.org/10.1016/0899-5362(89)90025-0}}.
+
+\bibitem[Larfa(2004)]{Larfa}
+Larfa, M.
+\newblock Dynamique de la Végétation Halophile en Milieu Aride et Semi-Aride
+  au Niveau des Chotts (Melghir, Merouane et Bendjeloud) et Oued Djeddi en
+  Fonction des Conditions du Milieu.
+\newblock Ph.D. Thesis, Université Badji Mokhtar, Annaba, Algérie,  2004.
+\newblock \highlighting{Thèse Doctorat.} %MDPI: please check if the information should be kept.
+
+
+\bibitem[ACHOUR(2014)]{achour2014vulnerabilite}
+ACHOUR, M.
+\newblock Vuln{\'e}rabilit{\'e} et Protection des eaux Souterraines en Zone
+  Aride, cas de la vall{\'e}e du Mzab (Ghardaia-Alg{\'e}rie).
+\newblock Ph.D. Thesis, Universit{\'e} Mohamed Ben Ahmed d'Oran, \hl{Oran, Algeria,} %MDPI: newly added, please confirm.
+ 2014.
+
+\bibitem[Caby and Andreopoulos-Renaud(1987)]{CABY1987335}
+Caby, R.; Andreopoulos-Renaud, U.
+\newblock Le Hoggar oriental, bloc cratonisé à 730 Ma dans la chaîne
+  pan-africaine du Nord du continent Africain.
+\newblock {\em Precambrian Res.} {\bf 1987}, {\em 36},~335--344.
+\newblock {\url{https://doi.org/10.1016/0301-9268(87)90030-1}}.
+
+\bibitem[Boubekri \em{et~al.}(2015)Boubekri, Hamoudi, Bendaoud, Priezzhev, and
+  Allek]{BOUBEKRI2015471}
+Boubekri, H.; Hamoudi, M.; Bendaoud, A.; Priezzhev, I.; Allek, K.
+\newblock 3D structural cartography based on magnetic and gravity data
+  inversion---Case of South-West Algeria.
+\newblock {\em J. Afr. Earth Sci.} {\bf 2015}, {\em
+  112},~471--\hl{484.}
+%\newblock Tectonics, mineralisation and regolith evolution of the West African
+%  Craton, 
+  {\url{https://doi.org/10.1016/j.jafrearsci.2015.02.001}}.
+
+\bibitem[Darling \em{et~al.}(2018)Darling, Sorensen, Newell, Midgley, and
+  Benhamza]{DARLING2018277}
+Darling, W.; Sorensen, J.; Newell, A.; Midgley, J.; Benhamza, M.
+\newblock The age and origin of groundwater in the Great Western Erg sub-basin
+  of the North-Western Sahara aquifer system: Insights from Krechba, central
+  Algeria.
+\newblock {\em Appl. Geochem.} {\bf 2018}, {\em 96},~277--286.
+\newblock {\url{https://doi.org/10.1016/j.apgeochem.2018.07.016}}.
+
+\bibitem[Benyoucef \em{et~al.}(2023)Benyoucef, Salamon, Bendella, Ferré,
+  Bouchemla, Slami, and Newell]{BENYOUCEF2023105547}
+Benyoucef, M.; Salamon, M.; Bendella, M.; Ferré, B.; Bouchemla, I.; Slami, R.;
+  Newell, A.
+\newblock Stratigraphy, palaeontology and sedimentology of the Upper Cretaceous
+  of northern Tademait (Sahara, Algeria).
+\newblock {\em Cretac. Res.} {\bf 2023}, \emph{149}, 105547.
+\mbox{\newblock {\url{https://doi.org/10.1016/j.cretres.2023.105547}}.}
+
+\bibitem[Hacini \em{et~al.}(2008)Hacini, Kherici, and Oelkers]{HACINI20081583}
+Hacini, M.; Kherici, N.; Oelkers, E.H.
+\newblock Mineral precipitation rates during the complete evaporation of the
+  Merouane Chott ephemeral lake.
+\newblock {\em Geochim. Cosmochim. Acta} {\bf 2008}, {\em
+  72},~1583--1597.
+\newblock {\url{https://doi.org/10.1016/j.gca.2008.01.019}}.
+
+\bibitem[Meftah and Hani(2022)]{MEFTAH20222105}
+Meftah, N.; Hani, A.
+\newblock Characterization of Algerian dune sand as a source to
+  metallurgical-grade silicon production.
+\newblock {\em Mater. Today Proc.} {\bf 2022}, {\em 51},~2105--\hl{2108.}
+%\newblock First Maghrebian Conference for Renewable Energies and their
+%  applications, 
+  {\url{https://doi.org/10.1016/j.matpr.2021.12.366}}.
+
+\bibitem[Díaz-Cuevas \em{et~al.}(2021)Díaz-Cuevas, Haddad, and
+  Fernandez-Nunez]{DIAZCUEVAS2021101445}
+Díaz-Cuevas, P.; Haddad, B.; Fernandez-Nunez, M.
+\newblock Energy for the future: Planning and mapping renewable energy. The
+  case of Algeria.
+\newblock {\em Sustain. Energy Technol. Assess.} {\bf 2021},
+  {\em 47},~101445.
+\newblock {\url{https://doi.org/10.1016/j.seta.2021.101445}}.
+
+\bibitem[Hakimi \em{et~al.}(2021)Hakimi, Orban, Deschamps, and
+  Brouyere]{HAKIMI2021100791}
+Hakimi, Y.; Orban, P.; Deschamps, P.; Brouyere, S.
+\newblock Hydrochemical and isotopic characteristics of groundwater in the
+  Continental Intercalaire aquifer system: Insights from Mzab Ridge and
+  surrounding regions, North of the Algerian Sahara.
+\newblock {\em J. Hydrol. Reg. Stud.} {\bf 2021}, {\em
+  34},~100791.
+\newblock {\url{https://doi.org/10.1016/j.ejrh.2021.100791}}.
+
+\bibitem[Ballais(2010)]{Ballais}
+Ballais, J.L.
+\newblock {Des oueds mythiques aux rivières artificielles : L'hydrographie du
+  Bas-Sahara algérien}.
+\newblock {\em Physio-Géo} {\bf 2010}, {\em 4},~107--127.
+\newblock {\url{https://doi.org/10.4000/physio-geo.1173}}.
+
+\bibitem[Fabre \em{et~al.}(2005)Fabre, Latouche, {Kazi Tani},
+  {Moussine-Pouchkine}, {Aït Hamou}, Dautria, and Maza]{fabre2005geologie}
+Fabre, J.; Latouche, L.; {Kazi Tani}, N.; {Moussine-Pouchkine}, A.; {Aït
+  Hamou}, F.; Dautria, J.M.; Maza, M.
+\newblock {\em G{\'e}ologie du Sahara Occidental et Central}; \hl{Tervuren African
+  Geoscience Collection,} Musée Royal de l’Afrique Centrale (Tervuren), %MDPI: Please provide more information about the article type, such as book (please provide the name and location of the publisher); online resource (please provide the URL of the website and the date it was accessed (Date Month Year)); or journal article (please provide the name of the journal, the year and volume in which it was published, and the page number). Please refer to https://www.mdpi.com/authors/references for full reference formatting guides.
+  2005.
+
+\bibitem[Aubert(1983)]{aubert1983observations}
+Aubert, G.
+\newblock Observations sur les caract{\'e}ristiques, la d{\'e}nomination et la
+  classification des sols sal{\'e}s ou salsodiques.
+\newblock {\em Cah. ORSTOM S{\'e}rie P{\'e}dol} {\bf 1983}, {\em 20},~73--78.
+
+\bibitem[Remli \em{et~al.}(2018)Remli, Bounouala, Rouaiguia, and
+  Benselhoub]{Remli}
+Remli, S.; Bounouala, M.; Rouaiguia, I.; Benselhoub, A.
+\newblock {Optimization of salt crystallization process by solar energy with
+  the use of mirror reflection, case of chott Merouane El-Oued (South East of
+  Algeria)}.
+\newblock {\em Min. Miner. Depos.} {\bf 2018}, {\em 12},~97--104.
+\newblock {\url{https://doi.org/10.15407/mining12.03.097}}.
+
+\bibitem[Gasse \em{et~al.}(1987)Gasse, Fontes, Plaziat, Carbonel, Kaczmarska,
+  {De Deckker}, Soulié-Marsche, Callot, and Dupeuble]{GASSE19871}
+Gasse, F.; Fontes, J.; Plaziat, J.; Carbonel, P.; Kaczmarska, I.; {De Deckker},
+  P.; Soulié-Marsche, I.; Callot, Y.; Dupeuble, P.
+\newblock Biological remains, geochemistry and stable isotopes for the
+  reconstruction of environmental and hydrological changes in the holocene
+  lakes from North Sahara.
+\newblock {\em Palaeogeogr. Palaeoclimatol. Palaeoecol.} {\bf 1987},
+  {\em 60},~1--46.
+\newblock {\url{https://doi.org/10.1016/0031-0182(87)90022-8}}.
+
+\bibitem[Hamiche \em{et~al.}(2015)Hamiche, Stambouli, and
+  Flazi]{HAMICHE2015261}
+Hamiche, A.M.; Stambouli, A.B.; Flazi, S.
+\newblock A review on the water and energy sectors in Algeria: Current
+  forecasts, scenario and sustainability issues.
+\newblock {\em Renew. Sustain. Energy Rev.} {\bf 2015}, {\em
+  41},~261--276.
+\newblock {\url{https://doi.org/10.1016/j.rser.2014.08.024}}.
+
+\bibitem[Neffar \em{et~al.}(2016)Neffar, Chenchouni, and Bachir]{Neffar}
+Neffar, S.; Chenchouni, H.; Bachir, A.S.
+\newblock Floristic composition and analysis of spontaneous vegetation of
+  Sabkha Djendli in north-east Algeria.
+\newblock {\em Plant Biosyst.-Int. J. Deal. All Asp. Plant Biol.} {\bf 2016}, {\em 150},~396--403.
+\newblock {\url{https://doi.org/10.1080/11263504.2013.810181}}.
+
+\bibitem[Chenchouni(2017)]{CHENCHOUNI2017660}
+Chenchouni, H.
+\newblock Edaphic factors controlling the distribution of inland halophytes in
+  an ephemeral salt lake “Sabkha ecosystem” at North African semi-arid
+  lands.
+\newblock {\em Sci. Total Environ.} {\bf 2017}, {\em
+  575},~660--671.
+\newblock {\url{https://doi.org/10.1016/j.scitotenv.2016.09.071}}.
+
+\bibitem[Boutaiba \em{et~al.}(2011)Boutaiba, Hacene, Bidle, and
+  Maupin-Furlow]{BOUTAIBA2011909}
+Boutaiba, S.; Hacene, H.; Bidle, K.; Maupin-Furlow, J.
+\newblock Microbial diversity of the hypersaline Sidi Ameur and Himalatt Salt
+  Lakes of the Algerian Sahara.
+\newblock {\em J. Arid Environ.} {\bf 2011}, {\em 75},~909--916.
+\newblock {\url{https://doi.org/10.1016/j.jaridenv.2011.04.010}}.
+
+\bibitem[Quadri \em{et~al.}(2016)Quadri, Hassani, l’Haridon, Chalopin,
+  Hacène, and Jebbar]{QUADRI2016119}
+Quadri, I.; Hassani, I.I.; l’Haridon, S.; Chalopin, M.; Hacène, H.; Jebbar,
+  M.
+\newblock Characterization and antimicrobial potential of extremely halophilic
+  archaea isolated from hypersaline environments of the Algerian Sahara.
+\newblock {\em Microbiol. Res.} {\bf 2016}, {\em \mbox{186--187}},\mbox{~119--131.}
+\newblock {\url{https://doi.org/10.1016/j.micres.2016.04.003}}.
+
+\bibitem[Abdennour \em{et~al.}(2021)Abdennour, Douaoui, Barrena, Pulido,
+  Bradaï, Bennacer, Piccini, and Alfonso-Torreño]{Abdennour}
+Abdennour, M.A.; Douaoui, A.; Barrena, J.; Pulido, M.; Bradaï, A.; Bennacer,
+  A.; Piccini, C.; Alfonso-Torreño, A.
+\newblock {Geochemical characterization of the salinity of irrigated soils in
+  arid regions (Biskra, SE Algeria)}.
+\newblock {\em Acta Geochim.} {\bf 2021}, {\em 40},~234--250.
+\mbox{\newblock {\url{https://doi.org/10.1007/s11631-020-00426-2}}.}
+
+\bibitem[Benmarce \em{et~al.}(2021)Benmarce, Hadji, Zahri, Khanchoul, Chouabi,
+  Zighmi, and Hamed]{BENMARCE2021104285}
+Benmarce, K.; Hadji, R.; Zahri, F.; Khanchoul, K.; Chouabi, A.; Zighmi, K.;
+  Hamed, Y.
+\newblock Hydrochemical and geothermometry characterization for a geothermal
+  system in semiarid dry climate: The case study of Hamma spring (Northeast
+  Algeria).
+\newblock {\em J. Afr. Earth Sci.} {\bf 2021}, {\em
+  182},~104285.
+\newblock {\url{https://doi.org/10.1016/j.jafrearsci.2021.104285}}.
+
+\bibitem[Melouah \em{et~al.}(2021)Melouah, Eldosouky, and
+  Ebong]{MELOUAH2021102211}
+Melouah, O.; Eldosouky, A.M.; Ebong, E.D.
+\newblock Crustal architecture, heat transfer modes and geothermal energy
+  potentials of the Algerian Triassic provinces.
+\newblock {\em Geothermics} {\bf 2021}, {\em 96},~102211.
+\newblock {\url{https://doi.org/10.1016/j.geothermics.2021.102211}}.
+
+\bibitem[Abdelaziz and Messaoud(2016)]{Abdelaziz}
+Abdelaziz, B.; Messaoud, H.
+\newblock {Thermodynamic Models: Application to the Brines of Chotts in
+  Algerian North-Eastern Sahara}.
+\newblock \mbox{{\em J. Thermodyn. Catal.}} {\bf 2016}, {\em
+  7},~178.
+\newblock {\url{https://doi.org/10.4178/2160-7544.1000178}}.
+
+\bibitem[Djili and Hamdi-Aïssa(2018)]{Djili}
+Djili, B.; Hamdi-Aïssa, B.
+\newblock Characteristics and mineralogy of desert alluvial soils: Wadi Zegrir,
+  Northern Sahara of Algeria.
+\newblock {\em Arid Land Res. Manag.} {\bf 2018}, {\em 32},~1--19.
+\newblock {\url{https://doi.org/10.1080/15324982.2017.1384413}}.
+
+\bibitem[Hamdi-Aissa \em{et~al.}(2004)Hamdi-Aissa, Valles, Aventurier, and
+  Ribolzi]{HamdiAissa}
+Hamdi-Aissa, B.; Valles, V.; Aventurier, A.; Ribolzi, O.
+\newblock Soils and Brine Geochemistry and Mineralogy of Hyperarid Desert
+  Playa, Ouargla Basin, Algerian Sahara.
+\newblock {\em Arid Land Res. Manag.} {\bf 2004}, {\em
+  18},~103--126.
+\newblock {\url{https://doi.org/10.1080/1532480490279656}}.
+
+\bibitem[Valles \em{et~al.}(1997)Valles, Rezagui, Auque, Semadi, Roger, and
+  Zougari]{Valles}
+Valles, V.; Rezagui, M.; Auque, L.; Semadi, A.; Roger, L.; Zougari, H.
+\newblock Geochemistry of saline soils in two arid zones of the Mediterranean
+  basin. I. geochemistry of the chott melghir‐mehrouane watershed in Algeria.
+\newblock {\em Arid Soil Res. Rehabil.} {\bf 1997}, {\em
+  11},~71--84.
+\newblock {\url{https://doi.org/10.1080/15324989709381460}}.
+
+\bibitem[Samie and Dutil(1961)]{Samie}
+Samie, C.; Dutil, P.
+\newblock Essai de bilan hydrologique du chott d’Ouargla (Sahara occidental).
+\newblock In Proceedings of the L'hydraulique Souterraine. Compte Rendu des
+  Sixièmes Journées de L'hydraulique, Nancy, France, 28--30 June \hl{1960. } %MDPI: we removed extra information, please confirm.
+
+%  Tome 2, 1961.,
+%  1961, Journées de l'hydraulique.
+%\newblock Included in a thematic issue : L'hydraulique souterraine. Compte
+%  rendu des sixièmes journées de l'hydraulique, Nancy, 28-30 juin 1960.
+
+\bibitem[Boubehziz \em{et~al.}(2020)Boubehziz, Khanchoul, Benslama, Benslama,
+  Marchetti, Francaviglia, and Piccini]{BOUBEHZIZ2020104539}
+Boubehziz, S.; Khanchoul, K.; Benslama, M.; Benslama, A.; Marchetti, A.;
+  Francaviglia, R.; Piccini, C.
+\newblock Predictive mapping of soil organic carbon in Northeast Algeria.
+\newblock {\em CATENA} {\bf 2020}, {\em 190},~104539.
+\newblock {\url{https://doi.org/10.1016/j.catena.2020.104539}}.
+
+\bibitem[Demnati \em{et~al.}(2012)Demnati, Allache, Ernoul, and
+  Samraoui]{Demnati2012}
+Demnati, F.; Allache, F.; Ernoul, L.; Samraoui, B.
+\newblock {Socio-Economic Stakes and Perceptions of Wetland Management in an
+  Arid Region: A Case Study from Chott Merouane, Algeria}.
+\newblock {\em AMBIO Vol.} {\bf 2012}, {\em 41},~504--512.
+\newblock {\url{https://doi.org/10.1007/s13280-012-0285-2}}.
+
+\bibitem[Wessel \em{et~al.}(2019)Wessel, Luis, Uieda, Scharroo, Wobbe, Smith,
+  and Tian]{Wessel}
+Wessel, P.; Luis, J.F.; Uieda, L.; Scharroo, R.; Wobbe, F.; Smith, W.H.F.;
+  Tian, D.
+\newblock The Generic Mapping Tools Version 6.
+\newblock {\em Geochem. Geophys. Geosyst.} {\bf 2019}, {\em
+  20},~5556--5564.
+\newblock {\url{https://doi.org/10.1029/2019GC008515}}.
+
+\bibitem[Lemenkova(2022{\natexlab{a}})]{Lemenkova202206}
+Lemenkova, P.
+\newblock {Tanzania Craton, Serengeti Plain and Eastern Rift Valley: Mapping of
+  geospatial data by scripting techniques}.
+\newblock {\em Est. J. Earth Sci.} {\bf 2022}, {\em
+  71},~61--79.
+\newblock {\url{https://doi.org/10.3176/earth.2022.05}}.
+
+\bibitem[Lemenkova(2022{\natexlab{b}})]{Lemenkova202203}
+Lemenkova, P.
+\newblock {Console-Based Mapping of Mongolia Using GMT Cartographic Scripting
+  Toolset for Processing TerraClimate Data}.
+\newblock {\em Geosciences} {\bf 2022}, {\em 12},~140.
+\newblock {\url{https://doi.org/10.3390/geosciences12030140}}.
+
+\bibitem[Neteler \em{et~al.}(2008)Neteler, Beaudette, Cavallini, Lami, and
+  Cepicky]{Neteleretal2008}
+Neteler, M.; Beaudette, D.E.; Cavallini, P.; Lami, L.; Cepicky, J., GRASS GIS.
+\newblock In {\em Open Source Approaches in Spatial Data Handling}; Springer: Berlin/Heidelberg,  Germany, 2008; pp. 171--199.
+\newblock {\url{https://doi.org/10.1007/978-3-540-74831-1_9}}.
+
+\bibitem[Neteler and Mitasova(2008)]{NetelerMitasova2008}
+Neteler, M.; Mitasova, H.
+\newblock {\em Open Source GIS---A GRASS GIS Approach}, 3rd ed.; Springer: New
+  York, NY, USA,  2008.
+
+\bibitem[Mahowald \em{et~al.}(2003)Mahowald, Bryant, del Corral, and
+  Steinberger]{Mahowald}
+Mahowald, N.M.; Bryant, R.G.; del Corral, J.; Steinberger, L.
+\newblock Ephemeral lakes and desert dust sources.
+\newblock {\em Geophys. Res. Lett.} {\bf 2003}, {\em \hl{30}}. %MDPI: please add page number if possible.
+\newblock {\url{https://doi.org/10.1029/2002GL016041}}.
+
+\bibitem[Bourrié(2021)]{Bourrie}
+Bourrié, G., Salts in Deserts.
+\newblock In {\em Mankind and Deserts 2};  John Wiley \& Sons, Ltd: \hl{Hoboken, NJ, USA,} %We added the location of publisher. Please confirm
+  2021;
+  Chapter~4, pp. 121--137.
+\newblock {\url{https://doi.org/10.1002/9781119808275.ch4}}.
+
+\bibitem[{Paola Patricia} \em{et~al.}(2020){Paola Patricia}, {Ana Isabel}, and
+  la~Hoz-Franco~Emiro]{PAOLAPATRICIA2020129}
+{Paola Patricia}, A.C.; {Ana Isabel}, O.C.; la~Hoz-Franco~Emiro, D.
+\newblock Discovering similarities in Landsat satellite images using the
+  K-means method.
+\newblock {\em Procedia Comput. Sci.} {\bf 2020}, {\em 170},~129--136.
+\newblock {\url{https://doi.org/10.1016/j.procs.2020.03.017}}.
+
+\bibitem[Sharma \em{et~al.}(2023)Sharma, Kumar, Singh, and
+  Mehta]{SHARMA2023100963}
+Sharma, K.V.; Kumar, V.; Singh, K.; Mehta, D.J.
+\newblock LANDSAT 8 LST Pan sharpening using novel principal component based
+  downscaling model.
+\newblock {\em Remote Sens. Appl. Soc. Environ.} {\bf
+  2023}, {\em 30},~100963.
+\newblock {\url{https://doi.org/10.1016/j.rsase.2023.100963}}.
+
+\bibitem[Zhang \em{et~al.}(2023)Zhang, Zhang, Yao, Lin, An, and
+  Liu]{ZHANG2023129590}
+Zhang, M.; Zhang, H.; Yao, B.; Lin, H.; An, X.; Liu, Y.
+\newblock Spatiotemporal changes of wetlands in China during 2000–2015 using
+  Landsat imagery.
+\newblock {\em J. Hydrol.} {\bf 2023}, {\em 621},~129590.
+\newblock {\url{https://doi.org/10.1016/j.jhydrol.2023.129590}}.
+
+\bibitem[Tzepkenlis \em{et~al.}(2023)Tzepkenlis, Marthoglou, and
+  Grammalidis]{rs15082027}
+Tzepkenlis, A.; Marthoglou, K.; Grammalidis, N.
+\newblock Efficient Deep Semantic Segmentation for Land Cover Classification
+  Using Sentinel Imagery.
+\newblock {\em Remote Sens.} {\bf 2023}, {\em 15}, 2027.
+\newblock {\url{https://doi.org/10.3390/rs15082027}}.
+
+\bibitem[Boonpook \em{et~al.}(2023)Boonpook, Tan, Nardkulpat, Torsri, Torteeka,
+  Kamsing, Sawangwit, Pena, and Jainaen]{ijgi12010014}
+Boonpook, W.; Tan, Y.; Nardkulpat, A.; Torsri, K.; Torteeka, P.; Kamsing, P.;
+  Sawangwit, U.; Pena, J.; Jainaen, M.
+\newblock Deep Learning Semantic Segmentation for Land Use and Land Cover Types
+  Using Landsat 8 Imagery.
+\newblock {\em ISPRS Int. J. Geo-Inf.} {\bf 2023}, {\em
+  12}, 14.
+\newblock {\url{https://doi.org/10.3390/ijgi12010014}}.
+
+\bibitem[Lilay and Taye(2023)]{Lilay}
+Lilay, M.Y.; Taye, G.D.
+\newblock {Semantic segmentation model for land cover classification from
+  satellite images in Gambella National Park, Ethiopia}.
+\newblock {\em SN Appl. Sci.} {\bf 2023}, {\em 5},~76.
+\newblock {\url{https://doi.org/10.1007/s42452-023-05280-4}}.
+
+\bibitem[Yang and Xu(2021)]{Yang}
+Yang, B.; Xu, Y.
+\newblock {Applications of deep-learning approaches in horticultural research:
+  a review}.
+\newblock {\em Hortic. Res.} {\bf 2021}, {\em 8}.
+\newblock 123. {\url{https://doi.org/10.1038/s41438-021-00560-9}}.
+
+\bibitem[Kattenborn \em{et~al.}(2019)Kattenborn, Eichel, and
+  Fassnacht]{Kattenborn}
+Kattenborn, T.; Eichel, J.; Fassnacht, F.E.
+\newblock {Convolutional Neural Networks enable efficient, accurate and
+  fine-grained segmentation of plant species and communities from
+  high-resolution UAV imagery}.
+\newblock {\em Sci. Rep.} {\bf 2019}, {\em 9},~17656.
+\newblock {\url{https://doi.org/10.1038/s41598-019-53797-9}}.
+
+\bibitem[Li \em{et~al.}(2021)Li, Wang, Zhang, Wu, Xu, Liu, Qiu, Zhang, Fu, and
+  Li]{LI2021105763}
+Li, H.; Wang, X.; Zhang, K.; Wu, S.; Xu, Y.; Liu, Y.; Qiu, C.; Zhang, J.; Fu,
+  E.; Li, L.
+\newblock A neural network-based approach for the detection of heavy
+  precipitation using GNSS observations and surface meteorological data.
+\newblock {\em J. Atmos. Sol.-Terr. Phys.} {\bf
+  2021}, {\em 225},~105763.
+\newblock {\url{https://doi.org/10.1016/j.jastp.2021.105763}}.
+
+\bibitem[Seydi and Sadegh(2023)]{SEYDI2023112961}
+Seydi, S.T.; Sadegh, M.
+\newblock Improved burned area mapping using monotemporal Landsat-9 imagery and
+  convolutional shift-transformer.
+\newblock {\em Measurement} {\bf 2023}, {\em 216},~112961.
+\newblock {\url{https://doi.org/10.1016/j.measurement.2023.112961}}.
+
+\bibitem[Ye \em{et~al.}(2023)Ye, Zhu, and Cao]{YE2023113462}
+Ye, S.; Zhu, Z.; Cao, G.
+\newblock Object-based continuous monitoring of land disturbances from dense
+  Landsat time series.
+\newblock {\em Remote Sens. Environ.} {\bf 2023}, {\em 287},~113462.
+\newblock {\url{https://doi.org/10.1016/j.rse.2023.113462}}.
+
+\bibitem[McDermid \em{et~al.}(2017)McDermid, Mearns, and Ruane]{McDermid}
+McDermid, S.S.; Mearns, L.O.; Ruane, A.C.
+\newblock Representing agriculture in Earth System Models: Approaches and
+  priorities for development.
+\newblock {\em J. Adv. Model. Earth Syst.} {\bf 2017}, {\em
+  9},~2230--2265.
+\newblock {\url{https://doi.org/10.1002/2016MS000749}}.
+
+\bibitem[Peter \em{et~al.}(2020)Peter, Messina, Lin, and Snapp]{Peteretal2020}
+Peter, B.G.; Messina, J.P.; Lin, Z.; Snapp, S.S.
+\newblock {Crop climate suitability mapping on the cloud: A geovisualization
+  application for sustainable agriculture}.
+\newblock {\em Sci. Rep.} {\bf 2020}, {\em 10},~15487.
+\newblock {\url{https://doi.org/10.1038/s41598-020-72384-x}}.
+
+\bibitem[Peng \em{et~al.}(2020)Peng, Guan, Tang, and {et al.}]{Pengetal2020}
+Peng, B.; Guan, K.; Tang, J.; {et al.}.
+\newblock {Towards a multiscale crop modelling framework for climate change
+  adaptation assessment}.
+\newblock {\em Nat. Plants} {\bf 2020}, {\em 6},~338--348.
+\newblock {\url{https://doi.org/10.1038/s41477-020-0625-3}}.
+
+\end{thebibliography}
+
+%=====================================
+% References, variant A: external bibliography
+%=====================================
+%\bibliography{Algeria.bib}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\PublishersNote{}
+\end{adjustwidth}
+\end{document}
