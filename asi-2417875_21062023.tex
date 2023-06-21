@@ -16,11 +16,11 @@
 \articlenumber{0}
 \pubyear{2023}
 \copyrightyear{2023}
-\externaleditor{\hl{Academic Editor:} %MDPI: please add the names.
+\externaleditor{Academic Editor: %MDPI: please add the names. % Author's reply: I don't know the name. Please add.
  }
 \datereceived{10 May 2023} 
 \daterevised{28 May 2023}
-\dateaccepted{} 
+\dateaccepted{20 June 2023} 
 \datepublished{} 
 \hreflink{https://doi.org/} % If needed use \linebreak
 %\doinum{}
@@ -86,10 +86,9 @@
 
 % Author Orchid ID: enter ID or remove command
 \newcommand{\orcidauthorA}{0000-0002-5759-1089} % Polina Add \orcidA{} behind the author's name
-\newcommand{\orcidauthorB}{0000-0002-6461-1551} % Olivier Add \orcidB{} behind the author's name
 
 % Authors, for the paper (add full first names)
-\Author{\hl{Polina Lemenkova} %MDPI: Please carefully check the accuracy of name and affiliation.
+\Author{Polina Lemenkova %MDPI: Please carefully check the accuracy of name and affiliation. % Author's reply: yes, correct.
  \orcidA{}}
 
 %\longauthorlist{yes}
@@ -98,12 +97,12 @@
 \AuthorNames{Polina Lemenkova}
 
 % MDPI internal command: Authors, for citation in the left column
-\AuthorCitation{\hl{Lemenkova, P.} %MDPI: Please carefully check the accuracy of name .
+\AuthorCitation{Lemenkova, P. %MDPI: Please carefully check the accuracy of name. % Author's reply: yes, correct.
 }
 % If this is a Chicago style journal: Lastname, Firstname, Firstname Lastname, and Firstname Lastname.
 
 % Affiliations / Addresses (Add [1] after \address if there is only one affiliation.)
-\address[1]{ Laboratory of Image Synthesis and Analysis (LISA), \highlighting{École} Polytechnique de Bruxelles (Brussels \hl{Faculty} of Engineering), \highlighting{Université} Libre de Bruxelles (ULB), \hl{Building L, Campus du Solbosch, ULB---LISA CP165/57,} %MDPI: please check if there are two address, if so, please split it to two affs; if it's one address, the provided information should be arranged from subordinate to superior, please check and rearrange it.
+\address[1]{Laboratory of Image Synthesis and Analysis (LISA), École Polytechnique de Bruxelles (Brussels Faculty of Engineering), Université Libre de Bruxelles (ULB). Building L, Campus du Solbosch, ULB---LISA CP165/57, %MDPI: please check if there are two address, if so, please split it to two affs; if it's one address, the provided information should be arranged from subordinate to superior, please check and rearrange it. % Author's reply: yes, correct. It is only one (1) affiliation. The  information is arranged from subordinate to superior (from Laboratory to University).
  Avenue Franklin D. Roosevelt 50, 1050 Brussels, Belgium; polina.lemenkova@ulb.be; Tel.: +32-471-86-04-59
 }
 
@@ -122,10 +121,10 @@
 \keyword{Sahara Desert; Africa; salt lake; cartography; image analysis; satellite image; remote sensing; geography; GRASS GIS; mapping} 
 
 % The fields PACS, MSC, and JEL may be left empty or commented out if not applicable
-\PACS{\highlighting{91.10.Da;} %MDPI: PACS, MSC, JEL are not necessary for this journal, please check if need keep them.
- 91.10.Jf; 91.10.Sp; 91.10.Xa; 96.25.Vt; 91.10.Fc; 95.40.+s; 95.75.Qr; 95.75.Rs; 42.68.Wt}
-\MSC{\highlighting{86A30;} 86-08; 86A99; 86A04}
-\JEL{\highlighting{Y91;} Q20; Q24; Q23; Q3; Q01; R11; O44; O13; Q5; Q51; Q55; N57; C6; C61}
+%\PACS{91.10.Da;} %MDPI: PACS, MSC, JEL are not necessary for this journal, please check if need keep them. % Author's reply: ok, agree. PACS, MSC, JEL are deleted.
+% 91.10.Jf; 91.10.Sp; 91.10.Xa; 96.25.Vt; 91.10.Fc; 95.40.+s; 95.75.Qr; 95.75.Rs; 42.68.Wt}
+%\MSC{86A30; 86-08; 86A99; 86A04}
+%\JEL{Y91; Q20; Q24; Q23; Q3; Q01; R11; O44; O13; Q5; Q51; Q55; N57; C6; C61}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{document}
@@ -141,7 +140,7 @@ Satellite images serve as data sources in many applications of Earth science, su
 
 {The goal of this study was to create a GRASS GIS framework for image classification by using scripts that yield good image-processing capabilities, and to create a series of maps based on the automated land cover classification. }An important consideration for the use of satellite images for cartographic data analysis is that they {need} to be classified into maps of land cover types for the interpretation and analysis of landscapes. {Manual }classification is a time-consuming process involving many iterations, which might lead to errors and result in low accuracy. The problem is, therefore, focused on finding  effective algorithms for the classification of satellite images.
 
-Landsat 8--9 OLI/TIRS images, which have been recorded since 2013 as a continuation of the Landsat data collection, form a valuable pool of Earth's geospatial data to evaluate land cover types and landscapes of the Earth. However, such datasets should be processed and classified {by GIS }to enable the use of satellite images in the environmental applications. {At the same time, the use of commercial \hl{GIS software} %MDPI: Please state the version number of the software.
+Landsat 8--9 OLI/TIRS images, which have been recorded since 2013 as a continuation of the Landsat data collection, form a valuable pool of Earth's geospatial data to evaluate land cover types and landscapes of the Earth. However, such datasets should be processed and classified {by GIS }to enable the use of satellite images in the environmental applications. {At the same time, the use of commercial software (e.g., ArcGIS version 8.0)  %MDPI: Please state the version number of the software. % Author's reply: added.
  is subject to the availability of the license, which can lead to restrictions on its usage. In this regard, the use of the freely available open-source GRASS GIS for satellite image processing is advantageous. Moreover, it includes the Python API and libraries as extended functionalities. Therefore, this paper proposes}  using GRASS GIS {as a free open-source GIS for image classification. Furthermore, using} scripts {of GRASS GIS allows for the } automation of remote sensing data classification. {This is possible }by employing algorithms involving image processing and geospatial analysis for the discrimination of land cover types and detecting changes{. }Moreover, the existing applications in geomorphometry~\cite{HOFIERKA2009387} can also be used for satellite image processing for environmental applications~\cite{Lemenkova202125}.
 
 \subsection{Motivation}
@@ -215,32 +214,30 @@ Specific soil properties and salinity gradients in chotts in Algeria largely aff
 The GRASS GIS-based image classification workflow is based on {the} Landsat 8--9 dataset containing nine satellite images (Figure \ref{fig03}{. The images cover} the region of Chott Melrhir and Chott Merouane in Algeria. The major metadata are listed in Table \ref{tab1}. 
 
 \begin{table}[H]
-
-\caption{\hl{Satellite} %MDPI: we removed vertical lines and change table center align, please confirm.
- \textls[-15]{images used for computing the VIs: Landsat-8 OLI/TIRS collected from the USGS} \hl{\textsuperscript{1}.} %MDPI: please add an explanation for superscript number 1 or remove it
-\label{tab1}}
-
-\begin{adjustwidth}{-\extralength}{0cm}
+\caption{Satellite %MDPI: we removed vertical lines and change table center align, please confirm. % Author's reply: yes, confirm.
+% \textls[-15]
+ images used in this study: Landsat-8 OLI/TIRS collected from the USGS}. %MDPI: please add an explanation for superscript number 1 or remove it. % Author's reply: superscript number 1 is removed.
+\label{tab1}
+\begin{adjustwidth}{-\extralength}{-0.5cm}
+\setlength\extrarowheight{-1.8cm}
 %\centering %% If there is a figure in wide page, please release command \centering
-
-
-		\begin{tabularx}{\fulllength}{ccCC}
+		\begin{tabularx}{\fulllength}{p{2.2cm}cCC}
 			\toprule
 			\textbf{Date} & \textbf{Spacecraft} & \textbf{Landsat Product ID} & \textbf{Scene ID} \\
 			\midrule
-			\hl{2014/01/01} %MDPI: please check if the date format should be changed to English format, such as 1 January 2014.
- & 8 & \makecell{LC08\_L2SP\_193036\_20140101\_20200912\_02\_T1} & LC81930362014001LGN01 \\
-			2015/01/04 & 8 & \makecell{LC08\_L2SP\_193036\_20150104\_20200910\_02\_T1} & LC81930362015004LGN01 \\
-			2016/01/07 & 8 & \makecell{LC08\_L2SP\_193036\_20160107\_20200907\_02\_T1} & LC81930362016007LGN02 \\
-			2017/01/25 & 8 & \makecell{LC08\_L2SP\_193036\_20170125\_20201013\_02\_T1} & LC81930362017025LGN02 \\
-			2018/01/28 & 8 & \makecell{LC08\_L2SP\_193036\_20180128\_20200902\_02\_T1} & LC81930362018028LGN00 \\
-			2019/01/15 & 8 & \makecell{LC08\_L2SP\_193036\_20190115\_20200830\_02\_T1} & LC81930362019015LGN00 \\	
-			2020/01/02 & 8 & \makecell{LC08\_L2SP\_193036\_20200102\_20200824\_02\_T1} & LC81930362020002LGN00 \\
-			2021/01/04 & 8 & \makecell{LC08\_L2SP\_193036\_20210104\_20210309\_02\_T1} & LC81930362021004LGN00 \\
-			2022/01/15 & 9 & \makecell{LC09\_L2SP\_193036\_20220115\_20220118\_02\_T1} & LC91930362022015LGN00 \\		
+			1 January 2014 %MDPI: please check if the date format should be changed to English format, such as 1 January 2014. % Author's reply: yes, corrected as suggested.
+& 8 & \makecell{LC08\_L2SP\_193036\_20140101\_20200912\_02\_T1} & LC81930362014001LGN01 \\
+			4 January 2015 & 8 & \makecell{LC08\_L2SP\_193036\_20150104\_20200910\_02\_T1} & LC81930362015004LGN01 \\
+			7 January 2016 & 8 & \makecell{LC08\_L2SP\_193036\_20160107\_20200907\_02\_T1} & LC81930362016007LGN02 \\
+			25 January 2017 & 8 & \makecell{LC08\_L2SP\_193036\_20170125\_20201013\_02\_T1} & LC81930362017025LGN02 \\
+			28 January 2018 & 8 & \makecell{LC08\_L2SP\_193036\_20180128\_20200902\_02\_T1} & LC81930362018028LGN00 \\
+			15 January 2019 & 8 & \makecell{LC08\_L2SP\_193036\_20190115\_20200830\_02\_T1} & LC81930362019015LGN00 \\	
+			2 January 2020 & 8 & \makecell{LC08\_L2SP\_193036\_20200102\_20200824\_02\_T1} & LC81930362020002LGN00 \\
+			4 January 2021 & 8 & \makecell{LC08\_L2SP\_193036\_20210104\_20210309\_02\_T1} & LC81930362021004LGN00 \\
+			15 January 2022 & 9 & \makecell{LC09\_L2SP\_193036\_20220115\_20220118\_02\_T1} & LC91930362022015LGN00 \\		
 			\bottomrule
 		\end{tabularx}
-		\end{adjustwidth}
+	\end{adjustwidth}
 \end{table}
 
 {All of the images were selected during the January period for two reasons. First, the water levels in the chotts fluctuate, with the highest levels occurring during the wet periods (i.e., spring and winter), when the lakes are filled by water from occasional rainwater or groundwater sources. In contrast, during the summer and autumn periods, the majority of lakes are completely dry due to the highest temperature and evaporation rates in the Sahara Desert. Therefore, to detect changes on the images, it is necessary to select the wet period in the calendar year. The second reason is related to the quality of the data covering target areas related to the cloudiness of the images. Many scenes from Landsat 8--9 OLI/TIRS were checked, and only those with low cloud coverage (below 10\%) were selected for classification. Such conditions corresponded to the images taken on January during the time period of 2014--2022, Figure }\ref{fig03}.
